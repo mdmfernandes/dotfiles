@@ -22,7 +22,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'dense-analysis/ale'
 Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-surround'
-Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()
@@ -71,6 +70,7 @@ highlight GitGutterChange cterm=bold ctermfg=172 ctermbg=bg
 """ vim-gitgutter (end)
 
 """ ALE
+let g:ale_fix_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%code%]'
 "" Signs
 let g:ale_sign_error = '●'
