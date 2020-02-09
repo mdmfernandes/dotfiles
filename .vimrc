@@ -139,7 +139,7 @@ map <Space> <Leader>
 " Toogle line wrapping
 map <F6> <Esc>:set wrap!<CR>
 " Open file under the cursor in a new tab
-map <F9> <Esc><C-W>gF<CR>:tabm<CR>
+map <Leader>o <Esc><C-W>gF<CR>:tabm<CR>
 " base64 decode the word under cursor
 nmap <Leader>b :!echo <C-R><C-W> \| base64 -d<CR>
 " Buffers
