@@ -82,7 +82,30 @@ alias dcp="docker-compose ps"
 alias dcpa="docker-compose ps -a"
 alias dci="docker-compose images"
 
-# Gron (requires gron to be installed)
+# tmux
+# Attach a session (last or named)
+ta() {
+	# If it has no arguments
+	if [ -z "$1" ]; then
+		tmux attach-session
+	else
+		tmux a -t $1
+	fi
+}
+alias tl="tmux list-sessions"       # List sessions
+alias tls="tl"
+alias tk="tmux kill-session -t"     # Kill a named session
+# Create a session (default or named)
+tn() {
+	# If it has no arguments
+	if [ -z "$1" ]; then
+		tmux new-session
+	else
+		tmux new -s $1
+	fi
+}
+
+# Gron
 alias norg="gron --ungron"
 
 # Other commands
@@ -112,7 +135,7 @@ alias cd..='cd ..'
 #   ..   -> cd ../
 #   .. 2 -> cd ../../
 #   .. 3 -> cd ../../../
-function .. {
+..() {
     local count=$1
     if [ -z "${count}" ]; then
         count=1
@@ -125,7 +148,7 @@ function .. {
 }
 
 # Get IP info
-function ipinfo {
+ipinfo() {
     # If it's empty
     if [ -z "$1" ]; then
         ip=""
