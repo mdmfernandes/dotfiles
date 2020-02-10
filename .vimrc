@@ -152,6 +152,8 @@ map <Leader>v :buffers<CR>
 map <C-n> <Esc>:tabe<CR>
 map <C-h> gT
 map <C-l> gt
+" Hide search highlights
+nnoremap <silent> <Esc><Esc> :nohls<CR>
 " Toggle between paste and nopaste modes
 set pastetoggle=<F3>
 
