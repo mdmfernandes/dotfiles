@@ -22,7 +22,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'dense-analysis/ale'
 Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-surround'
-Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()
@@ -55,8 +54,9 @@ nmap <Leader>gu <Plug>(GitGutterUndoHunk)
 " Jump between hunks
 nmap <Leader>gn <Plug>(GitGutterNextHunk)
 nmap <Leader>gp <Plug>(GitGutterPrevHunk)
-" Preview/detail hunk changes
-nmap <Leader>gd <Plug>(GitGutterPreviewHunk)
+" Preview hunk changes
+nmap <Leader>gv <Plug>(GitGutterPreviewHunk)
+nmap <Leader>gd :pclose<CR>
 "" Custom signs
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '>'
@@ -71,6 +71,7 @@ highlight GitGutterChange cterm=bold ctermfg=172 ctermbg=bg
 """ vim-gitgutter (end)
 
 """ ALE
+let g:ale_fix_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%code%]'
 "" Signs
 let g:ale_sign_error = '●'
@@ -82,7 +83,7 @@ nmap <Leader>ln <Plug>(ale_next_wrap)
 nmap <Leader>lp <Plug>(ale_previous_wrap)
 nmap <Leader>lg <Plug>(ale_first)
 nmap <Leader>lG <Plug>(ale_last)
-nmap <Leader>ld <Plug>(ale_detail)
+nmap <Leader>lv <Plug>(ale_detail)
 """ ale (end)
 
 """ nerdtree
