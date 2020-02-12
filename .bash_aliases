@@ -162,9 +162,9 @@ ipinfo() {
 
     # If jq is installed, make the output prettier
     if [ -n "$(which jq)" ]; then
-        curl ipinfo.io/$1 | jq
+        curl -s  ipinfo.io/$1 | jq
     else
-        curl ipinfo.io/$1
+        curl -s  ipinfo.io/$1
     fi
 }
 
