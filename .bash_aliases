@@ -159,6 +159,12 @@ ipinfo() {
         echo "Invalid IP address (IPv4 only)"
         return
     fi
-    curl ipinfo.io/$1
+
+    # If jq is installed, make the output prettier
+    if [ -n "$(which jq)" ]; then
+        curl ipinfo.io/$1 | jq
+    else
+        curl ipinfo.io/$1
+    fi
 }
 
