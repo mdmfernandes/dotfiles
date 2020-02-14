@@ -222,6 +222,12 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 """ ctrlp (end)
 
 
+""" VimWiki
+let g:vimwiki_list = [{'path': '~/Documents/VimWiki/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0
+""" VimWiki (end)
+
+
 """ History
 set history=50 "default
 
