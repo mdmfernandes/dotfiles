@@ -93,7 +93,7 @@ ta() {
 	fi
 }
 alias tl="tmux list-sessions"       # List sessions
-alias tls="tl"
+alias ts="tl"
 alias tk="tmux kill-session -t"     # Kill a named session
 # Create a session (default or named)
 tn() {
