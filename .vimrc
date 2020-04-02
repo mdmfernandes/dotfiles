@@ -278,12 +278,13 @@ map <F6> <Esc>:set wrap!<CR>
 " Open file under the cursor in a new tab
 map <Leader>o <Esc><C-W>gF<CR>:tabm<CR>
 " base64 decode the word under cursor
-nmap <Leader>b :!echo <C-R><C-W> \| base64 -d<CR>
+nmap <Leader>64 :!echo <C-R><C-W> \| base64 -d<CR>
 " Buffers
+map <Leader>b :enew<CR>
 map <Leader>n :bn<CR>
 map <Leader>p :bp<CR>
 map <Leader>d :bd<CR>
-map <Leader>v :buffers<CR>
+map <Leader>l :buffers<CR>
 " Tabs
 map <C-n> <Esc>:tabe<CR>
 map <C-h> gT
