@@ -58,14 +58,16 @@ alias gan='git add .'       # Stage new
 alias gc='git commit -m'
 alias gca='git commit -am'
 alias gd='git diff'
-alias gfm='git fetch origin && git merge origin/master'
-alias gfrb='git fetch origin && git rebase origin/master'
-alias glc='git ls-files | xargs wc -l'
-alias gm='git merge'
-alias gmom='git merge origin/master'
+alias gds='git diff --stat'
+alias gfr='git fetch origin && git rebase origin/master'
+alias glc='git ls-files | xargs wc -l' # Number o code lines
 alias gp='git push'
 alias gpo='git push origin'
 alias gs='git status'
+alias gl='git log'
+alias glo='git log --oneline'
+alias glg='git log --graph'
+alias glos='git log --oneline --stat'
 
 # Docker
 alias d="docker"
@@ -162,9 +164,9 @@ ipinfo() {
 
     # If jq is installed, make the output prettier
     if [ -n "$(which jq)" ]; then
-        curl -s  ipinfo.io/$1 | jq
+        curl -s ipinfo.io/$1 | jq
     else
-        curl -s  ipinfo.io/$1
+        curl -s ipinfo.io/$1
     fi
 }
 
