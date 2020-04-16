@@ -77,8 +77,8 @@ alias dp="docker ps"
 alias dpa="docker ps -a"
 alias drc="docker rm"   # Remove one or more containers
 alias dri="docker rmi"  # Remove one or more images
-alias drxc="docker ps -a -f status=exited -q | xargs docker rm"   # Remove all exited containers
-alias drxi="docker images -f dangling=true -q | xargs docker rmi" # Remove all dangling images
+alias dpc="docker container prune"  # Delete stopped containers 
+alias dpi="docker image prune"      # Delete dangling images
 alias dc="docker-compose"
 alias dcp="docker-compose ps"
 alias dcpa="docker-compose ps -a"
