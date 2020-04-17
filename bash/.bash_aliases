@@ -31,6 +31,7 @@ alias ports='ss -tulpan'
 # Security
 # Confirmation before overwite
 alias mv='mv -i'
+alias rm='rm -i'
 alias cp='cp -i'
 alias ln='ln -i'
 # Don't allow to operate recursively on '/'
@@ -47,8 +48,9 @@ alias root='sudo -i'
 
 # Disks
 alias df='df -h'
-alias du='du -ch'
-alias biggest='du -c --max-depth=1 | sort -h'
+alias du='du -h'
+alias dud='du -d 1 -h' # Size of files at depth 1 in current location
+alias duf='du -sh' # Size of files in current location
 
 # Git
 alias ga='git add'
@@ -95,10 +97,9 @@ ta() {
 	fi
 }
 alias tl="tmux list-sessions"       # List sessions
-alias ts="tl"
 alias tk="tmux kill-session -t"     # Kill a named session
 # Create a session (default or named)
-tn() {
+ts() {
 	# If it has no arguments
 	if [ -z "$1" ]; then
 		tmux new-session
@@ -112,6 +113,7 @@ alias norg="gron --ungron"
 
 # Other commands
 alias h='history'
+alias help='man'
 alias j='jobs -l'
 alias :q="exit"
 
