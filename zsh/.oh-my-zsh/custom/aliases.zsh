@@ -36,6 +36,8 @@ alias root='sudo -i'
 
 # git (override the zsh plugin)
 alias gl='git log'
+alias gs='git status'
+unalias gf
 
 # docker
 alias d='docker'
