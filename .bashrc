@@ -24,3 +24,7 @@ fi
 # Default editor is VIM
 export EDITOR=/usr/bin/vim
 
+# Use vim mode in bash
+set -o vi
+bind -m vi-insert "\C-l":clear-screen # Map C-l to clear screen in edit mode
+
