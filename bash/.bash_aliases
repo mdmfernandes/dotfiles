@@ -1,8 +1,10 @@
 ## Custom aliases
 # ls
-alias ll='ls -AlhF'
-alias la='ls -A'
-alias l='ls -F'
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls -G'
+alias lsa='ls -lah'
 alias l.='ls -d .*' # Show hidden files
 alias lt='ls -lth'  # Show recent first (modification time)
 

@@ -1,5 +1,9 @@
 # Aliases
 
+# ls
+alias l.='ls -d .*'
+alias lt='ls -lth'
+
 # Use colordiff for dif, if installed
 if [ -n "$(which colordiff)" ]; then
     alias diff='colordiff'
