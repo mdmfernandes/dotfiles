@@ -258,10 +258,10 @@ fi
 # Avoid error 'command not found'
 alias cd..='cd ..'
 # Change up a variable number of directories
-alias ...=../..
-alias ....=../../..
-alias ....=../../../..
-alias ......=../../../../..
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ....='cd ../../../..'
+alias ......='cd ../../../../..'
 #   ..   -> cd ../
 #   .. 2 -> cd ../../
 #   .. 3 -> cd ../../../

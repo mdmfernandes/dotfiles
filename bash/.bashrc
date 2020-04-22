@@ -21,8 +21,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ "$color_prompt" = yes ]; then                                                                                                                                     
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;36m\]\w\[\033[92m\] ➜ \[\033[00m\]'                                                                               
+else                                                                                                                                                                   
+    PS1='${debian_chroot:+($debian_chroot)}\w\$ '                                                                                                                
+fi  
+
 # Default editor is VIM
-export EDITOR=/usr/bin/vim
+export EDITOR=vim
 
 # Use vim mode in bash
 set -o vi
