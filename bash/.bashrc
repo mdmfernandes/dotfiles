@@ -22,7 +22,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then                                                                                                                                     
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;36m\]\w\[\033[92m\] ➜ \[\033[00m\]'                                                                               
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;36m\]\W\[\033[92m\] ➜ \[\033[00m\]'                                                                               
 else                                                                                                                                                                   
     PS1='${debian_chroot:+($debian_chroot)}\w\$ '                                                                                                                
 fi  

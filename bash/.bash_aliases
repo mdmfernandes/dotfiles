@@ -238,6 +238,7 @@ alias norg="gron --ungron"
 alias h='history'
 alias help='man'
 alias j='jobs -l'
+alias copy='xsel -i -b'
 alias :q="exit"
 
 # Use grc (requires grc)
