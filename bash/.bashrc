@@ -34,3 +34,8 @@ export EDITOR=vim
 set -o vi
 bind -m vi-insert "\C-l":clear-screen # Map C-l to clear screen in edit mode
 
+# Enable SSH using GPG keys
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+
