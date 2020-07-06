@@ -63,7 +63,7 @@ _Z_DATA=$HOME/.config/zsh/.z
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-prompt vi-mode tmux docker go gcloud colored-man-pages z)
+plugins=(git git-prompt vi-mode tmux docker golang gcloud colored-man-pages z)
 
 source $ZSH/oh-my-zsh.sh
 
