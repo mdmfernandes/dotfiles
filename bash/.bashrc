@@ -4,8 +4,9 @@ HISTCONTROL=ignoreboth
 # Append to the history file, don't overwite it
 shopt -s histappend
 # History size
-HISTSIZE=100000
-HISTFILESIZE=200000
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTIGNORE="&:ls:[bf]g:exit:history"
 
 # Enable programmable completion features 
 if ! shopt -oq posix; then

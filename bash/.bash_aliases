@@ -54,6 +54,9 @@ alias du='du -h'
 alias dud='du -d 1 -h' # Size of files at depth 1 in current location
 alias duf='du -sh' # Size of files in current location
 
+# IP
+alias ip='ip -color=auto' # Colorize the output if a terminal is available
+
 # Git
 alias g='git'
 
@@ -204,6 +207,7 @@ alias drc="docker rm"   # Remove one or more containers
 alias dri="docker rmi"  # Remove one or more images
 alias dpc="docker container prune"  # Delete stopped containers 
 alias dpi="docker image prune"      # Delete dangling images
+# docker-compose
 alias dc="docker-compose"
 alias dcp="docker-compose ps"
 alias dcpa="docker-compose ps -a"

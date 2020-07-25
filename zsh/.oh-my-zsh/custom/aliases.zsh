@@ -79,6 +79,9 @@ alias zshrc='${=EDITOR} ~/.config/zsh/.zshrc'
 # Gron
 alias norg="gron --ungron"
 
+# IP
+alias ip='ip -color=auto' # Colorize the output if a terminal is available
+
 # Get IP info
 ipinfo() {
     # If it's empty
