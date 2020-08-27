@@ -32,9 +32,9 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias ln='ln -i'
 # Don't allow to operate recursively on '/'
-#alias chown='chown --preserve-root'
-#alias chmod='chmod --preserve-root'
-#alias chgrp='chgrp --preserve-root'
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
 
 # apt
 alias ai='sudo apt install'
@@ -47,7 +47,6 @@ alias root='sudo -i'
 alias gl='git log'
 alias gs='git status'
 alias gbv='git branch -vv'
-alias gff='git fetch'
 unalias gf
 
 # docker
