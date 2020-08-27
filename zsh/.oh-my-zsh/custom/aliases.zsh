@@ -9,6 +9,11 @@ if [ -n "$(which colordiff)" ]; then
     alias diff='colordiff'
 fi
 
+# Use bat as cat, if installed
+if [ -n "$(which batcat)" ]; then
+    alias cat='batcat -pp'
+fi
+
 # Show path with \n
 alias path='printf ${PATH//:/\\n}'
 
@@ -59,9 +64,6 @@ alias dpi='docker image prune'      # Delete dangling images
 alias dcp='docker-compose ps'
 alias dcpa='docker-compose ps -a'
 alias dci='docker-compose images'
-
-# tmux (override the zsh plugin)
-alias tk='tmux kill-session -t'
 
 # Disk usage
 alias df='df -h'
