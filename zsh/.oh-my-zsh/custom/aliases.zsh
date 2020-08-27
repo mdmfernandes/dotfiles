@@ -1,16 +1,22 @@
 # Aliases
 
+# Check if a command exists
+exists()
+{
+    command -v "$1" >/dev/null 2>&1
+}
+
 # ls
 alias l.='ls -d .*'
 alias lt='ls -lth'
 
 # Use colordiff for diff, if installed
-if [ -n "$(which colordiff)" ]; then
+if exists colordiff; then
     alias diff='colordiff'
 fi
 
 # Use bat as cat, if installed
-if [ -n "$(which batcat)" ]; then
+if exists batcat; then
     alias cat='batcat -pp'
 fi
 
@@ -99,7 +105,7 @@ ipinfo() {
     fi
     
     # If jq is installed, make the output prettier
-    if [ -n "$(which jq)" ]; then
+    if exists jq; then
         curl -s ipinfo.io/$1 | jq
     else
         curl -s ipinfo.io/$1
