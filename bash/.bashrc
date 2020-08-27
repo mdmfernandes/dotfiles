@@ -40,3 +40,5 @@ export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
+# GRC - Generic colourizer
+[[ -s "/etc/grc.bashrc" ]] && source /etc/grc.bashrc

@@ -14,9 +14,6 @@ ZSH_THEME="mike"
 # Command auto-correction
 ENABLE_CORRECTION="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
@@ -73,6 +70,9 @@ CLOUDSDK_HOME=$HOME/Apps/google-cloud-sdk
 export PATH=$PATH:/usr/local/cuda-10.2/bin
 export PATH=$PATH:/usr/local/cuda-10.2/targets/x86_64-linux/include
 export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:/usr/local/cuda-10.2/targets/x86_64-linux/lib
+
+# GRC - Generic colouriser
+[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
 # gf autocomplete
 [[ -r "$GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh" ]] && source "$GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh"
