@@ -16,8 +16,15 @@ alias fgrep='fgrep --color=auto'
 # Make directory with parents
 alias mkdirp='mkdir -pv'
 
-# Diff with colors (requires colordiff)
-alias diff='colordiff'
+# Use colordiff for diff, if installed
+if [ -n "$(which colordiff)" ]; then
+    alias diff='colordiff'
+fi
+
+# Use bat as cat, if installed
+if [ -n "$(which batcat)" ]; then
+    alias cat='batcat -pp'
+fi
 
 # Show path with \n
 alias path='printf ${PATH//:/\\n}'
@@ -108,8 +115,8 @@ alias drc="docker rm"   # Remove one or more containers
 alias dri="docker rmi"  # Remove one or more images
 alias dpc="docker container prune"  # Delete stopped containers 
 alias dpi="docker image prune"      # Delete dangling images
-# docker-compose
-alias dc="docker-compose"
+# Docker-Compose
+alias dco="docker-compose"
 alias dcp="docker-compose ps"
 alias dcpa="docker-compose ps -a"
 alias dci="docker-compose images"
@@ -145,20 +152,6 @@ alias help='man'
 alias j='jobs -l'
 alias copy='xsel -i -b'
 alias :q="exit"
-
-# Use grc (requires grc)
-# More aliases here: https://github.com/garabik/grc/blob/master/grc.bashrc
-if [ -n "$(which grc)" ]; then                                                                      
-    alias env='grc env'
-    alias id='grc id'   
-    alias lsof='grc lsof'                         
-    alias ping='grc ping' 
-    alias dig='grc dig'                           
-    alias ps='grc ps'
-    alias ip='grc ip'
-    alias ifconfig='grc ifconfig'
-    alias nmap='grc nmap' 
-fi
 
 # Change up directories
 # Avoid error 'command not found'
