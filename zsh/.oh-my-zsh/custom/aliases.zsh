@@ -10,6 +10,9 @@ exists()
 alias l.='ls -d .*'
 alias lt='ls -lth'
 
+# Make directory with parents
+alias mkdirp='mkdir -pv'
+
 # Use colordiff for diff, if installed
 if exists colordiff; then
     alias diff='colordiff'

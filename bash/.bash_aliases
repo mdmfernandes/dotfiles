@@ -164,6 +164,7 @@ alias :q="exit"
 # Avoid error 'command not found'
 alias cd..='cd ..'
 # Change up a variable number of directories
+alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ....='cd ../../../..'
