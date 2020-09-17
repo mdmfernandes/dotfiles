@@ -161,17 +161,13 @@ alias copy='xsel -i -b'
 alias :q="exit"
 
 # Change up directories
-# Avoid error 'command not found'
 alias cd..='cd ..'
 # Change up a variable number of directories
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ....='cd ../../../..'
+alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-#   ..   -> cd ../
-#   .. 2 -> cd ../../
-#   .. 3 -> cd ../../../
 
 # Get IP info
 ipinfo() {
