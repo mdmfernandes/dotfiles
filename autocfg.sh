@@ -78,7 +78,7 @@ if [[ "$zsh" = true ]]; then
     cp "./zsh/aliases.zsh" "$ZSH_CUSTOM/aliases.zsh"
     rm -f $HOME/.zshrc
 
-    echo "  [+] Installing plugins..."
+    echo "  [+] Installing custom plugins..."
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
@@ -101,4 +101,12 @@ if [[ "$neovim" = true ]]; then
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     nvim +PlugInstall
+
+    echo "  [+] Installing PIP..."
+    sudo apt install python3-pip
+
+    echo "  [+] Installing and Configuring linters and fixers..."
+    pip3 install pylint flake8 yapf
+    cp -r "./nvim/ftplugin" "$HOME/.config/nvim/ftplugin"
+    cp -r "./nvim/configs/*" "$HOME/.config"
 fi
