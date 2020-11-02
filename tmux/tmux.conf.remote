@@ -1,0 +1,13 @@
+# To use TMUX on remote machines together with the default TMUX config:
+# - use C-Space as prefix key
+# - use the basic theme
+
+# ---- Keys ----
+# Prefix key (C-<space>)
+unbind C-a
+set -g prefix C-Space
+bind C-Space send-prefix
+
+# ---- Theme ----
+set -g @themepack 'basic'
+set -goq  @theme-status-right-length 150

@@ -27,9 +27,10 @@ fi
 alias path='printf ${PATH//:/\\n}'
 
 # Vim
-alias vi='vim'
-alias svi='sudo vim'
-alias edit='vim'
+alias vim='nvim'
+alias vi='nvim'
+alias svi='sudo nvim'
+alias edit='nvim'
 
 # Show all ports
 alias ports='ss -tulpan'
@@ -59,13 +60,50 @@ alias dud='du -d 1 -h' # Size of files at depth 1 in current location
 alias duf='du -sh' # Size of files in current location
 
 # IP
-alias ip='ip -color=auto' # Colorize the output if a terminal is available
+if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
+    alias ip='ip -color=auto' # Colorize the output if a terminal is available
+fi
 
-# Git (override the zsh plugin)
-alias gl='git log'
-alias gs='git status'
+# Git
+alias ga='git add'
+alias gaa='git add --all'
+
+alias gb='git branch'
+alias gba='git branch -a'
+alias gbr='git branch --remote'
 alias gbv='git branch -vv'
-unalias gf
+
+alias gc='git commit -v'
+alias gc!='git commit -v --amend'
+alias gcn!='git commit -v --no-edit --amend'
+alias gca='git commit -v -a'
+alias gca!='git commit -v -a --amend'
+alias gcan!='git commit -v -a --no-edit --amend'
+alias gcam='git commit -a -m'
+alias gcb='git checkout -b'
+alias gcm='git checkout master'
+alias gcmsg='git commit -m'
+alias gco='git checkout'
+
+alias gl='git log'
+alias glg='git log --stat'
+alias glgp='git log --stat -p'
+alias glgg='git log --graph'
+alias glgga='git log --graph --decorate --all'
+alias glgm='git log --graph --max-count=10'
+alias glo='git log --oneline --decorate'
+alias glog='git log --oneline --decorate --graph'
+alias gloga='git log --oneline --decorate --graph --all'
+
+alias gp='git push'
+alias gpd='git push --dry-run'
+alias gpf='git push --force-with-lease'
+
+alias gs='git status'
+alias gss='git status -s'
+
+alias gsw='git switch'
+alias gswc='git switch -c'
 
 # Docker
 alias d='docker'
@@ -91,7 +129,7 @@ alias h='history'
 alias help='man'
 alias j='jobs -l'
 alias :q='exit'
-alias copy='xsel -i -b'
+alias copy='xclip -in -selection clipboard'
 alias zshrc='${=EDITOR} ~/.config/zsh/.zshrc'
 
 # Get IP info
@@ -109,8 +147,30 @@ ipinfo() {
     
     # If jq is installed, make the output prettier
     if exists jq; then
-        curl -s ipinfo.io/$1 | jq
+        curl -s -u $IPINFO_TOKEN: https://ipinfo.io/$1 | jq
     else
-        curl -s ipinfo.io/$1
+        curl -s -u $IPINFO_TOKEN: https://ipinfo.io/$1
+    fi
+}
+
+# Get domain info
+domaininfo() {
+    # If it's empty
+    if [ -z "$1" ]; then
+        echo "You need to provide a domain. Usage: domaininfo <domain>"
+        return 1
+    fi
+    # Check if the domain has a valid format
+    result=$(echo $1 | grep -E '^@[a-zA-Z0-9]+([-.]?[a-zA-Z0-9]+)*.[a-zA-Z]+$')
+    if [[ -z result ]]; then
+        echo "Invalid domain format"
+        return 2
+    fi
+
+    # If jq is installed, make the output prettier
+    if exists jq; then
+        curl -s -u $HOSTIO_TOKEN: https://host.io/api/full/$1 | jq
+    else
+        curl -s -u $HOSTIO_TOKEN: https://host.io/api/full/$1
     fi
 }

@@ -2,36 +2,35 @@
 set nocompatible
 
 " Specify the plugins directory
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Plugins
 " - themes
-Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 " - tabline
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" - icons
+Plug 'ryanoasis/vim-devicons'
 " - git
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " - others
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'vimwiki/vimwiki'
 Plug 'dense-analysis/ale'
 
 call plug#end()
 
 "filetype plugin on
 
-""" Syntax highlighting
-syntax on
-
 """ Enable jumping into files in a search buffer
 set hidden
 
 """ Displayed encoding
-set encoding=utf-8
+"set encoding=utf-8
 
 """ Signs refresh time
 set updatetime=250  
@@ -39,20 +38,20 @@ set updatetime=250
 " Map Leader
 let mapleader = "\<Space>"
 
-"---------- Plugins ----------
-""" gruvbox
-set background=dark 
-let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
-""" gruvbox (end)
-
-
-""" vim-airline
+" --------- Themes -----------
+""" Tabline
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'powerlineish'
-""" vim-airline (end)
+let g:airline_theme = 'wombat'
+let g:airline_powerline_fonts = 1
 
+""" Theme
+syntax on
+"set termguicolors
+set background=dark 
+colorscheme onedark
 
+"---------- Plugins ----------
 """ vim-gitgutter
 "" Custom key bindings
 " Hunk-add and hunk-revert for hunk staging
@@ -79,8 +78,15 @@ highlight GitGutterChange cterm=bold ctermfg=172 ctermbg=bg
 
 
 """ nerdtree
-map <C-t> :NERDTreeToggle<CR>
+nnoremap <silent> <C-t> :NERDTreeToggle<CR>
 let g:NERDTreeIgnore = ['^node_modules$']
+let g:NERDTreeIgnore = ['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__', 'node_modules']
+let g:NERDTreeChDirMode=2
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeStatusline = ''
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 """ nerdtree (end)
 
 
@@ -88,12 +94,6 @@ let g:NERDTreeIgnore = ['^node_modules$']
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 """ ctrlp (end)
-
-
-""" VimWiki
-let g:vimwiki_list = [{'path': '~/Documents/VimWiki/', 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_global_ext = 0
-""" VimWiki (end)
 
 
 """ ALE
@@ -121,7 +121,7 @@ set number relativenumber
 """ Line wrapping
 set wrap        " wrap lines
 set linebreak
-set showbreak=▹ " Show this symbol at break lines
+set showbreak=▶ " Show this symbol at break lines
 
 "" Direction keys for wrapped lines
 nnoremap <silent> k gk
@@ -174,13 +174,10 @@ set pastetoggle=<F3>
 " Write current file with sudo perms
 command! W w
 
-""" Make backspace a bit nicer
-set backspace=eol,start,indent
-
-""" Visual prompt for command completion
-set wildmenu
-
 """ Splits open to right and bottom
 set splitbelow
 set splitright
 
+""" Save swap and backup files to /tmp
+set directory=/tmp
+set backupdir=/tmp
