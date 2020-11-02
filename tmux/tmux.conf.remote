@@ -4,9 +4,10 @@
 
 # ---- Keys ----
 # Prefix key (C-<space>)
-unbind C-b
+unbind C-a
 set -g prefix C-Space
-bind Space send-prefix
+bind C-Space send-prefix
 
 # ---- Theme ----
 set -g @themepack 'basic'
+set -goq  @theme-status-right-length 150
