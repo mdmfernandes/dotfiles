@@ -1,28 +1,36 @@
-###################################################
-# This is a template for the ZSH config (.zshrc). #
-# Adapt your .zshrc file according to your needs. #
-###################################################
+#####################
+# Mike's ZSH config #
+#####################
 
-## ZSH configuration
+# Preferred editor for local and remote sessions
+# this is required for TMUX and needs to be before loading the plugin
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='nvim'
+    export VISUAL='nvim'
+else
+    export EDITOR='nvim'
+    export VISUAL='nvim'
+fi
 
+# Set language environment
+export LANG=en_US.UTF-8
+
+
+# Oh-my-zsh configuration
 # Path to oh-my-zsh installation
 export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 
 # oh-my-zsh theme to use
-ZSH_THEME="mike"
-
-# Command auto-correction
-ENABLE_CORRECTION="true"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source ~/.config/zsh/.p10k.zsh
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# History file
-HISTFILE=$HOME/.config/zsh/.zsh_history
-HIST_STAMPS="yyyy-mm-dd"
-HISTORY_IGNORE='([bf]g *|l[alsh]#( *)#|less *|vim# *|pwd|history|h|cd ..|..|...|....|.....)' 
+# Uncomment the following line if pasting URLs and other text is messed up.
+DISABLE_MAGIC_FUNCTIONS=true
 
 # Plugins settings
 _Z_DATA=$HOME/.config/zsh/.z
@@ -33,22 +41,61 @@ ZSH_TMUX_AUTOQUIT=false
 # - Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 #  -Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-prompt vi-mode tmux docker golang gcloud colored-man-pages z)
+plugins=(vi-mode tmux colored-man-pages z zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
+#####################
+# ZSH configuration #
+####################
+#setopt interactivecomments  # allow comments in interactive mode
+setopt noclobber             # prevent from overwriting an existing file
+#setopt magicequalsubst      # enable filename expansion for arguments of the form 'anything=expression'
+#setopt nonomatch            # hide error message if there is no match for the pattern
+#setopt notify               # report the status of background jobs immediatly
+#setopt numericglobsort      # sort filenames numerically when it makes sense
+#setopt promptsubst          # enable command substitution in prompt
 
-## User configuration
-# Set language environment
-export LANG=en_US.UTF-8
+WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='vim'
-fi
+# Change EOL sign (default: '%')
+PROMPT_EOL_MARK='%S$%s'
 
+
+# History file
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=20000
+setopt hist_expire_dups_first   # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups         # ignore duplicated commands history list
+setopt hist_ignore_space        # ignore commands that start with space
+setopt hist_verify              # show command with history expansion to user before running it
+
+# force zsh to show the complete history
+alias history="history 0"
+
+# don't complete functions
+zstyle ':completion:*:functions' ignored-patterns '_*'
+
+#new_line_before_prompt=yes
+#precmd() {
+    ## Print the previously configured title
+    #print -Pnr -- "$TERM_TITLE"
+
+    ## Print a new line before the prompt, but only if it is not the first line
+    #if [ "$new_line_before_prompt" = yes ]; then
+        #if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
+            #_NEW_LINE_BEFORE_PROMPT=1
+        #else
+            #print ""
+        #fi
+    #fi
+#}
+
+
+######################
+# User configuration #
+######################
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -63,31 +110,5 @@ gpgconf --launch gpg-agent
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-# Google Cloud SDK
-CLOUDSDK_HOME=$HOME/Apps/google-cloud-sdk 
-
-# CUDA
-export PATH=$PATH:/usr/local/cuda-10.2/bin
-export PATH=$PATH:/usr/local/cuda-10.2/targets/x86_64-linux/include
-export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:/usr/local/cuda-10.2/targets/x86_64-linux/lib
-
-# GRC - Generic colouriser
-[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
-
 # gf autocomplete
 [[ -r "$GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh" ]] && source "$GOPATH/src/github.com/tomnomnom/gf/gf-completion.zsh"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/usr/local/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/usr/local/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
