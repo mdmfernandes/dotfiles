@@ -124,6 +124,30 @@ alias dci='docker-compose images'
 # Gron
 alias norg="gron --ungron"
 
+# TMUX
+unalias ta
+unalias ts
+unalias tkss
+# Attach a session (last or named)
+ta() {
+    # If it has no arguments
+    if [ -z "$1" ]; then
+            tmux attach-session
+    else
+            tmux attach -t $1
+    fi
+}
+# Create a session (default or named)
+ts() {
+    # If it has no arguments
+    if [ -z "$1" ]; then
+            tmux new-session
+    else
+            tmux new-session -s $1
+    fi
+}
+alias tk="tmux kill-session -t"     # Kill a named session
+
 # Other commands
 alias h='history'
 alias help='man'

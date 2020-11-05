@@ -22,6 +22,7 @@ while test $# -gt 0; do
 done
 
 # Config
+apps=true
 tmux=true
 zsh=true
 neovim=true
@@ -31,6 +32,12 @@ exists() # Check if a command exists
 {
     command -v "$1" >/dev/null 2>&1
 }
+
+# Applications
+if [[ "$tmux" = true ]]; then
+    echo "[+] Installing applications [git, jq, colordiff, xclip, fzf, bat, tree]..."
+    sudo apt install --yes --quiet git jq colordiff xclip fzf bat tree
+fi
 
 # TMUX
 if [[ "$tmux" = true ]]; then
@@ -67,6 +74,7 @@ if [[ "$zsh" = true ]]; then
     mkdir -p $HOME/.config/zsh
     echo "ZDOTDIR=$HOME/.config/zsh" > $HOME/.zshenv && . $HOME/.zshenv
     cp "./zsh/zshrc" "$HOME/.config/zsh/.zshrc"
+    cp "./zsh/custom.zsh" "$HOME/.config/zsh/.custom.zsh"
     cp "./zsh/p10k.zsh" "$HOME/.config/zsh/.p10k.zsh"
     source $HOME/.config/zsh/.zshrc 2>/dev/null
 
