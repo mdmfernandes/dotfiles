@@ -156,9 +156,9 @@ map <Leader>o <Esc><C-W>gF<CR>:tabm<CR>
 " base64 decode the word under cursor
 nmap <Leader>64 :!echo <C-R><C-W> \| base64 -d<CR>
 " Buffers
-map <Leader>b :enew<CR>
+map <Leader>c :enew<CR>
 map <Leader>n :bn<CR>
-map <Leader>p :bp<CR>
+map <Leader>b :bp<CR>
 map <Leader>d :bd<CR>
 map <Leader>l :buffers<CR>
 " Tabs
@@ -169,6 +169,15 @@ map <C-l> gt
 nnoremap <silent> <Leader><Space> :nohls<CR>
 " Toggle between paste and nopaste modes
 set pastetoggle=<F3>
+" Copy/paste to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
 
 """ Change commands
 " Write current file with sudo perms
