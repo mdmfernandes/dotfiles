@@ -9,5 +9,6 @@ set -g prefix C-Space
 bind C-Space send-prefix
 
 # ---- Theme ----
+set -g @theme-status-right-length 150
+set -g @themepack-status-left-area-right-suffix " "
 set -g @themepack 'basic'
-set -goq  @theme-status-right-length 150
