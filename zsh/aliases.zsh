@@ -69,9 +69,8 @@ alias ga='git add'
 alias gaa='git add --all'
 
 alias gb='git branch'
-alias gba='git branch -a'
+alias gba='git branch -a -vv'
 alias gbr='git branch --remote'
-alias gbv='git branch -vv'
 
 alias gc='git commit -v'
 alias gc!='git commit -v --amend'
@@ -104,6 +103,8 @@ alias gss='git status -s'
 
 alias gsw='git switch'
 alias gswc='git switch -c'
+
+alias gur='git pull --rebase'
 
 # Docker
 alias d='docker'

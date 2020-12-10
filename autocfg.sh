@@ -34,14 +34,18 @@ exists() # Check if a command exists
 }
 
 # Applications
-if [[ "$tmux" = true ]]; then
+if [[ "$apps" = true ]]; then
     echo "[+] Installing applications [git, jq, colordiff, xclip, fzf, bat, tree]..."
     sudo apt install --yes --quiet git jq colordiff xclip fzf bat tree
+    # Configure git
+    git config --global branch.autoSetupRebase always
+    git config --global core.pager "less -F -X"
 fi
 
 # TMUX
 if [[ "$tmux" = true ]]; then
-    echo "\n[+] Configuring TMUX..."
+    echo ""
+    echo "[+] Configuring TMUX..."
 
     if ! exists tmux; then
         echo "  [+] Installing TMUX..."
@@ -63,7 +67,8 @@ fi
 
 # ZSH
 if [[ "$zsh" = true ]]; then
-    echo "\n[+] Configuring ZSH..."
+    echo ""
+    echo "[+] Configuring ZSH..."
 
     if ! exists zsh; then
         echo "  [+] Installing ZSH..."
@@ -94,7 +99,8 @@ fi
 
 # NeoVIM
 if [[ "$neovim" = true ]]; then
-    echo "\n[+] Configuring NeoVIM..."
+    echo ""
+    echo "[+] Configuring NeoVIM..."
 
     if ! exists zsh; then
         echo "  [+] Installing NeoVIM..."
@@ -115,6 +121,6 @@ if [[ "$neovim" = true ]]; then
 
     echo "  [+] Installing and Configuring linters and fixers..."
     pip3 install pylint flake8 yapf
-    cp -r "./nvim/ftplugin" "$HOME/.config/nvim/ftplugin"
-    cp -r "./nvim/configs/*" "$HOME/.config"
+    cp -r ./nvim/ftplugin $HOME/.config/nvim/ftplugin
+    cp -r ./nvim/configs/* $HOME/.config
 fi
