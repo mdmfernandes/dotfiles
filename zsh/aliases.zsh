@@ -80,7 +80,7 @@ alias gca!='git commit -v -a --amend'
 alias gcan!='git commit -v -a --no-edit --amend'
 alias gcam='git commit -a -m'
 alias gcb='git checkout -b'
-alias gcm='git checkout master'
+alias gcm='git checkout main'
 alias gcmsg='git commit -m'
 alias gco='git checkout'
 
