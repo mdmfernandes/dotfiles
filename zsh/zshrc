@@ -72,7 +72,7 @@ source $ZSH/oh-my-zsh.sh
 #setopt interactivecomments  # allow comments in interactive mode
 setopt noclobber             # prevent from overwriting an existing file
 #setopt magicequalsubst      # enable filename expansion for arguments of the form 'anything=expression'
-#setopt nonomatch            # hide error message if there is no match for the pattern
+setopt nonomatch             # hide error message if there is no match for the pattern
 #setopt notify               # report the status of background jobs immediatly
 #setopt numericglobsort      # sort filenames numerically when it makes sense
 #setopt promptsubst          # enable command substitution in prompt
