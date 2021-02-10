@@ -32,12 +32,14 @@ export BAT_PAGER="less -R"
 
 # Go 
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+PATH=$PATH:$GOPATH/bin
 
 
 #### User custom configurations ###############################################
 [[ -f "$HOME/.config/zsh/.custom.zsh" ]] && source "$HOME/.config/zsh/.custom.zsh"
 
+#### Export $PATH #############################################################
+export -U PATH
 
 #### Oh-my-zsh configuration ##################################################
 # Path to oh-my-zsh installation
