@@ -84,6 +84,8 @@ alias gcm='git checkout main'
 alias gcmsg='git commit -m'
 alias gco='git checkout'
 
+alias gd='git diff'
+
 alias gl='git log'
 alias glg='git log --stat'
 alias glgp='git log --stat -p'
