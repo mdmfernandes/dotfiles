@@ -25,8 +25,8 @@ export FZF_DEFAULT_OPTS="
 --no-mouse --height=50% -1 --reverse --multi --inline-info
 --preview '([[ -f {} ]] && [[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file) || ([[ -f {} ]] && (batcat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
 --preview-window='right:hidden:wrap'
---bind='ctrl-v:execute(batcat --style=numbers {} || less -f {})'
---bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+--bind='ctrl-v:execute(batcat --style=numbers {} < /dev/tty > /dev/tty 2>&1 || less -f {} < /dev/tty > /dev/tty 2>&1)'
+--bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)'
 --bind='ctrl-p:toggle-preview'
 --bind='ctrl-d:half-page-down'
 --bind='ctrl-u:half-page-up'
