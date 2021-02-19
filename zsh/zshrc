@@ -10,6 +10,14 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 
 
+#### Helpers ##################################################################
+# Check if a command exists
+exists()
+{
+    command -v "$1" >/dev/null 2>&1
+}
+
+
 #### Applications #############################################################
 # fzf
 export FZF_COMPLETION_TRIGGER="'"
@@ -24,6 +32,11 @@ export FZF_DEFAULT_OPTS="
 --bind='ctrl-u:half-page-up'
 --bind='ctrl-a:select-all'
 --bind='ctrl-y:execute-silent(echo -n {+} | xclip -in -selection clipboard)'"
+# If ripgrep is installed, use it with FZF
+if exists rg; then
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-vcs"
+    export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+fi
 
 alias -g Z='| fzf'
 
