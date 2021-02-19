@@ -12,3 +12,5 @@ bind C-Space send-prefix
 set -g @theme-status-right-length 150
 set -g @themepack-status-left-area-right-suffix " "
 set -g @themepack 'basic'
+# show the host IP
+#set -g @themepack-status-right-area-middle-format "#(cut -c3- ~/.tmux.conf | sh -s _myip)"
