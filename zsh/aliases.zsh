@@ -146,7 +146,7 @@ ts() {
     if [ -z "$1" ]; then
             tmux new-session
     else
-            tmux new-session -s $1
+            tmux new-session -A -s $1
     fi
 }
 alias tk="tmux kill-session -t"     # Kill a named session
