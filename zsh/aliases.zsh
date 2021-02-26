@@ -85,9 +85,10 @@ alias gcmsg='git commit -m'
 alias gco='git checkout'
 
 alias gd='git diff'
+alias gds='git diff --stat'
 
 alias gl='git log'
-alias glg='git log --stat'
+alias gls='git log --stat'
 alias glgp='git log --stat -p'
 alias glgg='git log --graph'
 alias glgga='git log --graph --decorate --all'
@@ -101,10 +102,10 @@ alias gpd='git push --dry-run'
 alias gpf='git push --force-with-lease'
 
 alias gs='git status'
-alias gss='git status -s'
+alias gss='git status --short'
 
 alias gsw='git switch'
-alias gswc='git switch -c'
+alias gswc='git switch --create'
 
 alias gur='git pull --rebase'
 
