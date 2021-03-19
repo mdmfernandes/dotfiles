@@ -15,11 +15,13 @@ Plug 'ryanoasis/vim-devicons'
 " - git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+" - fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " - others
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dense-analysis/ale'
 
 call plug#end()
@@ -90,10 +92,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 """ nerdtree (end)
 
 
-""" ctrlp
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-""" ctrlp (end)
+""" fzf
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+nnoremap <silent> <Leader>g :Commits<CR>
+""" fzf (end)
 
 
 """ ALE
