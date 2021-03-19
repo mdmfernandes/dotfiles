@@ -35,8 +35,12 @@ exists() # Check if a command exists
 
 # Applications
 if [[ "$apps" = true ]]; then
-    echo "[+] Installing applications [git, jq, colordiff, xclip, fzf, bat, tree]..."
-    sudo apt install --yes --quiet git jq colordiff xclip fzf bat tree
+    echo "[+] Installing applications [git, jq, colordiff, xclip, fzf, ripgrep, bat, tree]..."
+    sudo apt install --yes --quiet git jq colordiff xclip fzf ripgrep tree
+    # Use this solution to avoid an incompatibility between ripgrep and bat:
+    # https://github.com/sharkdp/bat/issues/938#issuecomment-759415389\
+    sudo sed -i '/\/usr\/.crates2.json/d' /var/lib/dpkg/info/ripgrep.list
+    sudo apt install --yes --quiet bat
     # Configure git
     git config --global branch.autoSetupRebase always
     git config --global core.pager "less -F -X"
@@ -95,6 +99,9 @@ if [[ "$zsh" = true ]]; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+
+    echo " [+] Creating soft links for the aliases files..."
+    ln -s $ZSH_CUSTOM/aliases.zsh $HOME/.config/zsh/.aliases.zsh
 fi
 
 # NeoVIM
