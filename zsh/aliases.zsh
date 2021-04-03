@@ -7,11 +7,39 @@ exists()
 }
 
 # ls
-alias l.='ls -d .*'
+if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
+    alias ls='ls --color=auto' # Colorize the output if a terminal is available
+fi
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias l='ls -lh'
 alias lt='ls -lth'
+alias l.='ls -d .*'
+
+# cd
+alias ...=../..
+alias ....=../../..
+alias .....=../../../..
+alias ......=../../../../..
+alias -- -='cd -'
+alias 1='cd -'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+alias 8='cd -8'
+alias 9='cd -9'
+alias dv='dirs -v'
+
+# grep
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
+alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
+alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 
 # Make directory with parents
-alias mkdirp='mkdir -pv'
+alias md='mkdir -pv'
 
 # Use colordiff for diff, if installed
 if exists colordiff; then
@@ -19,8 +47,13 @@ if exists colordiff; then
 fi
 
 # Use bat as cat, if installed
+# Ubuntu
 if exists batcat; then
     alias cat='batcat -pp'
+fi
+# Manjaro
+if exists bat; then
+    alias cat='bat -pp'
 fi
 
 # Show path with \n
@@ -29,7 +62,7 @@ alias path='printf ${PATH//:/\\n}'
 # Vim
 alias vim='nvim'
 alias vi='nvim'
-alias svi='sudo nvim'
+alias svi='sudo -e' # Requires 'EDITOR=nvim'
 alias edit='nvim'
 
 # Show all ports
@@ -45,6 +78,9 @@ alias ln='ln -i'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
+
+# fzf
+alias -g Z='| fzf'
 
 # apt
 alias ai='sudo apt install'
@@ -67,11 +103,9 @@ fi
 # Git
 alias ga='git add'
 alias gaa='git add --all'
-
 alias gb='git branch'
 alias gba='git branch -a -vv'
 alias gbr='git branch --remote'
-
 alias gc='git commit -v'
 alias gc!='git commit -v --amend'
 alias gcn!='git commit -v --no-edit --amend'
@@ -83,10 +117,8 @@ alias gcb='git checkout -b'
 alias gcm='git checkout main'
 alias gcmsg='git commit -m'
 alias gco='git checkout'
-
 alias gd='git diff'
 alias gds='git diff --stat'
-
 alias gl='git log'
 alias gls='git log --stat'
 alias glgp='git log --stat -p'
@@ -96,17 +128,14 @@ alias glgm='git log --graph --max-count=10'
 alias glo='git log --oneline --decorate'
 alias glog='git log --oneline --decorate --graph'
 alias gloga='git log --oneline --decorate --graph --all'
-
 alias gp='git push'
 alias gpd='git push --dry-run'
 alias gpf='git push --force-with-lease'
-
+alias grv='git remote --verbose'
 alias gs='git status'
 alias gss='git status --short'
-
 alias gsw='git switch'
 alias gswc='git switch --create'
-
 alias gur='git pull --rebase'
 
 # Docker
@@ -125,13 +154,7 @@ alias dcp='docker-compose ps'
 alias dcpa='docker-compose ps -a'
 alias dci='docker-compose images'
 
-# Gron
-alias norg="gron --ungron"
-
 # TMUX
-unalias ta
-unalias ts
-unalias tkss
 # Attach a session (last or named)
 ta() {
     # If it has no arguments
@@ -150,7 +173,8 @@ ts() {
             tmux new-session -A -s $1
     fi
 }
-alias tk="tmux kill-session -t"     # Kill a named session
+alias tl='tmux list-sessions'
+alias tk='tmux kill-session -t'
 
 # Other commands
 alias h='history'
