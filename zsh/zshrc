@@ -1,11 +1,19 @@
-#####################
-# Mike's ZSH config #
-#####################
+###############################################################################
+# Miguel's ZSH config
+# ===================
+# Available at https://github.com/mdmfernandes/dotfiles
+# Theme:
+#   - Powerlevel10k (https://github.com/romkatv/powerlevel10k)
+# Plugins:
+#   - z.sh (https://github.com/rupa/z)
+#   - zsh-syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
+#   - zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
+###############################################################################
 
 # Set language environment
 export LANG=en_US.UTF-8
 
-# Preferred editor
+# Preferred editor (this will also change the ZSH mode)
 export EDITOR='nvim'
 export VISUAL='nvim'
 
@@ -17,112 +25,217 @@ exists()
     command -v "$1" >/dev/null 2>&1
 }
 
-
-#### Applications #############################################################
-# fzf
-export FZF_COMPLETION_TRIGGER="'"
-export FZF_DEFAULT_OPTS="
---no-mouse --height=50% -1 --reverse --multi --inline-info
---preview '([[ -f {} ]] && [[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file) || ([[ -f {} ]] && (batcat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
---preview-window='right:hidden:wrap'
---bind='ctrl-v:execute(batcat --style=numbers {} < /dev/tty > /dev/tty 2>&1 || less -f {} < /dev/tty > /dev/tty 2>&1)'
---bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)'
---bind='ctrl-p:toggle-preview'
---bind='ctrl-d:half-page-down'
---bind='ctrl-u:half-page-up'
---bind='ctrl-a:select-all'
---bind='ctrl-y:execute-silent(echo -n {+} | xclip -in -selection clipboard)'"
-# If ripgrep is installed, use it with FZF
-if exists rg; then
-    export FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-vcs"
-    export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-fi
-
-alias -g Z='| fzf'
-
-# batcat
-export BAT_PAGER="less -R"
-
-# Go 
-export GOPATH=$HOME/go
-PATH=$PATH:$GOPATH/bin
-
-
-#### User custom configurations ###############################################
-[[ -f "$HOME/.config/zsh/.custom.zsh" ]] && source "$HOME/.config/zsh/.custom.zsh"
-
-#### Export $PATH #############################################################
-export -U PATH
-
-#### Oh-my-zsh configuration ##################################################
-# Path to oh-my-zsh installation
-export ZSH="$HOME/.config/zsh/.oh-my-zsh"
-
-# Theme - Powerlevel10k
-ZSH_THEME="powerlevel10k/powerlevel10k"
-source $HOME/.config/zsh/.p10k.zsh
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-DISABLE_MAGIC_FUNCTIONS=true
-
-# Plugins settings
-_Z_DATA=$HOME/.config/zsh/.z
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOQUIT=false
-
-# Plugins to load
-#  - Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode tmux colored-man-pages z zsh-autosuggestions zsh-syntax-highlighting fzf)
-
-source $ZSH/oh-my-zsh.sh
+# Get this script path
+ZDOTDIR="${${(%):-%x}:h}"
 
 
 #### Zsh configuration ########################################################
-#setopt interactivecomments  # allow comments in interactive mode
-setopt noclobber             # prevent from overwriting an existing file
-#setopt magicequalsubst      # enable filename expansion for arguments of the form 'anything=expression'
-setopt nonomatch             # hide error message if there is no match for the pattern
-#setopt notify               # report the status of background jobs immediatly
-#setopt numericglobsort      # sort filenames numerically when it makes sense
-#setopt promptsubst          # enable command substitution in prompt
+## Options
+setopt noclobber            # prevent from overwriting an existing file
+setopt nonomatch            # hide error message if there is no match for the pattern
+setopt extendedglob         # extended globbing. Allows using regular expressions with *
+setopt nocaseglob           # case insensitive globbing
+setopt nocheckjobs          # don't warn about running processes when exiting
+setopt numericglobsort      # sort filenames numerically when it makes sense
+setopt nobeep               # no beep
+setopt autocd               # if only directory path is entered, cd there.
+setopt appendhistory        # immediately append history instead of overwriting
+setopt histignorealldups    # if a new command is a duplicate, remove the older one
+setopt incappendhistory     # save commands are added to the history immediately, otherwise only when shell exits.
+setopt histignorespace      # ignore commands that start with space
+setopt histverify           # show command with history expansion to user before running it
 
-WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
+# Colors
+if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
+    if [[ -f /usr/bin/dircolors && -r $HOME/.dir_colors ]]; then
+        eval $(/usr/bin/dircolors -b $HOME/.dir_colors)
+    fi
+else    # If in MacOS
+    export CLICOLOR=1
+    # Use https://geoff.greer.fm/lscolors/ to convert between BSD (LSCOLORS),
+    # used in MacOS, and Linux colors (LS_COLORS)
+    LS_COLORS='di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+fi
 
-# Change EOL sign (default: '%')
-PROMPT_EOL_MARK='%S$%s'
+# Completion
+setopt auto_menu            # automatically use menu completion
+setopt complete_in_word     # keep the cursor at the completion, if ambiguous
+setopt always_to_end        # move cursor to end if word has one match
+
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # colored completion (different colors for dirs/files/etc)
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # case insensitive tab completion
+zstyle ':completion:*' rehash true                              # automatically find new executables in path
+zstyle ':completion:*' menu select                              # select completions with arrow keys
+zstyle ':completion:*:functions' ignored-patterns '_*'          # don't complete functions
+
+zstyle ':completion:*' special-dirs true                        # complete . and .. special directories
+# speed up completions
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path ${0:a:h}/.zsh_cache
+
+# Don't complete uninteresting users
+zstyle ':completion:*:*:*:users' ignored-patterns \
+        adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
+        clamav colord cups daemon dbus dhcpcd distcache dnsmasq dovecot fax ftp games gdm \
+        gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
+        ldap lp mail mailman mailnull man messagebus  mldonkey mysql nagios \
+        named netdump news nfsnobody 'nm-*' nobody nscd ntp nut nx obsrun openvpn \
+        operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
+        rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync 'systemd-*' tftp \
+        usbmux uucp vcsa wwwrun xfs '_*'
+
+WORDCHARS=${WORDCHARS//\/[&.;]} # don't consider certain characters part of the word
 
 # History file
 HISTFILE=$ZDOTDIR/.zsh_history
 HISTSIZE=10000
 SAVEHIST=20000
-setopt hist_expire_dups_first   # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups         # ignore duplicated commands history list
-setopt hist_ignore_space        # ignore commands that start with space
-setopt hist_verify              # show command with history expansion to user before running it
 
-# force zsh to show the complete history
-alias history="history 0"
+# Change EOL sign (default: '%')
+PROMPT_EOL_MARK='%S$%s'
 
-# don't complete functions
-zstyle ':completion:*:functions' ignored-patterns '_*'
 
-#new_line_before_prompt=yes
-#precmd() {
-    ## Print the previously configured title
-    #print -Pnr -- "$TERM_TITLE"
+#### Load completion and colors ###############################################
+autoload -U compinit colors
+compinit -d
+colors
 
-    ## Print a new line before the prompt, but only if it is not the first line
-    #if [ "$new_line_before_prompt" = yes ]; then
-        #if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
-            #_NEW_LINE_BEFORE_PROMPT=1
-        #else
-            #print ""
-        #fi
-    #fi
-#}
+
+#### Colored man pages ########################################################
+export LESS_TERMCAP_mb=$'\E[01;32m'
+export LESS_TERMCAP_md=$'\E[01;32m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;36m'
+export LESS=-R
+
+
+#### Vi mode ##################################################################
+# Although the editor set the zsh mode, we can force the vi mode
+bindkey -v              # vi mode
+export KEYTIMEOUT=2     # decrease change mode time to 0.2s
+
+
+#### Keybindings ##############################################################
+bindkey '^[[7~' beginning-of-line                   # Home key
+bindkey '^[[H' beginning-of-line                    # Home key
+bindkey '^a' beginning-of-line                      # Ctrl+a
+if [[ "${terminfo[khome]}" != "" ]]; then
+  bindkey "${terminfo[khome]}" beginning-of-line    # [Home] - Go to beginning of line
+fi
+bindkey '^[[8~' end-of-line                         # End key
+bindkey '^[[F' end-of-line                          # End key
+bindkey '^e' end-of-line                            # Ctrl+e
+if [[ "${terminfo[kend]}" != "" ]]; then
+  bindkey "${terminfo[kend]}" end-of-line           # [End] - Go to end of line
+fi
+bindkey '^[[2~' overwrite-mode                      # Insert key
+bindkey '^[[3~' delete-char                         # Delete key
+bindkey '^[[C'  forward-char                        # Right key
+bindkey '^[[D'  backward-char                       # Left key
+
+# Search history
+bindkey '^[[5~' history-beginning-search-backward   # Page up key
+bindkey '^[[6~' history-beginning-search-forward    # Page down key
+bindkey '^r' history-incremental-search-backward    # Ctrl+r
+bindkey '^s' history-incremental-search-forward     # Ctrl+s
+bindkey '^P' up-history                             # Ctrl+p
+bindkey '^N' down-history                           # Ctrl+n
+
+# Navigate words with ctrl+arrow keys
+bindkey '^[Oc' forward-word
+bindkey '^[Od' backward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+
+# Delete chars and words
+bindkey '^?' backward-delete-char                   # Backspace
+bindkey '^h' backward-delete-char                   # Ctrl+h
+bindkey '^H' backward-kill-word                     # Ctrl+backspace
+bindkey '^w' backward-kill-word                     # Ctrl+w
+bindkey '^[[Z' undo                                 # Shift+tab undo last action
+
+
+#### Theme ####################################################################
+# Powerlevel10k
+source $HOME/.local/share/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+source $ZDOTDIR/.p10k.zsh
+
+
+#### ZSH Plugins ##############################################################
+# z.sh
+if [[ -r "$HOME/.local/share/zsh/plugins/z/z.sh" ]];then
+    _Z_DATA=$ZDOTDIR/.z
+    source "$HOME/.local/share/zsh/plugins/z/z.sh"
+fi
+
+# Syntax Highlighting
+if [[ -r "$HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]];then
+    source $HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# Auto Suggestions
+if [[ -r "$HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]];then
+    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+    source $HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+
+#### Source aliases and user custom configurations ############################
+[[ -f "$ZDOTDIR/.aliases.zsh" ]] && source "$ZDOTDIR/.aliases.zsh"
+[[ -f "$ZDOTDIR/.custom.zsh" ]] && source "$ZDOTDIR/.custom.zsh"
+
+
+#### Applications #############################################################
+# FZF
+if exists fzf; then
+    # Custom configs
+    export FZF_COMPLETION_TRIGGER="'"
+    export FZF_DEFAULT_OPTS="
+    --no-mouse --height=50% -1 --reverse --multi --inline-info
+    --preview '([[ -f {} ]] && [[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file) || ([[ -f {} ]] && (batcat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+    --preview-window='right:hidden:wrap'
+    --bind='ctrl-v:execute(batcat --style=numbers {} < /dev/tty > /dev/tty 2>&1 || less -f {} < /dev/tty > /dev/tty 2>&1)'
+    --bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)'
+    --bind='ctrl-p:toggle-preview'
+    --bind='ctrl-d:half-page-down'
+    --bind='ctrl-u:half-page-up'
+    --bind='ctrl-a:select-all'
+    --bind='ctrl-y:execute-silent(echo -n {+} | xclip -in -selection clipboard)'
+    --color=fg:15,bg:-1,hl:#5f87af,fg+:#ffffff,bg+:0,hl+:#5fd7ff
+    --color=info:0,pointer:12,marker:#87ff00,spinner:11,header:-1"
+    # If ripgrep is installed, use it with FZF
+    if exists rg; then
+        export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore-vcs --glob "!.git/*"'
+        export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+    fi
+    # Key bindings and autocompletion
+    source $HOME/.local/share/fzf/shell/key-bindings.zsh
+    source $HOME/.local/share/fzf/shell/completion.zsh
+fi
+
+# batcat
+if exists bat || exists batcat; then
+    export BAT_PAGER='less -R'
+fi
+
+# SSH using GPG keys
+if exists gpgconf; then
+    export GPG_TTY=$(tty)
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
+fi
+
+# Go
+if exists go; then
+    export GOPATH=$HOME/go
+    PATH=$PATH:$GOPATH/bin
+fi
+
+
+#### Export $PATH #############################################################
+export -U PATH
