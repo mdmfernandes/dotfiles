@@ -2,15 +2,35 @@
 
 My configs for:
 
-- `zsh` ([Oh My Zash](https://github.com/ohmyzsh/ohmyzsh))
+- `zsh`
 - `tmux` (Inspired by [.tmux](https://github.com/gpakosz/.tmux))
-- `nvim`
+- `neovim`
 
-The **zsh** aliases use the following apps (if installed):
+## Zsh
 
-- `colordiff`: Colorize the `diff` output
-- `bat`: A `cat` clone with syntax highlighting
-- `jq`: Processing and manipulation of JSON via the command line
+### Plugins
+
+- [z.sh](https://github.com/rupa/z)
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [sh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+### Theme
+
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+
+## tmux
+
+### Plugins
+
+- [tpm](https://github.com/tmux-plugins/tpm)
+- [tmux-plugin-sysstat](https://github.com/samoshkin/tmux-plugin-sysstat)
+- [tmux-network-bandwidth](https://github.com/mdmfernandes/tmux-network-bandwidth)
+- [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect)
+- [tmux-logging](https://github.com/tmux-plugins/tmux-logging)
+
+### Theme
+
+- [tmux-themepack](https://github.com/jimeh/tmux-themepack)
 
 ## Fonts
 
