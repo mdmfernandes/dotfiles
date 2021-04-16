@@ -208,11 +208,29 @@ if exists fzf; then
     --bind='ctrl-y:execute-silent(echo -n {+} | xclip -in -selection clipboard)'
     --color=fg:15,bg:-1,hl:#5f87af,fg+:#ffffff,bg+:0,hl+:#5fd7ff
     --color=info:0,pointer:12,marker:#87ff00,spinner:11,header:-1"
-    # If ripgrep is installed, use it with FZF
-    if exists rg; then
-        export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore-vcs --glob "!.git/*"'
+
+    # If fd is installed, use it as the default source for fzf
+    if exists fd; then
+        export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
+        export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+        export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git --exclude node_modules'
+
+        # Use fd for listing path candidates.
+        # - The first argument to the function ($1) is the base path to start traversal
+        _fzf_compgen_path() {
+        fd --hidden --follow --exclude ".git" . "$1"
+        }
+
+        # Use fd to generate the list for directory completion
+        _fzf_compgen_dir() {
+        fd --type d --hidden --follow --exclude ".git" . "$1"
+        }
+    # If not, try to use ripgrep
+    elif exists rg; then
+        export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --no-ignore-vcs --glob "!.git/*"'
         export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
     fi
+
     # Key bindings and autocompletion
     source $HOME/.local/share/fzf/shell/key-bindings.zsh
     source $HOME/.local/share/fzf/shell/completion.zsh
