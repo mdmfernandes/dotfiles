@@ -37,6 +37,7 @@ setopt extendedglob         # extended globbing. Allows using regular expression
 setopt nocaseglob           # case insensitive globbing
 setopt nocheckjobs          # don't warn about running processes when exiting
 setopt numericglobsort      # sort filenames numerically when it makes sense
+setopt promptsubst          # perform parameter expansion, command substitution and arithmetic expansion in prompts
 setopt nobeep               # no beep
 setopt autocd               # if only directory path is entered, cd there.
 setopt appendhistory        # immediately append history instead of overwriting
