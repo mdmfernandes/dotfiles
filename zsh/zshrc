@@ -40,9 +40,14 @@ setopt numericglobsort      # sort filenames numerically when it makes sense
 setopt promptsubst          # perform parameter expansion, command substitution and arithmetic expansion in prompts
 setopt nobeep               # no beep
 setopt autocd               # if only directory path is entered, cd there.
+setopt cdsilent             # don't print the working directory after a `cd`
+setopt autopushd            # make cd push the old directory onto the directory stack
+setopt pushdignoredups      # don't push multiple copies of the same directory onto the stack
+setopt pushdminus           # exchanges the meaning of `+` and `-` when used with a number to specify a directory in the stack
+setopt pushdsilent          # don't print the directory stack after `pushd` or `popd`
 setopt appendhistory        # immediately append history instead of overwriting
 setopt histignorealldups    # if a new command is a duplicate, remove the older one
-setopt incappendhistory     # save commands are added to the history immediately, otherwise only when shell exits.
+setopt incappendhistory     # save commands are added to the history immediately, otherwise only when shell exits
 setopt histignorespace      # ignore commands that start with space
 setopt histverify           # show command with history expansion to user before running it
 
@@ -88,6 +93,9 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 
 WORDCHARS=${WORDCHARS//\/[&.;]} # don't consider certain characters part of the word
 
+# Directories stack size (number of directories shown in 'dirs -v')
+DIRSTACKSIZE=8
+
 # History file
 HISTFILE=$ZDOTDIR/.zsh_history
 HISTSIZE=10000
@@ -103,7 +111,8 @@ compinit -d
 colors
 
 
-#### Colored man pages ########################################################
+#### Less #####################################################################
+# Colored man pages
 export LESS_TERMCAP_mb=$'\E[01;32m'
 export LESS_TERMCAP_md=$'\E[01;32m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -111,7 +120,8 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;47;34m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
-export LESS=-R
+# '-i' is for case insensitive search
+export LESS='-R -i'
 
 
 #### Vi mode ##################################################################
