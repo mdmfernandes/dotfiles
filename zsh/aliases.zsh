@@ -74,10 +74,12 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias cp='cp -i'
 alias ln='ln -i'
-# Don't allow to operate recursively on '/'
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
+# Don't allow to operate recursively on '/' (don't work in MacOS)
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    alias chown='chown --preserve-root'
+    alias chmod='chmod --preserve-root'
+    alias chgrp='chgrp --preserve-root'
+fi
 
 # fzf
 alias -g Z='| fzf'
