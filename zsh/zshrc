@@ -78,7 +78,7 @@ zstyle ':completion:*' special-dirs true                        # complete . and
 # speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache yes
-zstyle ':completion:*' cache-path ${0:a:h}/.zsh_cache
+zstyle ':completion:*' cache-path $ZDOTDIR/.zsh_cache
 
 # Don't complete uninteresting users
 zstyle ':completion:*:*:*:users' ignored-patterns \
