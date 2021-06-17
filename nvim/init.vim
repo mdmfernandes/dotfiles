@@ -173,14 +173,16 @@ nnoremap <silent> <Leader><Space> :nohls<CR>
 " Toggle between paste and nopaste modes
 set pastetoggle=<F3>
 " Copy/paste to clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy  "+yy
+nnoremap <leader>y  "+y
+vnoremap <leader>y  "+y
+nnoremap <leader>Y  "+yg_
+nnoremap <leader>yy  "+yy
 nnoremap <leader>p "+p
-nnoremap <leader>P "+P
 vnoremap <leader>p "+p
+nnoremap <leader>P "+P
 vnoremap <leader>P "+P
+" Show all registers
+map <Leader>r :registers<CR>
 
 """ Change commands
 " Write current file with sudo perms
