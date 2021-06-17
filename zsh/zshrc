@@ -129,6 +129,11 @@ export LESS='-R -i'
 bindkey -v              # vi mode
 export KEYTIMEOUT=2     # decrease change mode time to 0.2s
 
+# Use ' to edit a command line in the editor, if zsh is in insert mode
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd "'" edit-command-line
+
 
 #### Keybindings ##############################################################
 bindkey '^[[7~' beginning-of-line                   # Home key
