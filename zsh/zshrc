@@ -30,7 +30,7 @@ ZDOTDIR="${${(%):-%x}:h}"
 
 
 #### Zsh configuration ########################################################
-## Options
+# Set options
 setopt noclobber            # prevent from overwriting an existing file
 setopt nonomatch            # hide error message if there is no match for the pattern
 setopt extendedglob         # extended globbing. Allows using regular expressions with *
@@ -50,6 +50,10 @@ setopt histignorealldups    # if a new command is a duplicate, remove the older 
 setopt incappendhistory     # save commands are added to the history immediately, otherwise only when shell exits
 setopt histignorespace      # ignore commands that start with space
 setopt histverify           # show command with history expansion to user before running it
+setopt interactivecomments  # allow comments even in interactive shells
+
+# Unset options
+unsetopt flowcontrol        # disable output flow control in the shell's editor
 
 # Colors
 if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
@@ -174,6 +178,8 @@ bindkey '^H' backward-kill-word                     # Ctrl+backspace
 bindkey '^w' backward-kill-word                     # Ctrl+w
 bindkey '^[[Z' undo                                 # Shift+tab undo last action
 
+# Push the current buffer onto the buffer stack and clear the buffer
+bindkey '^q' push-line-or-edit                      # Ctrl+q
 
 #### Theme ####################################################################
 # Powerlevel10k
