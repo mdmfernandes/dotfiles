@@ -110,6 +110,13 @@ PROMPT_EOL_MARK='%S$%s'
 
 
 #### Load completion and colors ###############################################
+## Completions (must be added before `compinit`)
+# Conda
+if [[ -r "$HOME/.local/share/zsh/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh" ]] \
+    && exists conda; then
+    source $HOME/.local/share/zsh/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh
+fi
+
 autoload -U compinit colors
 compinit -d
 colors
@@ -189,18 +196,18 @@ source $ZDOTDIR/.p10k.zsh
 
 #### ZSH Plugins ##############################################################
 # z.sh
-if [[ -r "$HOME/.local/share/zsh/plugins/z/z.sh" ]];then
+if [[ -r "$HOME/.local/share/zsh/plugins/z/z.sh" ]]; then
     _Z_DATA=$ZDOTDIR/.z
     source "$HOME/.local/share/zsh/plugins/z/z.sh"
 fi
 
 # Syntax Highlighting
-if [[ -r "$HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]];then
+if [[ -r "$HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     source $HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # Auto Suggestions
-if [[ -r "$HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]];then
+if [[ -r "$HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
     source $HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
