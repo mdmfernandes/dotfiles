@@ -8,6 +8,8 @@
 #   - z.sh (https://github.com/rupa/z)
 #   - zsh-syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
 #   - zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
+#   - conda-zsh-completion (https://github.com/esc/conda-zsh-completion): if
+#     `conda` is installed
 ###############################################################################
 
 # Set language environment
@@ -214,9 +216,10 @@ if [[ -r "$HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions
 fi
 
 
-#### Source aliases and user custom configurations ############################
-[[ -f "$ZDOTDIR/.aliases.zsh" ]] && source "$ZDOTDIR/.aliases.zsh"
-[[ -f "$ZDOTDIR/.custom.zsh" ]] && source "$ZDOTDIR/.custom.zsh"
+#### Source aliases, functions, and user custom configurations ################
+[[ -r "$ZDOTDIR/.aliases.zsh" ]] && source "$ZDOTDIR/.aliases.zsh"
+[[ -r "$ZDOTDIR/.functions.zsh" ]] && source "$ZDOTDIR/.functions.zsh"
+[[ -r "$ZDOTDIR/.custom.zsh" ]] && source "$ZDOTDIR/.custom.zsh"
 
 
 #### Applications #############################################################
@@ -226,9 +229,9 @@ if exists fzf; then
     export FZF_COMPLETION_TRIGGER="'"
     export FZF_DEFAULT_OPTS="
     --no-mouse --height=50% -1 --reverse --multi --inline-info
-    --preview '([[ -f {} ]] && [[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file) || ([[ -f {} ]] && (batcat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+    --preview '([[ -f {} ]] && [[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file) || ([[ -f {} ]] && (batcat --style=numbers --color=always {} || bat --style=numbers --color=always {} || cat {}) 2>/dev/null) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2>/dev/null | head -200'
     --preview-window='right:hidden:wrap'
-    --bind='ctrl-v:execute(batcat --style=numbers {} < /dev/tty > /dev/tty 2>&1 || less -f {} < /dev/tty > /dev/tty 2>&1)'
+    --bind='ctrl-v:execute(batcat --style=numbers --color=always {} < /dev/tty > /dev/tty 2>/dev/null || bat --style=numbers --color=always {} < /dev/tty > /dev/tty 2>/dev/null || less -f {} < /dev/tty > /dev/tty 2>7dev/null)'
     --bind 'ctrl-e:execute(nvim {} < /dev/tty > /dev/tty 2>&1)'
     --bind='ctrl-p:toggle-preview'
     --bind='ctrl-d:half-page-down'

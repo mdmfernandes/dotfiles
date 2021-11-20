@@ -1,4 +1,5 @@
 # To use TMUX on remote machines together with the default TMUX config:
+# (change file name to .tmux.conf.local)
 # - use C-Space as prefix key
 # - use the basic theme
 
