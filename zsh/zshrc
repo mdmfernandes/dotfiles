@@ -12,12 +12,15 @@
 #     `conda` is installed
 ###############################################################################
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Set language environment
 export LANG=en_US.UTF-8
-
-# Preferred editor (this will also change the ZSH mode)
-export EDITOR='nvim'
-export VISUAL='nvim'
 
 
 #### Helpers ##################################################################
@@ -31,8 +34,7 @@ exists()
 ZDOTDIR="${${(%):-%x}:h}"
 
 
-#### Zsh configuration ########################################################
-# Set options
+#### Options ##############################################################
 setopt noclobber            # prevent from overwriting an existing file
 setopt nonomatch            # hide error message if there is no match for the pattern
 setopt extendedglob         # extended globbing. Allows using regular expressions with *
@@ -54,25 +56,13 @@ setopt histignorespace      # ignore commands that start with space
 setopt histverify           # show command with history expansion to user before running it
 setopt interactivecomments  # allow comments even in interactive shells
 
-# Unset options
 unsetopt flowcontrol        # disable output flow control in the shell's editor
 
-# Colors
-if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
-    if [[ -f /usr/bin/dircolors && -r $HOME/.dir_colors ]]; then
-        eval $(/usr/bin/dircolors -b $HOME/.dir_colors)
-    fi
-else    # If in MacOS
-    export CLICOLOR=1
-    # Use https://geoff.greer.fm/lscolors/ to convert between BSD (LSCOLORS),
-    # used in MacOS, and Linux colors (LS_COLORS)
-    LS_COLORS='di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
-fi
 
-# Completion
-setopt auto_menu            # automatically use menu completion
-setopt complete_in_word     # keep the cursor at the completion, if ambiguous
-setopt always_to_end        # move cursor to end if word has one match
+#### Completion ###############################################################
+setopt auto_menu                                                # automatically use menu completion
+setopt complete_in_word                                         # keep the cursor at the completion, if ambiguous
+setopt always_to_end                                            # move cursor to end if word has one match
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # colored completion (different colors for dirs/files/etc)
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # case insensitive tab completion
@@ -81,7 +71,7 @@ zstyle ':completion:*' menu select                              # select complet
 zstyle ':completion:*:functions' ignored-patterns '_*'          # don't complete functions
 
 zstyle ':completion:*' special-dirs true                        # complete . and .. special directories
-# speed up completions
+# Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path $ZDOTDIR/.zsh_cache
@@ -99,45 +89,26 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 
 WORDCHARS=${WORDCHARS//\/[&.;]} # don't consider certain characters part of the word
 
-# Directories stack size (number of directories shown in 'dirs -v')
-DIRSTACKSIZE=8
-
-# History file
-HISTFILE=$ZDOTDIR/.zsh_history
-HISTSIZE=10000
-SAVEHIST=20000
-
-# Change EOL sign (default: '%')
-PROMPT_EOL_MARK='%S$%s'
-
-
-#### Load completion and colors ###############################################
-## Completions (must be added before `compinit`)
-# Conda
-if [[ -r "$HOME/.local/share/zsh/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh" ]] \
-    && exists conda; then
+# zsh-completions
+if [[ -r "$HOME/.local/share/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh" ]]; then
+    source $HOME/.local/share/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
+fi
+# conda-zsh-completions
+if [[ -r "$HOME/.local/share/zsh/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh" ]]; then
     source $HOME/.local/share/zsh/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh
 fi
 
-autoload -U compinit colors
-compinit -d
-colors
-
-
-#### Less #####################################################################
-# Colored man pages
-export LESS_TERMCAP_mb=$'\E[01;32m'
-export LESS_TERMCAP_md=$'\E[01;32m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;47;34m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;36m'
-# '-i' is for case insensitive search
-export LESS='-R -i'
+# Load completion
+autoload -Uz compaudit compinit
+compaudit
+compinit
 
 
 #### Vi mode ##################################################################
+# Preferred editor (this will also change the ZSH mode)
+export EDITOR='nvim'
+export VISUAL='nvim'
+
 # Although the editor set the zsh mode, we can force the vi mode
 bindkey -v              # vi mode
 export KEYTIMEOUT=2     # decrease change mode time to 0.2s
@@ -190,6 +161,46 @@ bindkey '^[[Z' undo                                 # Shift+tab undo last action
 # Push the current buffer onto the buffer stack and clear the buffer
 bindkey '^q' push-line-or-edit                      # Ctrl+q
 
+
+#### Colors ###################################################################
+if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
+    if [[ -f /usr/bin/dircolors && -r $HOME/.dir_colors ]]; then
+        eval $(/usr/bin/dircolors -b $HOME/.dir_colors)
+    fi
+else    # If in MacOS
+    export CLICOLOR=1
+    # Use https://geoff.greer.fm/lscolors/ to convert between BSD (LSCOLORS),
+    # used in MacOS, and Linux colors (LS_COLORS)
+    LS_COLORS='di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+fi
+
+# Colored man pages
+export LESS_TERMCAP_mb=$'\E[01;32m'
+export LESS_TERMCAP_md=$'\E[01;32m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;36m'
+
+# Load colors
+autoload -Uz colors
+colors
+
+
+#### Others ###################################################################
+# Directories stack size (number of directories shown in 'dirs -v')
+DIRSTACKSIZE=6
+
+# History file
+HISTFILE=$ZDOTDIR/.zsh_history
+HISTSIZE=10000
+SAVEHIST=20000
+
+# Change EOL sign (default: '%')
+PROMPT_EOL_MARK='%S$%s'
+
+
 #### Theme ####################################################################
 # Powerlevel10k
 source $HOME/.local/share/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
@@ -223,6 +234,9 @@ fi
 
 
 #### Applications #############################################################
+# Less
+export LESS='-R -i'     # -i is for insensitive search
+
 # FZF
 if exists fzf; then
     # Custom configs
