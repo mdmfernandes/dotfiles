@@ -12,7 +12,12 @@ My configs for:
 
 - [z.sh](https://github.com/rupa/z)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-- [sh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+### Auto-completion
+
+- [zsh-completions](https://github.com/zsh-users/zsh-completions)
+- [conda-zsh-completion](https://github.com/esc/conda-zsh-completion)
 
 ### Theme
 
