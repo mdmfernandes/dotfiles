@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "######################################################"
 echo "# This script configures 'TMUX', 'ZSH', and 'NeoVIM' #"
 echo "######################################################"
@@ -35,8 +34,8 @@ exists() # Check if a command exists
 
 # Applications
 if [[ "$apps" = true ]]; then
-    echo "[+] Installing applications [git, jq, colordiff, xclip, fzf, ripgrep, bat, tree]..."
-    sudo apt install --yes --quiet git jq colordiff xclip fzf ripgrep tree
+    echo "[+] Installing applications [git, jq, colordiff, xclip, fzf, ripgrep, bat, tree, fd]..."
+    sudo apt install --yes --quiet git jq colordiff xclip fzf ripgrep tree fd
     # Use this solution to avoid an incompatibility between ripgrep and bat:
     # https://github.com/sharkdp/bat/issues/938#issuecomment-759415389\
     sudo sed -i '/\/usr\/.crates2.json/d' /var/lib/dpkg/info/ripgrep.list
@@ -77,31 +76,24 @@ if [[ "$zsh" = true ]]; then
     if ! exists zsh; then
         echo "  [+] Installing ZSH..."
         sudo apt install zsh --yes --quiet
+        chsh -s $(which zsh)
     fi
 
     echo "  [+] Copying ZSH configuration files..."
     mkdir -p $HOME/.config/zsh
     echo "ZDOTDIR=$HOME/.config/zsh" > $HOME/.zshenv && . $HOME/.zshenv
-    cp "./zsh/zshrc" "$HOME/.config/zsh/.zshrc"
-    cp "./zsh/custom.zsh" "$HOME/.config/zsh/.custom.zsh"
-    cp "./zsh/p10k.zsh" "$HOME/.config/zsh/.p10k.zsh"
-    source $HOME/.config/zsh/.zshrc 2>/dev/null
-
-    echo "  [+] Installing oh-my-zsh..."
-    export RUNZSH="no"
-    export KEEP_ZSHRC="yes"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    source $HOME/.config/zsh/.zshrc 2>/dev/null
-    cp "./zsh/aliases.zsh" "$ZSH_CUSTOM/aliases.zsh"
-    rm -f $HOME/.zshrc
+    cp "./zsh/zshrc" "$ZDOTDIR/.zshrc"
+    cp "./zsh/aliases.zsh" "$ZDOTDIR/.aliases.zsh"
+    cp "./zsh/functions.zsh" "$ZDOTDIR/.functions.zsh"
+    cp "./zsh/custom.zsh" "$ZDOTDIR/.custom.zsh"
+    cp "./zsh/p10k.zsh" "$ZDOTDIR/.p10k.zsh"
+    source $ZDOTDIR/.zshrc 2>/dev/null
 
     echo "  [+] Installing custom plugins..."
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
-
-    echo " [+] Creating soft links for the aliases files..."
-    ln -s $ZSH_CUSTOM/aliases.zsh $HOME/.config/zsh/.aliases.zsh
+    ZSH_SHARE="$HOME/.local/share/zsh"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_SHARE}/themes/powerlevel10k
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_SHARE}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_SHARE}/plugins/zsh-autosuggestions
 fi
 
 # NeoVIM
@@ -109,14 +101,15 @@ if [[ "$neovim" = true ]]; then
     echo ""
     echo "[+] Configuring NeoVIM..."
 
-    if ! exists zsh; then
+    if ! exists nvim; then
         echo "  [+] Installing NeoVIM..."
         sudo apt install neovim --yes --quiet
     fi
 
-    echo "  [+] Copying ZSH configuration files..."
+    echo "  [+] Copying NeoVIM configuration files..."
     mkdir -p "$HOME/.config/nvim"
     cp "./nvim/init.vim" "$HOME/.config/nvim/init.vim"
+    cp "./nvim/filetype.vim" "$HOME/.config/nvim/filetype.vim"
 
     echo "  [+] Installing vim-plug..."
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -124,10 +117,10 @@ if [[ "$neovim" = true ]]; then
     nvim +PlugInstall
 
     echo "  [+] Installing PIP..."
-    sudo apt install python3-pip
+    sudo apt install python3-pip --yes --quiet
 
     echo "  [+] Installing and Configuring linters and fixers..."
     pip3 install pylint flake8 yapf
     cp -r ./nvim/ftplugin $HOME/.config/nvim/ftplugin
-    cp -r ./nvim/configs/* $HOME/.config
+    cp -r ./linters/* $HOME/.config
 fi
