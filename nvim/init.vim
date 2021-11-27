@@ -1,130 +1,51 @@
-""" VIM Configs
-set nocompatible
+"##############################################################################
+" Miguel's NeoVIM config
+" ======================
+" Available at https://github.com/mdmfernandes/dotfiles
+" Theme:
+"   - One Dark
+" Plugins:
+"   - Vim airline
+"   - Vim dev icons
+"   - FZF
+"   - Nerd tree
+"   - Nerd commenter
+"   - Vim surround
+"   - ALE
+"##############################################################################
 
-" Specify the plugins directory
-call plug#begin('~/.config/nvim/plugged')
-
-" Plugins
-" - themes
-Plug 'joshdick/onedark.vim'
-" - tabline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" - icons
-Plug 'ryanoasis/vim-devicons'
-" - git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-" - fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-" - others
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdcommenter'
-Plug 'dense-analysis/ale'
-
-call plug#end()
-
-"filetype plugin on
+"---------- General ----------
+""" Enable filetype detection, plugin, and indent
+filetype plugin indent on
 
 """ Enable jumping into files in a search buffer
 set hidden
-
-""" Displayed encoding
-"set encoding=utf-8
 
 """ Signs refresh time
 set updatetime=250  
 
 " Map Leader
 let mapleader = "\<Space>"
-
-" --------- Themes -----------
-""" Tabline
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'wombat'
-let g:airline_powerline_fonts = 1
-
-""" Theme
-syntax on
-"set termguicolors
-set background=dark 
-colorscheme onedark
-
-"---------- Plugins ----------
-""" vim-gitgutter
-"" Custom key bindings
-" Hunk-add and hunk-revert for hunk staging
-nmap ga <Plug>(GitGutterStageHunk)
-nmap gu <Plug>(GitGutterUndoHunk)
-" Jump between hunks
-nmap gn <Plug>(GitGutterNextHunk)
-nmap gp <Plug>(GitGutterPrevHunk)
-" Preview hunk changes
-nmap gv <Plug>(GitGutterPreviewHunk)
-nmap gd :pclose<CR>
-"" Custom signs
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '>'
-let g:gitgutter_sign_removed = '-'
-let g:gitgutter_sign_removed_first_line = '^'
-let g:gitgutter_sign_modified_removed = '<'
-"" Signs' background color
-let g:gitgutter_override_sign_column_highlight = 1
-highlight GitGutterAdd cterm=bold ctermfg=106 ctermbg=bg
-highlight GitGutterDelete cterm=bold ctermfg=124 ctermbg=bg
-highlight GitGutterChange cterm=bold ctermfg=172 ctermbg=bg
-""" vim-gitgutter (end)
-
-
-""" nerdtree
-nnoremap <silent> <C-t> :NERDTreeToggle<CR>
-let g:NERDTreeIgnore = ['^node_modules$']
-let g:NERDTreeIgnore = ['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__', 'node_modules']
-let g:NERDTreeChDirMode=2
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeStatusline = ''
-" Automaticaly close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-""" nerdtree (end)
-
-
-""" fzf
-nnoremap <silent> <C-f> :Files<CR>
-nnoremap <silent> <Leader>f :Rg<CR>
-nnoremap <silent> <Leader>g :Commits<CR>
-""" fzf (end)
-
-
-""" ALE
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%severity%][%linter%] %s'
-""" ALE (end)
-
 """ History
 set history=50 "default
 
 """ Display
-set ls=2            "default
-set showmode        "default
+set ls=2            " (default)
+set showmode        " (default)
 set showcmd         " Show commands on bottom right corner
 set ruler           " Show the ruler on the right side of the status line
-set title
+set title           " Show window title
 set nu              " Show line numbers
+syntax on
+set background=dark 
 
 """ Hybrid Line numbers
 set number relativenumber
 
 """ Line wrapping
-set wrap        " wrap lines
-set linebreak
-set showbreak=▶ " Show this symbol at break lines
+set wrap            " wrap lines
+set linebreak       " wrap lines at specific characters
+set showbreak=▶     " Show this symbol at break lines
 
 "" Direction keys for wrapped lines
 nnoremap <silent> k gk
@@ -195,3 +116,89 @@ set splitright
 """ Save swap and backup files to /tmp
 set directory=/tmp
 set backupdir=/tmp
+
+
+"---------- Plugins ----------
+" Specify the plugins directory
+call plug#begin('~/.config/nvim/plugged')
+
+" Load plugins
+" - themes
+Plug 'joshdick/onedark.vim'
+" - tabline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" - icons
+Plug 'ryanoasis/vim-devicons'
+" - git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+" - fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" - others
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
+Plug 'dense-analysis/ale'
+
+call plug#end()
+
+""" Theme (must be on top)
+colorscheme onedark
+
+""" vim-gitgutter
+"" Custom key bindings
+" Hunk-add and hunk-revert for hunk staging
+nmap ga <Plug>(GitGutterStageHunk)
+nmap gu <Plug>(GitGutterUndoHunk)
+" Jump between hunks
+nmap gn <Plug>(GitGutterNextHunk)
+nmap gp <Plug>(GitGutterPrevHunk)
+" Preview hunk changes
+nmap gv <Plug>(GitGutterPreviewHunk)
+nmap gd :pclose<CR>
+"" Custom signs
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '>'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = '<'
+"" Signs' background color
+let g:gitgutter_override_sign_column_highlight = 1
+highlight GitGutterAdd cterm=bold ctermfg=106 ctermbg=bg
+highlight GitGutterDelete cterm=bold ctermfg=124 ctermbg=bg
+highlight GitGutterChange cterm=bold ctermfg=172 ctermbg=bg
+""" vim-gitgutter (end)
+
+""" nerdtree
+nnoremap <silent> <C-t> :NERDTreeToggle<CR>
+let g:NERDTreeIgnore = ['^node_modules$']
+let g:NERDTreeIgnore = ['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__', 'node_modules']
+let g:NERDTreeChDirMode=2
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeStatusline = ''
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+""" nerdtree (end)
+
+""" fzf
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+nnoremap <silent> <Leader>g :Commits<CR>
+""" fzf (end)
+
+""" ALE
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%severity%][%linter%] %s'
+""" ALE (end)
+
+""" Tabline
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'wombat'
+let g:airline_powerline_fonts = 1
