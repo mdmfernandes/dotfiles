@@ -252,8 +252,10 @@ if exists fzf; then
     --bind='ctrl-u:half-page-up'
     --bind='ctrl-a:select-all'
     --bind='ctrl-y:execute-silent(echo -n {+} | xclip -in -selection clipboard)'
-    --color=fg:15,bg:-1,hl:#5f87af,fg+:#ffffff,bg+:0,hl+:#5fd7ff
-    --color=info:0,pointer:12,marker:#87ff00,spinner:11,header:-1"
+    --color=fg:#dbdbdb,bg:-1,hl:#5f87af
+    --color=fg+:#ffffff,bg+:-1,hl+:#5fd7ff
+    --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff
+    --color=marker:#87ff00,spinner:#af5fff,header:#87afaf"
 
     # If fd is installed, use it as the default source for fzf
     if exists fd; then
