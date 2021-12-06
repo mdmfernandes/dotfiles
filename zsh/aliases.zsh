@@ -15,7 +15,8 @@ fi
 alias la='ls -lAh'
 alias ll='ls -lh'
 alias l='ls -lh'
-alias lt='ls -lth'
+alias lt='ls -lthr'
+alias ltr='ls -lth'
 alias l.='ls -d .*'
 
 # cd
