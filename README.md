@@ -5,6 +5,7 @@ My configs for:
 - `zsh`
 - `tmux` (Inspired by [.tmux](https://github.com/gpakosz/.tmux))
 - `neovim`
+- `git`
 
 ## Zsh
 
