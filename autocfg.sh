@@ -92,6 +92,7 @@ if [[ "$zsh" = true ]]; then
     echo "  [+] Installing custom plugins..."
     ZSH_SHARE="$HOME/.local/share/zsh"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_SHARE}/themes/powerlevel10k
+    git clone https://github.com/rupa/z.git ${ZSH_SHARE}/plugins/z
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_SHARE}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_SHARE}/plugins/zsh-autosuggestions
 fi
