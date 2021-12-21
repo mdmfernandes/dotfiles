@@ -1,0 +1,10 @@
+[core]
+	pager = less -F -X
+[branch]
+	autoSetupRebase = always
+[user]
+#   name = ...
+#   email = ...
+#   signingkey = ...
+[commit]
+	gpgsign = true
