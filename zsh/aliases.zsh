@@ -173,7 +173,7 @@ ta() {
     if [ -z "$1" ]; then
             tmux attach-session
     else
-            tmux attach -t $1
+            tmux attach-session -t $1
     fi
 }
 # Create a session (default or named)
