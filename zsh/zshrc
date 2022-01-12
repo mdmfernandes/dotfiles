@@ -33,6 +33,8 @@ exists()
 # Get this script path
 ZDOTDIR="${${(%):-%x}:h}"
 
+# ZSH user data directory (directory for themes, plugins, etc.)
+ZSH_USERDATA="${HOME}/.local/share/zsh"
 
 #### Options ##############################################################
 setopt noclobber            # prevent from overwriting an existing file
@@ -74,7 +76,7 @@ zstyle ':completion:*' special-dirs true                        # complete . and
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache yes
-zstyle ':completion:*' cache-path $ZDOTDIR/.zsh_cache
+zstyle ':completion:*' cache-path ${ZDOTDIR}/.zsh_cache
 
 # Don't complete uninteresting users
 zstyle ':completion:*:*:*:users' ignored-patterns \
@@ -90,12 +92,12 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 WORDCHARS=${WORDCHARS//\/[&.;]} # don't consider certain characters part of the word
 
 # zsh-completions
-if [[ -r "$HOME/.local/share/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh" ]]; then
-    fpath=($HOME/.local/share/zsh/plugins/zsh-completions $fpath)
+if [[ -r "${ZSH_USERDATA}/plugins/zsh-completions/zsh-completions.plugin.zsh" ]]; then
+    fpath=(${ZSH_USERDATA}/plugins/zsh-completions $fpath)
 fi
 # conda-zsh-completions
-if [[ -r "$HOME/.local/share/zsh/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh" ]]; then
-    fpath=($HOME/.local/share/zsh/plugins/conda-zsh-completion $fpath)
+if [[ -r "${ZSH_USERDATA}/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh" ]]; then
+    fpath=(${ZSH_USERDATA}/plugins/conda-zsh-completion $fpath)
 fi
 
 # Load completion. Regenerate .zdcompdump once a day, since `compinit` have
@@ -166,9 +168,9 @@ bindkey '^q' push-line-or-edit                      # Ctrl+q
 
 
 #### Colors ###################################################################
-if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
-    if [[ -f /usr/bin/dircolors && -r $HOME/.dir_colors ]]; then
-        eval $(/usr/bin/dircolors -b $HOME/.dir_colors)
+if [[ "${OSTYPE}" != "darwin"* ]]; then   # If not in MacOS
+    if [[ -f /usr/bin/dircolors && -r ${HOME}/.dir_colors ]]; then
+        eval $(/usr/bin/dircolors -b ${HOME}/.dir_colors)
     fi
 else    # If in MacOS
     export CLICOLOR=1
@@ -196,7 +198,7 @@ colors
 DIRSTACKSIZE=6
 
 # History file
-HISTFILE=$ZDOTDIR/.zsh_history
+HISTFILE=${ZDOTDIR}/.zsh_history
 HISTSIZE=10000
 SAVEHIST=20000
 
@@ -206,34 +208,34 @@ PROMPT_EOL_MARK='%S$%s'
 
 #### Theme ####################################################################
 # Powerlevel10k
-source $HOME/.local/share/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
-source $ZDOTDIR/.p10k.zsh
+source ${ZSH_USERDATA}/themes/powerlevel10k/powerlevel10k.zsh-theme
+source ${ZDOTDIR}/.p10k.zsh
 
 
 #### ZSH Plugins ##############################################################
 # z.sh
-if [[ -r "$HOME/.local/share/zsh/plugins/z/z.sh" ]]; then
-    _Z_DATA=$ZDOTDIR/.z
-    source "$HOME/.local/share/zsh/plugins/z/z.sh"
+if [[ -r "${ZSH_USERDATA}/plugins/z/z.sh" ]]; then
+    _Z_DATA=${ZDOTDIR}/.z
+    source "${ZSH_USERDATA}/plugins/z/z.sh"
 fi
 
 # Syntax Highlighting
-if [[ -r "$HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-    source $HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -r "${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source ${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # Auto Suggestions
-if [[ -r "$HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+if [[ -r "${ZSH_USERDATA}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-    source $HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source ${ZSH_USERDATA}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 
 #### Source aliases, functions, and user custom configurations ################
-[[ -r "$ZDOTDIR/.aliases.zsh" ]] && source "$ZDOTDIR/.aliases.zsh"
-[[ -r "$ZDOTDIR/.functions.zsh" ]] && source "$ZDOTDIR/.functions.zsh"
-[[ -r "$ZDOTDIR/.custom.zsh" ]] && source "$ZDOTDIR/.custom.zsh"
+[[ -r "${ZDOTDIR}/.aliases.zsh" ]] && source "${ZDOTDIR}/.aliases.zsh"
+[[ -r "${ZDOTDIR}/.functions.zsh" ]] && source "${ZDOTDIR}/.functions.zsh"
+[[ -r "${ZDOTDIR}/.custom.zsh" ]] && source "${ZDOTDIR}/.custom.zsh"
 
 
 #### Applications #############################################################
@@ -263,7 +265,7 @@ if exists fzf; then
     # If fd is installed, use it as the default source for fzf
     if exists fd; then
         export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
-        export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+        export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND}
         export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git --exclude node_modules'
 
         # Use fd for listing path candidates.
@@ -279,12 +281,14 @@ if exists fzf; then
     # If not, try to use ripgrep
     elif exists rg; then
         export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --no-ignore-vcs --glob "!.git/*"'
-        export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+        export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND}
     fi
 
+    FZF_USERDATA="${HOME}/.local/share/fzf"
+
     # Key bindings and autocompletion
-    source $HOME/.local/share/fzf/shell/key-bindings.zsh
-    source $HOME/.local/share/fzf/shell/completion.zsh
+    source ${HOME}/.local/share/fzf/shell/key-bindings.zsh
+    source ${HOME}/.local/share/fzf/shell/completion.zsh
 fi
 
 # batcat
@@ -301,8 +305,8 @@ fi
 
 # Go
 if exists go; then
-    export GOPATH=$HOME/go
-    PATH=$PATH:$GOPATH/bin
+    export GOPATH=${HOME}/go
+    PATH=${PATH}:${GOPATH}/bin
 fi
 
 
