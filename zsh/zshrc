@@ -91,17 +91,20 @@ WORDCHARS=${WORDCHARS//\/[&.;]} # don't consider certain characters part of the 
 
 # zsh-completions
 if [[ -r "$HOME/.local/share/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh" ]]; then
-    source $HOME/.local/share/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
+    fpath=($HOME/.local/share/zsh/plugins/zsh-completions $fpath)
 fi
 # conda-zsh-completions
 if [[ -r "$HOME/.local/share/zsh/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh" ]]; then
-    source $HOME/.local/share/zsh/plugins/conda-zsh-completion/conda-zsh-completion.plugin.zsh
+    fpath=($HOME/.local/share/zsh/plugins/conda-zsh-completion $fpath)
 fi
 
-# Load completion
-autoload -Uz compaudit compinit
-compaudit
-compinit
+# Load completion. Regenerate .zdcompdump once a day, since `compinit` have
+# a noticeable delay in slow systems
+autoload -Uz compinit
+for dump in ${ZDOTDIR}/.zcompdump(N.mh+24); do
+    compinit
+done
+compinit -C
 
 
 #### Vi mode ##################################################################
