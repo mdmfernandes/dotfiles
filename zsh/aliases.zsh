@@ -17,6 +17,8 @@ alias ll='ls -lh'
 alias l='ls -lh'
 alias lt='ls -lthr'
 alias ltr='ls -lth'
+alias lsz='ls -lhSr'
+alias lszr='ls -lhS'
 alias l.='ls -d .*'
 
 # cd
