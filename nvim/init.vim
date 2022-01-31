@@ -72,6 +72,9 @@ set smartcase   " Only ignore case if the search pattern is all in lowercase
 set hlsearch    " Highlight all found patterns
 set showmatch   " When a bracket is inserted, briefly jump to the matching one
 
+""" Live highlight substitutions
+set inccommand=nosplit
+
 """ Map keys
 " Toogle line wrapping
 map <F6> <Esc>:set wrap!<CR>
