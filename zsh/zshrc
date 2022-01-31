@@ -100,13 +100,10 @@ if [[ -r "${ZSH_USERDATA}/plugins/conda-zsh-completion/conda-zsh-completion.plug
     fpath=(${ZSH_USERDATA}/plugins/conda-zsh-completion $fpath)
 fi
 
-# Load completion. Regenerate .zdcompdump once a day, since `compinit` have
-# a noticeable delay in slow systems
-autoload -Uz compinit
-for dump in ${ZDOTDIR}/.zcompdump(N.mh+24); do
-    compinit
-done
-compinit -C
+# Load completion.
+# NOTE: For better performance, make sure that the zsh global compinit is disabled
+# in the .zshenv file, by placing the command `skip_global_compinit=1` at the EOF.
+autoload -Uz compinit && compinit
 
 
 #### Vi mode ##################################################################

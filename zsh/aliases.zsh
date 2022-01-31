@@ -46,6 +46,9 @@ alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox
 # Make directory with parents
 alias md='mkdir -pv'
 
+# Get real path of a file or directory
+alias rpath='realpath'
+
 # Use colordiff for diff, if installed
 if exists colordiff; then
     alias diff='colordiff'
@@ -65,10 +68,13 @@ fi
 alias path='printf ${PATH//:/\\n}'
 
 # Vim
-alias vim='nvim'
-alias vi='nvim'
+if exists nvim; then
+    alias vim='nvim'
+fi
+alias vi='vim'
+alias edit='vim'
+# `sudo -e` is the same as `sudoedit` but also works in MacOS
 alias svi='sudo -e' # Requires 'EDITOR=nvim'
-alias edit='nvim'
 
 # Show all ports
 alias ports='ss -tulpan'
