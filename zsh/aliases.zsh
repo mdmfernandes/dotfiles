@@ -154,6 +154,7 @@ alias gst='git status'
 alias gss='git status --short'
 alias gsw='git switch'
 alias gswc='git switch --create'
+alias gswd='git switch --detach'
 alias guf='git pull --ff-only'
 alias gur='git pull --rebase'
 
