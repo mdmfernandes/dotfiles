@@ -121,7 +121,7 @@ if [[ "$neovim" = true ]]; then
     sudo apt install python3-pip --yes --quiet
 
     echo "  [+] Installing and Configuring linters and fixers..."
-    pip3 install pylint flake8 yapf
+    pip3 install pylint flake8 black mypy
     cp -r ./nvim/ftplugin $HOME/.config/nvim/ftplugin
-    cp -r ./linters/* $HOME/.config
+    cp -r ./python/* $HOME/.config
 fi

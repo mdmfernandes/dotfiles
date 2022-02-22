@@ -6,6 +6,7 @@ My configs for:
 - `tmux` (Inspired by [.tmux](https://github.com/gpakosz/.tmux))
 - `neovim`
 - `git`
+- `python` linters, formatters, and type checkers
 
 ## Zsh
 
