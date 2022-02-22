@@ -107,6 +107,7 @@ alias df='df -h'
 alias du='du -h'
 alias dud='du -d 1 -h' # Size of files at depth 1 in current location
 alias duf='du -sh' # Size of files in current location
+alias dusz='du -h | sort -h' # disk usage ordered by size
 
 # IP
 if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
@@ -155,6 +156,9 @@ alias gss='git status --short'
 alias gsw='git switch'
 alias gswc='git switch --create'
 alias gswd='git switch --detach'
+alias gtg='git tag'
+alias gtgn='git tag -n'
+alias gtgr='git ls-remote --tags'
 alias guf='git pull --ff-only'
 alias gur='git pull --rebase'
 
