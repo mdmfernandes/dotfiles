@@ -104,10 +104,10 @@ alias root='sudo -i'
 
 # Disks
 alias df='df -h'
-alias du='du -h'
 alias dud='du -d 1 -h' # Size of files at depth 1 in current location
 alias duf='du -sh' # Size of files in current location
-alias dusz='du -h | sort -h' # disk usage ordered by size
+alias dusz='du -sh | sort -h' # disk usage ordered by size
+alias du='du -h'
 
 # IP
 if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
