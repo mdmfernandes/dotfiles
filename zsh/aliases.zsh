@@ -108,6 +108,7 @@ alias dud='du -d 1 -h' # Size of files at depth 1 in current location
 alias duf='du -sh' # Size of files in current location
 alias dusz='du -sh | sort -h' # disk usage ordered by size
 alias du='du -h'
+alias lsblkf='lsblk --fs' # Show info about filesystems in `lsblk`
 
 # IP
 if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
