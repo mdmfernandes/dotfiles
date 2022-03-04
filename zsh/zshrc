@@ -261,9 +261,9 @@ if exists fzf; then
 
     # If fd is installed, use it as the default source for fzf
     if exists fd; then
-        export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
+        export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git --exclude node_modules'
         export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND}
-        export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git --exclude node_modules'
+        export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exclude .git --exclude node_modules'
 
         # Use fd for listing path candidates.
         # - The first argument to the function ($1) is the base path to start traversal
