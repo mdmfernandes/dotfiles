@@ -1,0 +1,11 @@
+-- Static type checker for Python: https://github.com/microsoft/pyright
+local M = {}
+
+M.setup = function(on_attach, capabilities)
+  require("lspconfig").pyright.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+end
+
+return M
