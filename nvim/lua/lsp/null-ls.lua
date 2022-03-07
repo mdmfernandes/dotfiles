@@ -14,12 +14,14 @@ local sources = {
   nb.formatting.shfmt, -- Bash
   nb.formatting.prettier, -- Multiple languages
   -- diagnostics
-  nb.diagnostics.write_good,
+  nb.diagnostics.misspell,
   nb.diagnostics.trail_space,
   nb.diagnostics.pylint, -- Python
   nb.diagnostics.flake8, -- Python
   nb.diagnostics.mypy, -- Python
-  nb.diagnostics.yamllint, -- YAML
+  nb.diagnostics.yamllint.with({ -- YAML
+    extra_args = { "-d", "relaxed" },
+  }),
   nb.diagnostics.hadolint, -- Docker
   nb.diagnostics.zsh, -- zsh
   nb.diagnostics.gitlint, -- Git

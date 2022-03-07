@@ -3,8 +3,6 @@ local fn = vim.fn
 
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
-vim.cmd("packadd packer.nvim")
-
 -- Install packer if needed
 if fn.empty(fn.glob(install_path)) > 0 then
   Packer_bootstrap = fn.system({
@@ -16,6 +14,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
     install_path,
   })
 end
+
+-- Source packer. Must be after the install function
+vim.cmd("packadd packer.nvim")
 
 require("packer").init({
   -- /home/stef/.local/share/nvim/site/pack/packer/start/packer.nvim/packer_compiled.lua

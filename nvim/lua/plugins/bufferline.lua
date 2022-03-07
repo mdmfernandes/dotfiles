@@ -23,8 +23,8 @@ require("bufferline").setup({
 })
 
 -- Key mappings
-u.map("n", "C-h>", "<Cmd>BufferLineCyclePrev<CR>")
-u.map("n", "C-l>", "<Cmd>BufferLineCycleNext<CR>")
+u.map("n", "<C-h>", "<Cmd>BufferLineCyclePrev<CR>")
+u.map("n", "<C-l>", "<Cmd>BufferLineCycleNext<CR>")
 u.map("n", "Leader>bc", "<Cmd>BufferLinePickClose<CR>")
 u.map("n", "Leader>be", "<Cmd>BufferLineSortByExtension<CR>")
 u.map("n", "Leader>bl", "<Cmd>BufferLineMovePrev<CR>")

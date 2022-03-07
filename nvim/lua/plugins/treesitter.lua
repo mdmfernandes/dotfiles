@@ -9,7 +9,6 @@ require("nvim-treesitter.configs").setup({
     "cmake",
     "cpp",
     "css",
-    "devicetree",
     "dockerfile",
     "go",
     "gomod",
