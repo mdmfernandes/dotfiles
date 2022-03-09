@@ -1,45 +1,54 @@
 -- null-ls: https://github.com/jose-elias-alvarez/null-ls.nvim
 local null_ls = require("null-ls")
-local nb = null_ls.builtins
+
+local ca = null_ls.builtins.code_actions
+local fmt = null_ls.builtins.formatting
+local diag = null_ls.builtins.diagnostics
+
+local u = require("lsp.utils")
 
 local sources = {
-  -- code actions
-  nb.code_actions.gitsigns,
-  -- formatting
-  nb.formatting.trim_whitespace,
-  nb.formatting.black, -- Python
-  nb.formatting.stylua.with({ -- Lua
-    extra_args = { "--config-path", vim.fn.expand("~/.config/stylua.toml") },
-  }),
-  nb.formatting.shfmt, -- Bash
-  nb.formatting.prettier, -- Multiple languages
-  -- diagnostics
-  nb.diagnostics.misspell,
-  nb.diagnostics.trail_space,
-  nb.diagnostics.pylint, -- Python
-  nb.diagnostics.flake8, -- Python
-  nb.diagnostics.mypy, -- Python
-  nb.diagnostics.yamllint.with({ -- YAML
-    extra_args = { "-d", "relaxed" },
-  }),
-  nb.diagnostics.hadolint, -- Docker
-  nb.diagnostics.zsh, -- zsh
-  nb.diagnostics.gitlint, -- Git
-  nb.diagnostics.markdownlint.with({ -- Markdown
-    extra_args = { "--config", vim.fn.expand("~/.config/.markdownlint.yaml") },
-  }),
+    -- Code actions
+    ca.gitsigns,
+
+    -- Formatting
+    fmt.black, -- Python
+    fmt.stylua.with({ -- Lua
+        extra_args = { "--config-path", vim.fn.expand("~/.config/stylua.toml") },
+    }),
+    fmt.shfmt, -- Bash
+    fmt.markdownlint, -- Markdown
+    fmt.trim_whitespace.with({
+        disabled_filetypes = { "go", "gomod", "json" },
+    }),
+
+    -- Diagnostics
+    diag.misspell,
+    diag.trail_space.with({
+        diagnostics_format = "#{s}: #{m}",
+        disabled_filetypes = { "gitcommit", "NeogitCommitMessage" },
+    }),
+    diag.pylint, -- Python
+    diag.flake8, -- Python
+    diag.mypy, -- Python
+    diag.yamllint.with({ -- YAML
+        extra_args = { "-d", "relaxed" },
+    }),
+    diag.hadolint, -- Docker
+    diag.zsh, -- zsh
+    diag.gitlint, -- Git
+    diag.markdownlint.with({ -- Markdown
+        extra_args = { "--config", vim.fn.expand("~/.config/.markdownlint.yaml") },
+    }),
 }
 
-local M = {}
-
-M.setup = function(on_attach, capabilities)
-  null_ls.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
+null_ls.setup({
+    -- debug = true,
     sources = sources,
     -- <source_name>[<code>]: <message>
     diagnostics_format = "#{s}[#{c}]: #{m}",
-  })
-end
-
-return M
+    on_attach = function(client, buf)
+        u.format_document(client, buf)
+        u.mappings(buf)
+    end,
+})

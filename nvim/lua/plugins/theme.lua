@@ -1,10 +1,5 @@
--- Theme
-
--- Onedark: https://github.com/navarasu/onedark.nvim
+-- Theme - Onedark: https://github.com/navarasu/onedark.nvim
 require("onedark").setup({
-  style = "warmer",
+    style = "warmer",
 })
 require("onedark").load()
-
--- LuaLine: https://github.com/nvim-lualine/lualine.nvim
-require("lualine").setup()
