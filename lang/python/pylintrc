@@ -3,4 +3,4 @@
 good-names=i,j,k,fp
 
 [FORMAT]
-max-line-length=100
+max-line-length=120
