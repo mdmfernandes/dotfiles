@@ -210,10 +210,9 @@ source ${ZDOTDIR}/.p10k.zsh
 
 
 #### ZSH Plugins ##############################################################
-# z.sh
-if [[ -r "${ZSH_USERDATA}/plugins/z/z.sh" ]]; then
-    _Z_DATA=${ZDOTDIR}/.z
-    source "${ZSH_USERDATA}/plugins/z/z.sh"
+# zoxide
+if exists zoxide; then
+    eval "$(zoxide init zsh)"
 fi
 
 # Syntax Highlighting

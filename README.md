@@ -12,7 +12,7 @@ My configs for:
 
 ### Zsh Plugins
 
-- [z.sh](https://github.com/rupa/z)
+- [zoxide](https://github.com/ajeetdsouza/zoxide)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 
