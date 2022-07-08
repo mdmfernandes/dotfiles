@@ -38,7 +38,7 @@ local sources = {
     diag.zsh, -- zsh
     diag.gitlint, -- Git
     diag.markdownlint.with({ -- Markdown
-        extra_args = { "--config", vim.fn.expand("~/.config/.markdownlint.yaml") },
+        extra_args = { "--config", vim.fn.expand("~/.config/markdownlint.yaml") },
     }),
 }
 
