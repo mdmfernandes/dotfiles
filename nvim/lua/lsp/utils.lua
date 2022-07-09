@@ -5,6 +5,22 @@ local ts_utils = require("nvim-treesitter.ts_utils")
 
 local U = {}
 
+-- Add nvim-cmp to the LS capabilities with cmp-nvim-lsp
+function U.capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    return require("cmp_nvim_lsp").update_capabilities(capabilities)
+end
+
+-- LSP servers flags that are common to all servers
+function U.flags()
+    local flags = {
+        -- Use incremental sync for buffer edits
+        allow_incremental_sync = true,
+        debounce_text_changes = 200,
+    }
+    return flags
+end
+
 -- Format document
 -- TODO: For NeoVIM > 0.8.0 see https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
 function U.format_document(client, bufnr)
@@ -81,20 +97,11 @@ function U.document_highlight(client, bufnr)
     end
 end
 
--- Add nvim-cmp to the LS capabilities with cmp-nvim-lsp
-function U.capabilities()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    return require("cmp_nvim_lsp").update_capabilities(capabilities)
-end
-
--- LSP servers flags that are common to all servers
-function U.flags()
-    local flags = {
-        -- Use incremental sync for buffer edits
-        allow_incremental_sync = true,
-        debounce_text_changes = 200,
-    }
-    return flags
+-- Show code context
+function U.code_context(client, bufnr)
+    if client.supports_method("textDocument/documentSymbol") then
+        require("nvim-navic").attach(client, bufnr)
+    end
 end
 
 -- LSP mappings
@@ -140,6 +147,13 @@ function U.mappings(bufnr)
     buf_map("n", "ºd", vim.diagnostic.goto_next)
     buf_map("n", "<Leader>q", vim.diagnostic.setqflist)
     buf_map("n", "<Leader>d", tb.diagnostics)
+end
+
+-- Functions that are attached to all LSP servers
+function U.attach_common(client, bufnr)
+    U.signature_help(client, bufnr)
+    U.code_context(client, bufnr)
+    U.mappings(bufnr)
 end
 
 return U

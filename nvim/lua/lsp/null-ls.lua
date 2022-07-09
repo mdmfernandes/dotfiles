@@ -18,6 +18,7 @@ local sources = {
     }),
     fmt.shfmt, -- Bash
     fmt.markdownlint, -- Markdown
+    fmt.taplo, -- TOML
     fmt.trim_whitespace.with({
         disabled_filetypes = { "go", "gomod", "json" },
     }),

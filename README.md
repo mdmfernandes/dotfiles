@@ -55,6 +55,7 @@ My configs for:
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)
 - [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
+- [nvim-navic](https://github.com/SmiteshP/nvim-navic)
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)

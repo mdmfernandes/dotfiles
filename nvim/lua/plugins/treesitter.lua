@@ -36,7 +36,7 @@ require("nvim-treesitter.configs").setup({
 
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     textobjects = {
-        -- Select inner (ix) and all (a) of a text object
+        -- Select inner (ix) and all (ax) of a text object
         select = {
             enable = true,
             lookahead = true,
@@ -53,6 +53,16 @@ require("nvim-treesitter.configs").setup({
                 ["iv"] = "@parameter.inner",
             },
         },
+        -- Swap the node under the cursor
+        swap = {
+            enable = true,
+            swap_next = {
+                ["<leader>v"] = "@parameter.inner",
+            },
+            swap_previous = {
+                ["<leader>V"] = "@parameter.inner",
+            },
+        },
         -- Jump to the next or previous text object
         -- PT-PT keyboards are weird :)
         move = {
@@ -60,12 +70,14 @@ require("nvim-treesitter.configs").setup({
             set_jumps = true,
             goto_next_start = {
                 ["ºf"] = "@function.outer",
+                ["ºv"] = "@parameter.inner",
             },
             goto_next_end = {
                 ["ºF"] = "@function.outer",
             },
             goto_previous_start = {
                 ["çf"] = "@function.outer",
+                ["çv"] = "@parameter.inner",
             },
             goto_previous_end = {
                 ["çF"] = "@function.outer",

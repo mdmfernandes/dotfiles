@@ -16,9 +16,8 @@ function S.setup()
         flags = u.flags(),
         capabilities = u.capabilities(),
         on_attach = function(client, buf)
+            u.attach_common(client, buf)
             u.format_document(client, buf)
-            u.signature_help(client, buf)
-            u.mappings(buf)
         end,
         settings = settings,
         cmd = { "gopls", "serve" },

@@ -8,8 +8,7 @@ function S.setup()
         flags = u.flags(),
         capabilities = u.capabilities(),
         on_attach = function(client, buf)
-            u.signature_help(client, buf)
-            u.mappings(buf)
+            u.attach_common(client, buf)
         end,
     })
 end

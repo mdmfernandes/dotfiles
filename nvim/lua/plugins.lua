@@ -46,6 +46,12 @@ return packer.startup({
         -- Required libs
         use("nvim-lua/plenary.nvim")
 
+        -- Notifications
+        use({
+            "rcarriga/nvim-notify",
+            config = config("plugins.notify"),
+        })
+
         ---------------------------------------
         -- Treesitter: Higlighting and stuff --
         ---------------------------------------
@@ -87,9 +93,9 @@ return packer.startup({
             config = config("plugins.tree"),
         })
 
-        -------------------------------
-        -- LSP and Snippets --
-        -------------------------------
+        ---------------------------
+        -- LSP, Snippets, Navbar --
+        ---------------------------
         use({
             "neovim/nvim-lspconfig",
             requires = "hrsh7th/cmp-nvim-lsp",
@@ -106,6 +112,12 @@ return packer.startup({
         use({
             "L3MON4D3/LuaSnip",
             -- config = config("plugins.luasnip"),
+        })
+
+        -- Navbar
+        use({
+            "SmiteshP/nvim-navic",
+            requires = "neovim/nvim-lspconfig",
         })
 
         ----------------
@@ -201,12 +213,6 @@ return packer.startup({
             "numToStr/Comment.nvim",
             event = "BufRead",
             config = config("plugins.comment"),
-        })
-
-        -- Notifications
-        use({
-            "rcarriga/nvim-notify",
-            config = config("plugins.notify"),
         })
 
         -- Higlighting for log files
