@@ -151,7 +151,9 @@ end
 
 -- Functions that are attached to all LSP servers
 function U.attach_common(client, bufnr)
-    U.signature_help(client, bufnr)
+    -- Currently using the 'nvim_lsp_signature_help' plugin
+    -- U.signature_help(client, bufnr)
+
     U.code_context(client, bufnr)
     U.mappings(bufnr)
 end

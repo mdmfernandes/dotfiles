@@ -58,6 +58,9 @@ cmp.setup({
             -- If the source is a LSP, show its name instead of the string "LSP"
             if entry.source.name == "nvim_lsp" then
                 vim_item.menu = entry.source.source.client.name
+            -- If the source is the signature help, don't show its name
+            elseif entry.source.name == "nvim_lsp_signature_help" then
+                vim_item.menu = nil
             else
                 vim_item.menu = alias[entry.source.name] or entry.source.name
             end
@@ -97,8 +100,17 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lsp", max_item_count = 10 },
         { name = "luasnip", max_item_count = 10 },
-        { name = "buffer", max_item_count = 10 },
+        {
+            name = "buffer",
+            option = {
+                get_bufnrs = function()
+                    return vim.api.nvim_list_bufs()
+                end,
+            },
+            max_item_count = 10,
+        },
         { name = "path", max_item_count = 10 },
+        { name = "nvim_lsp_signature_help" },
     }),
 })
 

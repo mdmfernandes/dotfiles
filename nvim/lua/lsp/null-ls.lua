@@ -32,9 +32,7 @@ local sources = {
     diag.pylint, -- Python
     diag.flake8, -- Python
     diag.mypy, -- Python
-    diag.yamllint.with({ -- YAML
-        extra_args = { "-d", "relaxed" },
-    }),
+    diag.yamllint, -- YAML
     diag.hadolint, -- Docker
     diag.zsh, -- zsh
     diag.gitlint, -- Git
