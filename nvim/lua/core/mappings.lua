@@ -8,7 +8,7 @@ local map = require("utils").map
 -- Buffers
 map("n", "<Leader>bn", "<Cmd>enew<CR>")
 map("n", "<Leader>bz", "<Cmd>only<CR>")
-map("n", "<C-x>", "<Cmd>bdelete<CR>")
+map("n", "<C-q>", "<Cmd>bdelete<CR>")
 -- Quickly save the current buffer or all buffers
 map("n", "<Leader>w", "<Cmd>update<CR>")
 map("n", "<Leader>W", "<Cmd>wall<CR>")
@@ -27,7 +27,7 @@ map("n", "<C-Right>", "<Cmd>vertical resize -3<CR>")
 
 -- Tabs
 map("n", "<Leader>tn", "<Cmd>tabnew<CR>")
-map("n", "<Leader>tx", "<Cmd>tabclose<CR>")
+map("n", "<Leader>tq", "<Cmd>tabclose<CR>")
 map("n", "<Leader>th", "<Cmd>tabNext<CR>")
 map("n", "<Leader>tl", "<Cmd>tabnext<CR>")
 
@@ -41,19 +41,25 @@ map("v", "<S-j>", ":m '>+1<CR>gv=gv")
 map("n", "ç<Space>", "<Cmd>put! =repeat(nr2char(10), v:count1)<CR>")
 map("n", "º<Space>", "<Cmd>put =repeat(nr2char(10), v:count1)<CR>")
 
--- Hide search highlights
-map("n", "<Leader><Space>", "<Cmd>nohlsearch<CR>")
+-- Smart delete
+map("n", "dd", function()
+    return vim.api.nvim_get_current_line():match("^%s*$") and '"_dd' or "dd"
+end, { expr = true })
 
 -- Copy/paste to clipboard
-map("", "<C-c>", '"+y')
-map("n", "<Leader>y", '"+y')
-map("v", "<Leader>y", '"+y')
-map("n", "<Leader>Y", '"+yg_')
-map("n", "<Leader>yy", '"+yy')
-map("n", "<Leader>p", '"+p')
-map("v", "<Leader>p", '"+p')
-map("n", "<Leader>P", '"+P')
-map("v", "<Leader>P", '"+P')
+-- Not required if using the "unnamedplus" clipboard
+-- map("", "<C-c>", '"+y')
+-- map("n", "<Leader>y", '"+y')
+-- map("v", "<Leader>y", '"+y')
+-- map("n", "<Leader>Y", '"+yg_')
+-- map("n", "<Leader>yy", '"+yy')
+-- map("n", "<Leader>p", '"+p')
+-- map("v", "<Leader>p", '"+p')
+-- map("n", "<Leader>P", '"+P')
+-- map("v", "<Leader>P", '"+P')
+
+-- Hide search highlights
+map("n", "<Leader><Space>", "<Cmd>nohlsearch<CR>")
 
 -- Remove mapping from macros recording and ex mode
 map("n", "q", "<Nop>")

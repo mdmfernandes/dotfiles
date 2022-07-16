@@ -37,7 +37,7 @@ map("n", "<S-Right>", function()
     bufferline.move(1)
 end)
 map("n", "<Leader>bp", bufferline.pick_buffer)
-map("n", "<Leader>bx", bufferline.close_buffer_with_pick)
+map("n", "<Leader>bq", bufferline.close_buffer_with_pick)
 -- Go to buffer in position
 map("n", "<Leader>1", function()
     bufferline.go_to_buffer(1)

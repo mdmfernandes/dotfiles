@@ -10,4 +10,4 @@ neogit.setup({
 -- Key Mappings
 local map = require("utils").map
 
-map("n", "<Leader>gs", neogit.open) -- Git status
+map("n", "<Leader>gg", neogit.open)

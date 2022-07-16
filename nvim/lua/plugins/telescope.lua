@@ -89,6 +89,10 @@ map("n", "<Leader>fo", tb.oldfiles)
 map("n", "<Leader>bb", tb.buffers)
 -- Search registers
 map("n", "<Leader>rr", tb.registers)
+-- Git
+map("n", "<Leader>gb", tb.git_branches)
+map("n", "<Leader>gc", tb.git_commits)
+map("n", "<Leader>gs", tb.git_status)
 -- Others
 map("n", "<Leader>fh", tb.help_tags)
 map("n", "<Leader>fm", tb.man_pages)

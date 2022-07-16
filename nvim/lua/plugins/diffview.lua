@@ -8,4 +8,4 @@ local map = require("utils").map
 
 map("n", "<Leader>gd", diffview.open)
 map("n", "<Leader>gh", diffview.file_history)
-map("n", "<Leader>gx", diffview.close)
+map("n", "<Leader>gq", diffview.close)
