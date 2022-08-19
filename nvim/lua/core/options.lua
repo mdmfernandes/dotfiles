@@ -24,6 +24,9 @@ o.scrolloff = 10 -- Show at least 10 lines above/below the cursor
 o.cursorline = true
 o.signcolumn = "yes"
 o.showmatch = true -- When a bracket is inserted, briefly jump to the matching one
+-- Empty characters
+-- o.list = true
+o.listchars = "eol:¬"
 
 ------------
 -- Editor --
