@@ -41,7 +41,7 @@ map("v", "<S-j>", ":m '>+1<CR>gv=gv")
 map("n", "ç<Space>", "<Cmd>put! =repeat(nr2char(10), v:count1)<CR>")
 map("n", "º<Space>", "<Cmd>put =repeat(nr2char(10), v:count1)<CR>")
 
--- Smart delete
+-- Smart delete - add deleted empty lines to the "_" register
 map("n", "dd", function()
     return vim.api.nvim_get_current_line():match("^%s*$") and '"_dd' or "dd"
 end, { expr = true })

@@ -15,9 +15,15 @@ neogen.setup({
 -- Key Mappings
 local map = require("utils").map
 
-map("n", "<Leader>nf", function()
-    neogen.generate()
+-- Create annotation for current function
+map("n", "<Leader>af", function()
+    neogen.generate({})
 end)
-map("n", "<Leader>nc", function()
+-- Create annotation for current class
+map("n", "<Leader>ac", function()
     neogen.generate({ type = "class" })
+end)
+-- Create annotation for current file/document
+map("n", "<Leader>ad", function()
+    neogen.generate({ type = "file" })
 end)

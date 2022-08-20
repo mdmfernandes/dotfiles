@@ -46,9 +46,6 @@ alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox
 # Make directory with parents
 alias md='mkdir -pv'
 
-# Get real path of a file or directory
-alias rpath='realpath'
-
 # Use colordiff for diff, if installed
 if exists colordiff; then
     alias diff='colordiff'
