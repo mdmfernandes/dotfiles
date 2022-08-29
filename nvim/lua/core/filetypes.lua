@@ -9,5 +9,6 @@ vim.filetype.add({
         service = "systemd",
         socket = "systemd",
         target = "systemd",
+        bb = "config",
     },
 })
