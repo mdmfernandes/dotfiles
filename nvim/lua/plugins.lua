@@ -87,12 +87,12 @@ return packer.startup({
         })
 
         -- File explorer
-        use({
-            "kyazdani42/nvim-tree.lua",
-            event = "CursorHold",
-            config = config("plugins.tree"),
-        })
-
+        -- use({
+        --     "kyazdani42/nvim-tree.lua",
+        --     event = "CursorHold",
+        --     config = config("plugins.tree"),
+        -- })
+        --
         ---------------------------
         -- LSP, Snippets, Navbar --
         ---------------------------
@@ -163,11 +163,11 @@ return packer.startup({
         })
 
         -- Status
-        use({
-            "TimUntersberger/neogit",
-            event = "BufEnter",
-            config = config("plugins.neogit"),
-        })
+        -- use({
+        --     "TimUntersberger/neogit",
+        --     event = "BufEnter",
+        --     config = config("plugins.neogit"),
+        -- })
 
         -----------------------------
         -- Themes, colors and bars --
@@ -216,9 +216,15 @@ return packer.startup({
             config = config("plugins.comment"),
         })
 
+        -- Highlight code search with find (f/F) and 'till (t/T)
+        use({
+            "jinh0/eyeliner.nvim",
+            config = config("plugins.eyeliner"),
+        })
+
         -- Higlighting for log files
         -- TODO: Check if there's log highlighting in treesitter or other NeoVIM compatible plugin
-        use("mtdl9/vim-log-highlighting")
+        -- use("mtdl9/vim-log-highlighting")
     end,
     config = {
         display = {
