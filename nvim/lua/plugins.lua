@@ -197,6 +197,14 @@ return packer.startup({
             config = config("plugins.lualine"),
         })
 
+        -- Icons
+        use({
+            "kyazdani42/nvim-web-devicons",
+            config = function()
+                require("nvim-web-devicons").setup()
+            end,
+        })
+
         ------------
         -- Others --
         ------------
