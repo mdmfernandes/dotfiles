@@ -2,5 +2,5 @@
 require("core.options")
 require("core.mappings")
 require("core.diagnostic")
-require("core.filetypes")
+require("core.filetype")
 require("core.autocmd")

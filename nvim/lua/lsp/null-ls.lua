@@ -13,14 +13,14 @@ local sources = {
 
     -- Formatting
     fmt.black, -- Python
-    fmt.stylua.with({ -- Lua
-        extra_args = { "--config-path", vim.fn.expand("~/.config/stylua.toml") },
-    }),
+    -- fmt.stylua.with({ -- Lua
+    --     extra_args = { "--config-path", vim.fn.expand("~/.config/stylua.toml") },
+    -- }),
     fmt.shfmt, -- Bash
     fmt.markdownlint, -- Markdown
     fmt.taplo, -- TOML
     fmt.trim_whitespace.with({
-        disabled_filetypes = { "go", "gomod", "json" },
+        disabled_filetypes = { "go", "gomod", "json", "lua" },
     }),
 
     -- Diagnostics
@@ -35,7 +35,6 @@ local sources = {
     diag.yamllint, -- YAML
     diag.hadolint, -- Docker
     diag.zsh, -- zsh
-    diag.gitlint, -- Git
     diag.markdownlint.with({ -- Markdown
         extra_args = { "--config", vim.fn.expand("~/.config/markdownlint.yaml") },
     }),
@@ -47,7 +46,7 @@ null_ls.setup({
     -- <source_name>[<code>]: <message>
     diagnostics_format = "#{s}[#{c}]: #{m}",
     on_attach = function(client, buf)
-        u.format_document(client, buf)
         u.mappings(buf)
+        u.format_document(client, buf)
     end,
 })
