@@ -22,38 +22,40 @@ function U.flags()
 end
 
 -- Format document
--- TODO: For NeoVIM > 0.8.0 see https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
-function U.format_document(client, bufnr)
+local format_au = api.nvim_create_augroup("LspFormatting", {})
+function U.format_document(client, bufnr, filter)
+    -- Format on save
     if client.supports_method("textDocument/formatting") then
-        local params = vim.lsp.util.make_formatting_params({})
-
-        local fmt_au = api.nvim_create_augroup("LspFormatting", {})
-        api.nvim_clear_autocmds({ group = fmt_au, buffer = bufnr })
+        api.nvim_clear_autocmds({ group = format_au, buffer = bufnr })
         api.nvim_create_autocmd("BufWritePre", {
-            group = fmt_au,
+            group = format_au,
             buffer = bufnr,
             callback = function()
-                local result, err = client.request_sync("textDocument/formatting", params, 2000)
-                if result and result.result then
-                    vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
-                    vim.notify(string.format("Formatted with %s", client.name), vim.log.levels.INFO)
-                elseif err then
-                    vim.notify(string.format("[%s] %s", client.name, err), vim.log.levels.WARN)
-                end
+                vim.lsp.buf.format({
+                    bufnr = bufnr,
+                    filter = filter,
+                })
+                vim.notify(string.format("Formatted with %s", client.name), vim.log.levels.INFO)
             end,
         })
+    end
 
-        -- Manually
+    -- Manually
+    if client.supports_method("textDocument/formatting") then
         map("n", "<Leader>lf", function()
-            client.request("textDocument/formatting", params, nil, bufnr)
+            vim.lsp.buf.format({
+                bufnr = bufnr,
+                filter = filter,
+            })
+            vim.notify(string.format("Formatted with %s", client.name), vim.log.levels.INFO)
         end, { buffer = bufnr })
     end
 end
 
 -- Show signature help on hover (insert mode)
+local help_au = api.nvim_create_augroup("LspShowSignatureHelp", { clear = true })
 function U.signature_help(client, bufnr)
     if client.supports_method("textDocument/signatureHelp") then
-        local help_au = api.nvim_create_augroup("LspShowSignatureHelp", { clear = true })
         api.nvim_create_autocmd("CursorHoldI", {
             group = help_au,
             buffer = bufnr,
@@ -65,9 +67,9 @@ function U.signature_help(client, bufnr)
 end
 
 -- Highlight code on hover
+local highlight_au = vim.api.nvim_create_augroup("LspDocumentHighlight", {})
 function U.document_highlight(client, bufnr)
     if client.supports_method("textDocument/documentHighlight") then
-        local highlight_au = vim.api.nvim_create_augroup("LspDocumentHighlight", {})
         api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             group = highlight_au,
             buffer = bufnr,
@@ -76,8 +78,7 @@ function U.document_highlight(client, bufnr)
                 while node ~= nil do
                     local node_type = node:type()
                     -- Don't highlight strings
-                    if
-                        node_type == "string"
+                    if node_type == "string"
                         or node_type == "string_fragment"
                         or node_type == "template_string"
                         or node_type == "document"

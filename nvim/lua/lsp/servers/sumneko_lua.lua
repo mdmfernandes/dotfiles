@@ -48,6 +48,7 @@ function S.setup()
         capabilities = u.capabilities(),
         on_attach = function(client, buf)
             u.attach_common(client, buf)
+            u.format_document(client, buf)
         end,
         settings = settings,
     })
