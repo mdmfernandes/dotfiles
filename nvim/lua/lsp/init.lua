@@ -7,16 +7,14 @@ lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_hel
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, d.border_opts)
 
 -- Enabled servers. The server configs are in the ./servers directory
-for _, server in
-    ipairs({
-        "bashls",
-        "gopls",
-        "jsonls",
-        "pyright",
-        -- "sqls",
-        "sumneko_lua",
-    })
-do
+for _, server in ipairs({
+    "bashls",
+    "gopls",
+    "jsonls",
+    "pyright",
+    -- "sqls",
+    "sumneko_lua",
+}) do
     require("lsp.servers." .. server).setup()
 end
 

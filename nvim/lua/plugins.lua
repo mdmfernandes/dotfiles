@@ -111,13 +111,20 @@ return packer.startup({
         -- Snippets
         use({
             "L3MON4D3/LuaSnip",
-            -- config = config("plugins.luasnip"),
         })
 
         -- Navbar
         use({
             "SmiteshP/nvim-navic",
             requires = "neovim/nvim-lspconfig",
+        })
+
+        -- Status
+        use({
+            "j-hui/fidget.nvim",
+            config = function()
+                require("fidget").setup()
+            end
         })
 
         ----------------
