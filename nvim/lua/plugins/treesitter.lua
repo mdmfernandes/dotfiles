@@ -51,6 +51,8 @@ require("nvim-treesitter.configs").setup({
                 ["il"] = "@loop.inner",
                 ["av"] = "@parameter.outer",
                 ["iv"] = "@parameter.inner",
+                ["ai"] = "@conditional.outer",
+                ["ii"] = "@conditional.inner",
             },
         },
         -- Swap the node under the cursor
@@ -70,17 +72,23 @@ require("nvim-treesitter.configs").setup({
             set_jumps = true,
             goto_next_start = {
                 ["ºf"] = "@function.outer",
+                ["ºi"] = "@conditional.inner",
                 ["ºv"] = "@parameter.inner",
             },
             goto_next_end = {
                 ["ºF"] = "@function.outer",
+                ["ºI"] = "@conditional.inner",
+                ["ºV"] = "@parameter.inner",
             },
             goto_previous_start = {
                 ["çf"] = "@function.outer",
+                ["çi"] = "@conditional.inner",
                 ["çv"] = "@parameter.inner",
             },
             goto_previous_end = {
                 ["çF"] = "@function.outer",
+                ["çI"] = "@conditional.inner",
+                ["çV"] = "@parameter.inner",
             },
         },
         autopairs = { enable = true },

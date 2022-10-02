@@ -148,6 +148,13 @@ function U.mappings(bufnr)
     buf_map("n", "ºd", vim.diagnostic.goto_next)
     buf_map("n", "<Leader>q", vim.diagnostic.setqflist)
     buf_map("n", "<Leader>d", tb.diagnostics)
+
+    -- Workspaces
+    buf_map("n", "<space>wa", vim.lsp.buf.add_workspace_folder)
+    buf_map("n", "<space>wr", vim.lsp.buf.remove_workspace_folder)
+    buf_map("n", "<space>wl", function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end)
 end
 
 -- Functions that are attached to all LSP servers
