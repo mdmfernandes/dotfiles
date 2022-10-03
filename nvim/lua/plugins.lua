@@ -89,7 +89,6 @@ return packer.startup({
         -- File explorer
         -- use({
         --     "kyazdani42/nvim-tree.lua",
-        --     event = "CursorHold",
         --     config = config("plugins.tree"),
         -- })
         --
@@ -104,7 +103,6 @@ return packer.startup({
 
         use({
             "jose-elias-alvarez/null-ls.nvim",
-            event = "BufRead",
             config = config("lsp.null-ls"),
         })
 
@@ -132,7 +130,6 @@ return packer.startup({
         ----------------
         use({
             "hrsh7th/nvim-cmp",
-            event = "CursorHold",
             config = config("plugins.nvim-cmp"),
             requires = "L3MON4D3/LuaSnip",
         })
@@ -147,7 +144,6 @@ return packer.startup({
 
         use({
             "windwp/nvim-autopairs",
-            event = "InsertCharPre",
             after = "nvim-cmp",
             config = config("plugins.autopairs"),
         })
@@ -158,21 +154,18 @@ return packer.startup({
         -- Signs
         use({
             "lewis6991/gitsigns.nvim",
-            event = "BufRead",
             config = config("plugins.gitsigns"),
         })
 
         -- Diff view
         use({
             "sindrets/diffview.nvim",
-            event = "BufRead",
             config = config("plugins.diffview"),
         })
 
         -- Status
         -- use({
         --     "TimUntersberger/neogit",
-        --     event = "BufEnter",
         --     config = config("plugins.neogit"),
         -- })
 
@@ -191,7 +184,6 @@ return packer.startup({
             tag = "v2.*",
             requires = { "kyazdani42/nvim-web-devicons", opt = true },
             after = "onedark.nvim",
-            event = "BufEnter",
             config = config("plugins.bufferline"),
         })
 
@@ -200,7 +192,6 @@ return packer.startup({
             "nvim-lualine/lualine.nvim",
             requires = { "kyazdani42/nvim-web-devicons", opt = true },
             after = "onedark.nvim",
-            event = "BufEnter",
             config = config("plugins.lualine"),
         })
 
@@ -218,7 +209,6 @@ return packer.startup({
         -- Todo comments
         use({
             "folke/todo-comments.nvim",
-            event = "BufRead",
             config = function()
                 require("todo-comments").setup()
             end,
@@ -227,7 +217,6 @@ return packer.startup({
         -- Code comments
         use({
             "numToStr/Comment.nvim",
-            event = "BufRead",
             config = config("plugins.comment"),
         })
 
