@@ -18,6 +18,7 @@ require("nvim-treesitter.configs").setup({
         "make",
         "markdown",
         "python",
+        "query",
         "regex",
         "rst",
         "rust",
@@ -36,6 +37,33 @@ require("nvim-treesitter.configs").setup({
 
     -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     textobjects = {
+        autopairs = { enable = true },
+        -- Jump to the next or previous text object
+        -- PT-PT keyboards are weird :)
+        move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+                ["ºf"] = "@function.outer",
+                ["ºi"] = "@conditional.inner",
+                ["ºa"] = "@parameter.inner",
+            },
+            goto_next_end = {
+                ["ºF"] = "@function.outer",
+                ["ºI"] = "@conditional.inner",
+                ["ºA"] = "@parameter.inner",
+            },
+            goto_previous_start = {
+                ["çf"] = "@function.outer",
+                ["çi"] = "@conditional.inner",
+                ["ça"] = "@parameter.inner",
+            },
+            goto_previous_end = {
+                ["çF"] = "@function.outer",
+                ["çI"] = "@conditional.inner",
+                ["çA"] = "@parameter.inner",
+            },
+        },
         -- Select inner (ix) and all (ax) of a text object
         select = {
             enable = true,
@@ -49,8 +77,8 @@ require("nvim-treesitter.configs").setup({
                 ["ib"] = "@block.inner",
                 ["al"] = "@loop.outer",
                 ["il"] = "@loop.inner",
-                ["av"] = "@parameter.outer",
-                ["iv"] = "@parameter.inner",
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
                 ["ai"] = "@conditional.outer",
                 ["ii"] = "@conditional.inner",
             },
@@ -59,46 +87,12 @@ require("nvim-treesitter.configs").setup({
         swap = {
             enable = true,
             swap_next = {
-                ["<leader>v"] = "@parameter.inner",
+                ["<leader>a"] = "@parameter.inner",
+                ["<leader>b"] = "@block.outer",
             },
             swap_previous = {
-                ["<leader>V"] = "@parameter.inner",
-            },
-        },
-        -- Jump to the next or previous text object
-        -- PT-PT keyboards are weird :)
-        move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = {
-                ["ºf"] = "@function.outer",
-                ["ºi"] = "@conditional.inner",
-                ["ºv"] = "@parameter.inner",
-            },
-            goto_next_end = {
-                ["ºF"] = "@function.outer",
-                ["ºI"] = "@conditional.inner",
-                ["ºV"] = "@parameter.inner",
-            },
-            goto_previous_start = {
-                ["çf"] = "@function.outer",
-                ["çi"] = "@conditional.inner",
-                ["çv"] = "@parameter.inner",
-            },
-            goto_previous_end = {
-                ["çF"] = "@function.outer",
-                ["çI"] = "@conditional.inner",
-                ["çV"] = "@parameter.inner",
-            },
-        },
-        autopairs = { enable = true },
-        -- Peek definitions of functions and classes
-        lsp_interop = {
-            enable = true,
-            border = "rounded",
-            peek_definition_code = {
-                ["df"] = "@function.outer",
-                ["dF"] = "@class.outer",
+                ["<leader>A"] = "@parameter.inner",
+                ["<leader>B"] = "@block.outer",
             },
         },
     },

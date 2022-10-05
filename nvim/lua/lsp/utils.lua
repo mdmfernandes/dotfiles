@@ -34,6 +34,7 @@ function U.format_document(client, bufnr, filter)
                 vim.lsp.buf.format({
                     bufnr = bufnr,
                     filter = filter,
+                    timeout_ms = 2000,
                 })
                 vim.notify(string.format("Formatted with %s", client.name), vim.log.levels.INFO)
             end,
@@ -46,6 +47,7 @@ function U.format_document(client, bufnr, filter)
             vim.lsp.buf.format({
                 bufnr = bufnr,
                 filter = filter,
+                timeout_ms = 2000,
             })
             vim.notify(string.format("Formatted with %s", client.name), vim.log.levels.INFO)
         end, { buffer = bufnr })
