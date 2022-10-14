@@ -87,15 +87,6 @@ return packer.startup({
             config = config("plugins.telescope"),
         })
 
-        -- File explorer
-        -- use({
-        --     "kyazdani42/nvim-tree.lua",
-        --     config = config("plugins.tree"),
-        -- })
-        --
-        ---------------------------
-        -- LSP, Snippets, Navbar --
-        ---------------------------
         use({
             "neovim/nvim-lspconfig",
             requires = "hrsh7th/cmp-nvim-lsp",
@@ -164,11 +155,32 @@ return packer.startup({
             config = config("plugins.diffview"),
         })
 
-        -- Status
-        -- use({
-        --     "TimUntersberger/neogit",
-        --     config = config("plugins.neogit"),
-        -- })
+        ------------
+        -- Others --
+        ------------
+        -- Todo comments
+        use({
+            "folke/todo-comments.nvim",
+            config = function()
+                require("todo-comments").setup()
+            end,
+        })
+
+        -- Code comments
+        use({
+            "numToStr/Comment.nvim",
+            config = config("plugins.comment"),
+        })
+
+        -- Highlight code search with find (f/F) and 'till (t/T)
+        use({
+            "jinh0/eyeliner.nvim",
+            config = config("plugins.eyeliner"),
+        })
+
+        -- Higlighting for log files
+        -- TODO: Check if there's log highlighting in treesitter or other NeoVIM compatible plugin
+        -- use("mtdl9/vim-log-highlighting")
 
         -----------------------------
         -- Themes, colors and bars --
@@ -203,33 +215,6 @@ return packer.startup({
                 require("nvim-web-devicons").setup()
             end,
         })
-
-        ------------
-        -- Others --
-        ------------
-        -- Todo comments
-        use({
-            "folke/todo-comments.nvim",
-            config = function()
-                require("todo-comments").setup()
-            end,
-        })
-
-        -- Code comments
-        use({
-            "numToStr/Comment.nvim",
-            config = config("plugins.comment"),
-        })
-
-        -- Highlight code search with find (f/F) and 'till (t/T)
-        use({
-            "jinh0/eyeliner.nvim",
-            config = config("plugins.eyeliner"),
-        })
-
-        -- Higlighting for log files
-        -- TODO: Check if there's log highlighting in treesitter or other NeoVIM compatible plugin
-        -- use("mtdl9/vim-log-highlighting")
     end,
     config = {
         display = {

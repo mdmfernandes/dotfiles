@@ -7,5 +7,9 @@ vim.filetype.add({
         socket = "systemd",
         target = "systemd",
         bb = "config",
+        log = "log",
+        _log = "log",
+        LOG = "log",
+        _LOG = "log"
     },
 })
