@@ -45,8 +45,8 @@ null_ls.setup({
     sources = sources,
     -- <source_name>[<code>]: <message>
     diagnostics_format = "#{s}[#{c}]: #{m}",
-    on_attach = function(client, buf)
-        u.mappings(buf)
-        u.format_document(client, buf)
+    on_attach = function(client, bufnr)
+        u.mappings(client, bufnr)
+        u.format_document(client, bufnr)
     end,
 })

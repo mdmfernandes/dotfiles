@@ -108,7 +108,7 @@ function U.code_context(client, bufnr)
 end
 
 -- LSP mappings
-function U.mappings(bufnr)
+function U.mappings(client, bufnr)
     -- Helper for buffer funtions
     local function buf_map(mode, target, source)
         map(mode, target, source, { buffer = bufnr })
@@ -145,11 +145,14 @@ function U.mappings(bufnr)
     -- List code actions available at the current cursor position
     buf_map("n", "<leader>ca", vim.lsp.buf.code_action)
 
-    -- Diagnostics key mappings
-    buf_map("n", "çd", vim.diagnostic.goto_prev)
-    buf_map("n", "ºd", vim.diagnostic.goto_next)
-    buf_map("n", "<Leader>q", vim.diagnostic.setqflist)
-    buf_map("n", "<Leader>d", tb.diagnostics)
+    -- Show LSP symbols, if supported.
+    if client.supports_method("textDocument/documentSymbolProvider") then
+        -- Document symbols. If not supported by the LSP client it uses
+        -- Treesitter to show the symbols (defined in telescope.lua).
+        buf_map("n", "<Leader>fy", tb.lsp_document_symbols)
+        -- Worspace symbols
+        buf_map("n", "<Leader>fw", tb.lsp_workspace_symbols)
+    end
 
     -- Workspaces
     buf_map("n", "<space>wa", vim.lsp.buf.add_workspace_folder)
@@ -163,9 +166,8 @@ end
 function U.attach_common(client, bufnr)
     -- Currently using the 'nvim_lsp_signature_help' plugin
     -- U.signature_help(client, bufnr)
-
     U.code_context(client, bufnr)
-    U.mappings(bufnr)
+    U.mappings(client, bufnr)
 end
 
 return U

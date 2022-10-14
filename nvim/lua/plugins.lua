@@ -82,6 +82,7 @@ return packer.startup({
             requires = {
                 { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
                 "nvim-telescope/telescope-file-browser.nvim",
+                "nvim-telescope/telescope-ui-select.nvim"
             },
             config = config("plugins.telescope"),
         })
