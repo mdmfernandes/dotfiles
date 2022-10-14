@@ -87,7 +87,7 @@ map("o", "A", "<Cmd>normal! mzggVG<CR>`z")
 map("x", "A", "<Cmd>normal! mzggVG<CR>`z")
 
 -- Toggle spelling
-map("", "<F6>", "<Cmd>set spell!<CR>", {})
+map("", "<F3>", "<Cmd>set spell!<CR>", {})
 -- Navigate between spell errors
 map("n", "çs", "[s")
 map("n", "ºs", "]s")
@@ -103,3 +103,9 @@ map("n", "<Leader><CR>", "<Cmd>source %<CR>", {})
 
 -- Health check
 map("n", "<Leader>hc", "<Cmd>checkhealth<CR>")
+
+-- Diagnostics
+map("n", "çd", vim.diagnostic.goto_prev)
+map("n", "ºd", vim.diagnostic.goto_next)
+map("n", "<F7>", vim.diagnostic.show)
+map("n", "<C-F7>", vim.diagnostic.hide)

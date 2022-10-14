@@ -21,10 +21,11 @@ end
 -- Key mappings
 local map = require("utils").map
 
--- Start and stop clients
-map("", "<F12>", "<Cmd>LspStart<CR>", {})
-map("", "<C-F12>", "<Cmd>:LspStop<CR>", {})
 -- Get info
-map("", "<F11>", function()
+map("", "<F6>", function()
     require("lspconfig.ui.lspinfo")()
 end, {})
+
+-- Start and stop clients
+map("", "<F8>", "<Cmd>LspStart<CR>", {})
+map("", "<C-F8>", "<Cmd>:LspStop<CR>", {})

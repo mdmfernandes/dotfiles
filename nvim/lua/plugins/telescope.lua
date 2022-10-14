@@ -4,7 +4,8 @@ local telescope = require("telescope")
 telescope.setup({
     defaults = {
         layout_config = {
-            width = 0.9,
+            width = 0.95,
+            height = 0.9,
             preview_cutoff = 120,
             horizontal = { preview_width = 0.55 },
         },
@@ -52,23 +53,29 @@ telescope.setup({
             wrap_results = false,
             layout_strategy = "vertical",
             layout_config = {
-                width = 0.9,
+                width = 0.95,
                 preview_cutoff = 30,
             },
             -- don't trim the results
-            line_width = 200,
+            -- line_width = 200,
         },
     },
     extensions = {
         file_browser = {
             hidden = true,
         },
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown {
+                -- even more opts
+            }
+        }
     },
 })
 
 -- Extensions
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
+telescope.load_extension("ui-select")
 
 -- Mappings
 local map = require("utils").map
@@ -92,6 +99,9 @@ map("n", "<Leader>rr", tb.registers)
 -- Git
 map("n", "<Leader>gc", tb.git_commits)
 map("n", "<Leader>gs", tb.git_status)
+-- Diagnostics
+map("n", "<Leader>wd", tb.diagnostics) -- All buffers
+map("n", "<Leader>d", function() tb.diagnostics({ bufnr = 0 }) end) -- Current buffer
 -- Others
 map("n", "<Leader>fh", tb.help_tags)
 map("n", "<Leader>fm", tb.man_pages)
