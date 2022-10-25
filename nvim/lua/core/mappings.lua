@@ -109,3 +109,7 @@ map("n", "çd", vim.diagnostic.goto_prev)
 map("n", "ºd", vim.diagnostic.goto_next)
 map("n", "<F7>", vim.diagnostic.show)
 map("n", "<C-F7>", vim.diagnostic.hide)
+
+-- Navigate between changes
+map("n", "çc", "[c")
+map("n", "ºc", "]c")
