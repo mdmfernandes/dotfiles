@@ -43,6 +43,11 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 
+# ripgrep
+if exists rg; then
+    alias rga='rg --text'   # Treat binary files as text
+fi
+
 # Make directory with parents
 alias md='mkdir -pv'
 
@@ -148,7 +153,6 @@ alias gpd='git push --dry-run'
 alias gpf='git push --force-with-lease'
 alias grv='git remote --verbose'
 alias grb='git rebase'
-alias grbc='git rebase --continue'
 alias gri='git rebase --interactive'
 alias gst='git status'
 alias gss='git status --short'
