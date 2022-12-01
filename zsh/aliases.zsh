@@ -54,6 +54,8 @@ alias md='mkdir -pv'
 # Use colordiff for diff, if installed
 if exists colordiff; then
     alias diff='colordiff'
+else
+    alias diff='diff --color=auto'
 fi
 
 # Use bat as cat, if installed

@@ -37,26 +37,27 @@ ZDOTDIR="${${(%):-%x}:h}"
 ZSH_USERDATA="${HOME}/.local/share/zsh"
 
 #### Options ##############################################################
-setopt noclobber            # prevent from overwriting an existing file
-setopt nonomatch            # hide error message if there is no match for the pattern
+setopt autocd               # if only directory path is entered, cd there.
+setopt autopushd            # make cd push the old directory onto the directory stack
+setopt appendhistory        # immediately append history instead of overwriting
+setopt cdsilent             # don't print the working directory after a `cd`
 setopt extendedglob         # extended globbing. Allows using regular expressions with *
+setopt histignorealldups    # if a new command is a duplicate, remove the older one
+setopt histignorespace      # ignore commands that start with space
+setopt histverify           # show command with history expansion to user before running it
+setopt incappendhistory     # save commands are added to the history immediately, otherwise only when shell exits
+setopt interactivecomments  # allow comments even in interactive shells
+setopt magicequalsubst      # enable filename expansion for arguments of the form 'foo=bar'
+setopt nobeep               # no beep
 setopt nocaseglob           # case insensitive globbing
 setopt nocheckjobs          # don't warn about running processes when exiting
+setopt noclobber            # prevent from overwriting an existing file
+setopt nonomatch            # hide error message if there is no match for the pattern
 setopt numericglobsort      # sort filenames numerically when it makes sense
 setopt promptsubst          # perform parameter expansion, command substitution and arithmetic expansion in prompts
-setopt nobeep               # no beep
-setopt autocd               # if only directory path is entered, cd there.
-setopt cdsilent             # don't print the working directory after a `cd`
-setopt autopushd            # make cd push the old directory onto the directory stack
 setopt pushdignoredups      # don't push multiple copies of the same directory onto the stack
 setopt pushdminus           # exchanges the meaning of `+` and `-` when used with a number to specify a directory in the stack
 setopt pushdsilent          # don't print the directory stack after `pushd` or `popd`
-setopt appendhistory        # immediately append history instead of overwriting
-setopt histignorealldups    # if a new command is a duplicate, remove the older one
-setopt incappendhistory     # save commands are added to the history immediately, otherwise only when shell exits
-setopt histignorespace      # ignore commands that start with space
-setopt histverify           # show command with history expansion to user before running it
-setopt interactivecomments  # allow comments even in interactive shells
 
 unsetopt flowcontrol        # disable output flow control in the shell's editor
 
@@ -66,7 +67,10 @@ setopt auto_menu                                                # automatically 
 setopt complete_in_word                                         # keep the cursor at the completion, if ambiguous
 setopt always_to_end                                            # move cursor to end if word has one match
 
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # colored completion (different colors for dirs/files/etc)
+# colored completion (different colors for dirs, files, etc.)
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # case insensitive tab completion
 zstyle ':completion:*' rehash true                              # automatically find new executables in path
 zstyle ':completion:*' menu select                              # select completions with arrow keys
@@ -205,8 +209,8 @@ PROMPT_EOL_MARK='%S$%s'
 
 #### Theme ####################################################################
 # Powerlevel10k
-source ${ZSH_USERDATA}/themes/powerlevel10k/powerlevel10k.zsh-theme
-source ${ZDOTDIR}/.p10k.zsh
+. ${ZSH_USERDATA}/themes/powerlevel10k/powerlevel10k.zsh-theme
+. ${ZDOTDIR}/.p10k.zsh
 
 
 #### ZSH Plugins ##############################################################
@@ -217,14 +221,64 @@ fi
 
 # Syntax Highlighting
 if [[ -r "${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-    source ${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    . ${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+
+    # Highlight styles (commented = default)
+    # ZSH_HIGHLIGHT_STYLES[default]=none
+    # ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
+    # ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=yellow
+    # ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
+    # ZSH_HIGHLIGHT_STYLES[global-alias]=fg=cyan
+    # ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
+    ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold     # default: none
+    # ZSH_HIGHLIGHT_STYLES[autodirectory]=fg=green,underline
+    # ZSH_HIGHLIGHT_STYLES[path]=underline
+    # ZSH_HIGHLIGHT_STYLES[path_pathseparator]=
+    # ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=
+    # ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue
+    # ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue
+    # ZSH_HIGHLIGHT_STYLES[command-substitution]=none
+    # ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=magenta
+    # ZSH_HIGHLIGHT_STYLES[process-substitution]=none
+    # ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=magenta
+    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=cyan,bold     # default: none
+    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=cyan,bold     # default: none
+    # ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
+    # ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=magenta
+    # ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow
+    # ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow
+    # ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=yellow
+    # ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=cyan
+    # ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=cyan
+    # ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=cyan
+    # ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=cyan
+    # ZSH_HIGHLIGHT_STYLES[assign]=none
+    ZSH_HIGHLIGHT_STYLES[redirection]=fg=yellow,bold            # default: none
+    # ZSH_HIGHLIGHT_STYLES[comment]=fg=black,bold
+    # ZSH_HIGHLIGHT_STYLES[named-fd]=none
+    # ZSH_HIGHLIGHT_STYLES[numeric-fd]=none
+    # ZSH_HIGHLIGHT_STYLES[arg0]=fg=green
+
+    # Highlight brackets
+    ZSH_HIGHLIGHT_STYLES[bracket-error]=fg=red
+    ZSH_HIGHLIGHT_STYLES[bracket-level-1]=fg=blue
+    ZSH_HIGHLIGHT_STYLES[bracket-level-2]=fg=yellow
+    ZSH_HIGHLIGHT_STYLES[bracket-level-3]=fg=green
+    ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=cyan
+    ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=yellow,bold
+    ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
+
+    # Highlight patterns
+    ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=white,bold,bg=red')
+    ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=yellow,bold')
 fi
 
 # Auto Suggestions
 if [[ -r "${ZSH_USERDATA}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    . ${ZSH_USERDATA}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-    source ${ZSH_USERDATA}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 fi
 
 
@@ -283,8 +337,8 @@ if exists fzf; then
     FZF_USERDATA="${HOME}/.local/share/fzf"
 
     # Key bindings and autocompletion
-    source ${HOME}/.local/share/fzf/shell/key-bindings.zsh
-    source ${HOME}/.local/share/fzf/shell/completion.zsh
+    . ${HOME}/.local/share/fzf/shell/key-bindings.zsh
+    . ${HOME}/.local/share/fzf/shell/completion.zsh
 fi
 
 # batcat
