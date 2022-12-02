@@ -67,16 +67,18 @@ setopt auto_menu                                                # automatically 
 setopt complete_in_word                                         # keep the cursor at the completion, if ambiguous
 setopt always_to_end                                            # move cursor to end if word has one match
 
-# colored completion (different colors for dirs, files, etc.)
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # case insensitive tab completion
-zstyle ':completion:*' rehash true                              # automatically find new executables in path
 zstyle ':completion:*' menu select                              # select completions with arrow keys
-zstyle ':completion:*:functions' ignored-patterns '_*'          # don't complete functions
-
+zstyle ':completion:*' rehash true                              # automatically find new executables in path
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' special-dirs true                        # complete . and .. special directories
+zstyle ':completion:*:-command-:*' tag-order '!parameters'      # don't show parameters (e.g. environment variables)
+zstyle ':completion:*:functions' ignored-patterns '_*'          # don't complete functions
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd' # format of `kill` completions
+
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache yes
@@ -169,23 +171,25 @@ bindkey '^q' push-line-or-edit                      # Ctrl+q
 
 
 #### Colors ###################################################################
-if [[ "${OSTYPE}" != "darwin"* ]]; then   # If not in MacOS
-    if [[ -f /usr/bin/dircolors && -r ${HOME}/.dir_colors ]]; then
-        eval $(/usr/bin/dircolors -b ${HOME}/.dir_colors)
-    fi
-else    # If in MacOS
+if [[ -x /usr/bin/dircolors ]]; then
+    test -r ~/.dircolors && eval "$(/usr/bin/dircolors -b ~/.dircolors)" || eval "$(/usr/bin/dircolors -b)"
+elif [[ "${OSTYPE}" = "darwin"* ]]; then   # If in MacOS
     export CLICOLOR=1
     # Use https://geoff.greer.fm/lscolors/ to convert between BSD (LSCOLORS),
     # used in MacOS, and Linux colors (LS_COLORS)
     LS_COLORS='di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 fi
 
+# Colored completions (different colors for dirs, files, etc.)
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+
 # Colored man pages
 export LESS_TERMCAP_mb=$'\E[01;32m'
 export LESS_TERMCAP_md=$'\E[01;32m'
 export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_so=$'\E[01;44;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
