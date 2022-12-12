@@ -107,8 +107,15 @@ map("n", "<Leader>hc", "<Cmd>checkhealth<CR>")
 -- Diagnostics
 map("n", "çd", vim.diagnostic.goto_prev)
 map("n", "ºd", vim.diagnostic.goto_next)
-map("n", "<F7>", vim.diagnostic.show)
+map("n", "<F7>", function()
+    vim.diagnostic.show()
+    vim.notify(string.format("Show diagnostics"), vim.log.levels.INFO)
+end)
 map("n", "<C-F7>", vim.diagnostic.hide)
+map("n", "<C-F7>", function()
+    vim.diagnostic.hide()
+    vim.notify(string.format("Hide diagnostics"), vim.log.levels.INFO)
+end)
 
 -- Navigate between changes
 map("n", "çc", "[c")

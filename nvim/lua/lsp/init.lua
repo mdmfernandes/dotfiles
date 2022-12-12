@@ -27,5 +27,11 @@ map("", "<F6>", function()
 end, {})
 
 -- Start and stop clients
-map("", "<F8>", "<Cmd>LspStart<CR>", {})
-map("", "<C-F8>", "<Cmd>:LspStop<CR>", {})
+map("", "<F8>", function()
+    vim.cmd("LspStart")
+    vim.notify(string.format("Start LSP server"), vim.log.levels.INFO)
+end, {})
+map("", "<C-F8>", function()
+    vim.cmd("LspStop")
+    vim.notify(string.format("Stop LSP server"), vim.log.levels.INFO)
+end, {})
