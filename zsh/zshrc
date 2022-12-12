@@ -274,8 +274,10 @@ if [[ -r "${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlightin
     ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
     # Highlight patterns
-    ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=white,bold,bg=red')
-    ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=yellow,bold')
+    ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=black,bold,bg=yellow')
+    ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=white,bold,bg=red')
+    ZSH_HIGHLIGHT_PATTERNS+=('sudoedit' 'fg=white,bold,bg=red')
+    ZSH_HIGHLIGHT_PATTERNS+=('svi' 'fg=white,bold,bg=red')
 fi
 
 # Auto Suggestions

@@ -11,7 +11,7 @@ ipinfo() {
     elif [[ $1 =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
         ip=$1
     else
-        echo "Invalid IP address (IPv4 only)"
+        echo -e '\e[31mInvalid IP address (IPv4 only)\e[0m'
         return
     fi
 
@@ -33,7 +33,7 @@ domaininfo() {
     # Check if the domain has a valid format
     result=$(echo $1 | grep -E '^@[a-zA-Z0-9]+([-.]?[a-zA-Z0-9]+)*.[a-zA-Z]+$')
     if [[ -z result ]]; then
-        echo "Invalid domain format"
+        echo -e '\e[31mInvalid domain format\e[0m'
         return 2
     fi
 
@@ -42,5 +42,21 @@ domaininfo() {
         curl -s -u $HOSTIO_TOKEN: https://host.io/api/full/$1 | jq
     else
         curl -s -u $HOSTIO_TOKEN: https://host.io/api/full/$1
+    fi
+}
+
+# Calculator
+calc() {
+    bc -l <<< ${*//[xX]/*}
+}
+
+# Decode JWTs
+jwtd() {
+    # This function only works if jq is installed
+    if exists jq; then
+        jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< $1
+        echo "Signature: $(echo "${1}" | awk -F'.' '{print $3}')"
+    else
+        echo -e '\e[31m`jq` is not installed and is required\e[0m'
     fi
 }
