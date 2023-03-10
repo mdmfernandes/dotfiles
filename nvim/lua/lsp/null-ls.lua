@@ -1,5 +1,8 @@
 -- null-ls: https://github.com/jose-elias-alvarez/null-ls.nvim
-local null_ls = require("null-ls")
+local null_ls_status_ok, null_ls = pcall(require, "null-ls")
+if not null_ls_status_ok then
+    return
+end
 
 local ca = null_ls.builtins.code_actions
 local fmt = null_ls.builtins.formatting
@@ -16,9 +19,9 @@ local sources = {
     -- fmt.stylua.with({ -- Lua
     --     extra_args = { "--config-path", vim.fn.expand("~/.config/stylua.toml") },
     -- }),
-    fmt.shfmt, -- Bash
+    fmt.shfmt,        -- Bash
     fmt.markdownlint, -- Markdown
-    fmt.taplo, -- TOML
+    fmt.taplo,        -- TOML
     fmt.trim_whitespace.with({
         disabled_filetypes = { "go", "gomod", "json", "lua" },
     }),
@@ -29,12 +32,12 @@ local sources = {
         diagnostics_format = "#{s}: #{m}",
         disabled_filetypes = { "gitcommit", "NeogitCommitMessage" },
     }),
-    diag.pylint, -- Python
-    diag.flake8, -- Python
-    diag.mypy, -- Python
-    diag.yamllint, -- YAML
-    diag.hadolint, -- Docker
-    diag.zsh, -- zsh
+    diag.pylint,             -- Python
+    diag.flake8,             -- Python
+    diag.mypy,               -- Python
+    diag.yamllint,           -- YAML
+    diag.hadolint,           -- Docker
+    diag.zsh,                -- zsh
     diag.markdownlint.with({ -- Markdown
         extra_args = { "--config", vim.fn.expand("~/.config/markdownlint.yaml") },
     }),

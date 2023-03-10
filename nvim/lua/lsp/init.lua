@@ -13,10 +13,13 @@ for _, server in ipairs({
     "jsonls",
     "pyright",
     -- "sqls",
-    "sumneko_lua",
+    "lua_ls",
 }) do
     require("lsp.servers." .. server).setup()
 end
+
+-- null-ls
+require("lsp.null-ls")
 
 -- Key mappings
 local map = require("utils").map

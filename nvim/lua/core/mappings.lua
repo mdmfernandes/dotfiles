@@ -1,6 +1,7 @@
 -- Key mappings
 
--- Map <Leader> to space
+-- Leader key -> <Space>
+-- Make sure this is set before loading the plugins
 vim.g.mapleader = " "
 
 local map = require("utils").map

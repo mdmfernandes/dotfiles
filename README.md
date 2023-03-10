@@ -43,7 +43,7 @@ My configs for:
 
 ### Plugins
 
-- [packer.nvim](https://github.com/wbthomason/packer.nvim)
+- [lazy.nvim](https://github.com/folke/lazy.nvim)
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [nvim-notify](https://github.com/rcarriga/nvim-notify)
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
