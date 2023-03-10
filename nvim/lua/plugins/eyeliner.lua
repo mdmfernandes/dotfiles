@@ -1,4 +1,9 @@
 -- eyeliner: https://github.com/jinh0/eyeliner.nvim
-require("eyeliner").setup({
-    highlight_on_key = true,
-})
+-- Highlight code search with find (f/F) and 'till (t/T)
+
+return {
+    "jinh0/eyeliner.nvim",
+    opts = {
+        highlight_on_key = true,
+    }
+}

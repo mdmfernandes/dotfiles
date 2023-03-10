@@ -1,29 +1,32 @@
 -- Neogen: https://github.com/danymat/neogen
-local neogen = require("neogen")
 
-neogen.setup({
-    snippet_engine = "luasnip",
-    languages = {
-        python = {
-            template = {
-                annotation_convention = "reST",
+return {
+    "danymat/neogen",
+    dependencies = {
+        "L3MON4D3/LuaSnip",
+        "nvim-treesitter/nvim-treesitter"
+    },
+    version = "*", -- Only follow stable versions
+    opts = {
+        snippet_engine = "luasnip",
+        languages = {
+            python = {
+                template = {
+                    annotation_convention = "reST",
+                },
             },
         },
     },
-})
-
--- Key Mappings
-local map = require("utils").map
-
--- Create annotation for current function
-map("n", "<Leader>af", function()
-    neogen.generate({})
-end)
--- Create annotation for current class
-map("n", "<Leader>ac", function()
-    neogen.generate({ type = "class" })
-end)
--- Create annotation for current file/document
-map("n", "<Leader>ad", function()
-    neogen.generate({ type = "file" })
-end)
+    keys = {
+        { "<Leader>af", function()
+            require("neogen").generate({})
+        end, desc = "Annotate current function" },
+        { "<Leader>ac", function()
+            require("neogen").generate({ type = "class" })
+        end, desc = "Annotate current class" },
+        { "<Leader>ad", function()
+            require("neogen").generate({ type = "file" })
+        end, desc = "Annotate current file"
+        },
+    },
+}
