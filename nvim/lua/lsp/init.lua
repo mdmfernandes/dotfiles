@@ -11,9 +11,10 @@ for _, server in ipairs({
     "bashls",
     "gopls",
     "jsonls",
+    "lua_ls",
     "pyright",
     -- "sqls",
-    "lua_ls",
+    "rust_analyzer",
 }) do
     require("lsp.servers." .. server).setup()
 end
