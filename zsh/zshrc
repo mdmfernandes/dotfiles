@@ -106,6 +106,9 @@ if [[ -r "${ZSH_USERDATA}/plugins/conda-zsh-completion/conda-zsh-completion.plug
     fpath=(${ZSH_USERDATA}/plugins/conda-zsh-completion $fpath)
 fi
 
+# Custom completions
+fpath=(${ZSH_USERDATA}/completions $fpath)
+
 # Load completion.
 # NOTE: For better performance, make sure that the zsh global compinit is disabled
 # in the .zshenv file, by placing the command `skip_global_compinit=1` at the EOF.
