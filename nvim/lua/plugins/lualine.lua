@@ -2,7 +2,7 @@
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
-        { "kyazdani42/nvim-web-devicons", lazy = true },
+        { "kyazdani42/nvim-web-devicons" },
         "SmiteshP/nvim-navic",
     },
     config = function()
@@ -14,8 +14,15 @@ return {
             },
             sections = {
                 lualine_c = {
-                    { navic.get_location, cond = navic.is_available },
-                },
+                    {
+                        function()
+                            return navic.get_location()
+                        end,
+                        cond = function()
+                            return navic.is_available()
+                        end
+                    },
+                }
             },
         })
     end

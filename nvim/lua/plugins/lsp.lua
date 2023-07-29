@@ -7,7 +7,14 @@ return {
     },
     {
         "j-hui/fidget.nvim", -- LSP progress status
-        config = true
+        event = "LspAttach",
+        opts = {
+            text = {
+                spinner = "dots" }
+        }
     },
-    "jose-elias-alvarez/null-ls.nvim",
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
+    }
 }

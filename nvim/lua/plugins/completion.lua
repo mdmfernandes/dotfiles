@@ -1,19 +1,14 @@
 -- nvim-cmp: https://github.com/hrsh7th/nvim-cmp
 return {
-    -- Snippets
-    {
-        "L3MON4D3/LuaSnip",
-        version = "1.*"
-    },
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "hrsh7th/cmp-buffer",                                              -- buffer completions
-            "hrsh7th/cmp-path",                                                -- path completions
-            "hrsh7th/cmp-nvim-lua",                                            -- nvim Lua API completions
-            "hrsh7th/cmp-nvim-lsp",                                            -- language-server-based completions
             "hrsh7th/cmp-cmdline",                                             -- cmdline completions
+            "hrsh7th/cmp-nvim-lsp",                                            -- language-server-based completions
             "hrsh7th/cmp-nvim-lsp-signature-help",                             -- function signatures
+            "hrsh7th/cmp-nvim-lua",                                            -- nvim Lua API completions
+            "hrsh7th/cmp-path",                                                -- path completions
             { "saadparwaiz1/cmp_luasnip", dependencies = "L3MON4D3/LuaSnip" }, -- completion engine
         },
         config = function()
@@ -139,6 +134,7 @@ return {
 
             -- Use buffer source for forward-search in command line
             cmp.setup.cmdline("/", {
+                mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "buffer" },
                 },
@@ -146,6 +142,7 @@ return {
 
             -- Use buffer source for backward-search in command line
             cmp.setup.cmdline("?", {
+                mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "buffer" },
                 },

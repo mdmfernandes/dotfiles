@@ -1,7 +1,7 @@
 -- BufferLine: https://github.com/akinsho/bufferline.nvim
 return {
     "akinsho/bufferline.nvim",
-    version = "v3.*",
+    version = "*",
     event = "VeryLazy",
     dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
     opts = {

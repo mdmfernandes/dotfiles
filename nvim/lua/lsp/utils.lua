@@ -101,7 +101,7 @@ end
 
 -- Show code context
 function U.code_context(client, bufnr)
-    if client.supports_method("textDocument/documentSymbol") then
+    if client.server_capabilities.documentSymbolProvider then
         require("nvim-navic").attach(client, bufnr)
     end
 end
