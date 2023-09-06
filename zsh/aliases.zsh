@@ -74,6 +74,7 @@ alias path='printf ${PATH//:/\\n}'
 # Vim
 if exists nvim; then
     alias vim='nvim'
+    alias vimdiff='nvim -d'
 fi
 alias vi='vim'
 alias edit='vim'
