@@ -9,6 +9,7 @@ lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, d.border_opts)
 -- Enabled servers. The server configs are in the ./servers directory
 for _, server in ipairs({
     "bashls",
+    "clangd",
     "gopls",
     "jsonls",
     "lua_ls",

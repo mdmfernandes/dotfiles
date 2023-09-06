@@ -7,6 +7,7 @@ return {
     },
     {
         "j-hui/fidget.nvim", -- LSP progress status
+        tag = "legacy",
         event = "LspAttach",
         opts = {
             text = {

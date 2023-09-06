@@ -15,16 +15,17 @@ local sources = {
     ca.gitsigns,
 
     -- Formatting
-    fmt.black, -- Python
-    -- fmt.stylua.with({ -- Lua
-    --     extra_args = { "--config-path", vim.fn.expand("~/.config/stylua.toml") },
-    -- }),
-    fmt.shfmt,        -- Bash
+    fmt.black,        -- Python
+    fmt.clang_format, -- C/C++
     fmt.markdownlint, -- Markdown
     fmt.taplo,        -- TOML
     fmt.trim_whitespace.with({
         disabled_filetypes = { "go", "gomod", "json", "lua" },
     }),
+    fmt.shfmt, -- Bash
+    -- fmt.stylua.with({ -- Lua
+    --     extra_args = { "--config-path", vim.fn.expand("~/.config/stylua.toml") },
+    -- }),
 
     -- Diagnostics
     diag.misspell,
