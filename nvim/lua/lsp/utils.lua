@@ -134,7 +134,9 @@ function U.mappings(client, bufnr)
     buf_map("n", "<Leader>rn", vim.lsp.buf.rename)
 
     --  List all the implementations for the symbol under the cursor
-    buf_map("n", "gi", tb.lsp_implementations)
+    --  `gi` is to place the cursor at the same position where it was
+    --  left last time in the Insert mode.
+    buf_map("n", "<Leader>gi", tb.lsp_implementations)
     --u.buf_map("n", "gi", vim.lsp.buf.implementation())
 
     -- List all the references to the symbol under the cursor

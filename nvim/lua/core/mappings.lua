@@ -67,12 +67,14 @@ map("n", "q", "<Nop>")
 map("n", "Q", "<Nop>")
 
 --- Direction keys for wrapped lines
-map("n", "k", "gk")
-map("n", "j", "gj")
-map("n", "<Up>", "gk")
-map("n", "<Down>", "gj")
-map("i", "<Up>", "<Esc>gka")
-map("i", "<Down>", "<Esc>gja")
+-- This is "breaking" the lines count, i.e. I need to consider the wrapped
+-- lines when moving up/down
+-- map("n", "k", "gk")
+-- map("n", "j", "gj")
+-- map("n", "<Up>", "gk")
+-- map("n", "<Down>", "gj")
+-- map("i", "<Up>", "<Esc>gka")
+-- map("i", "<Down>", "<Esc>gja")
 
 -- Don't lose selection when shifting
 map("x", "<", "<gv")
