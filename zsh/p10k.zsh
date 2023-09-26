@@ -50,8 +50,8 @@
     # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     # nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     # node_version            # node.js version
-    # go_version              # go version (https://golang.org)
-    # rust_version            # rustc version (https://www.rust-lang.org)
+    go_version                # go version (https://golang.org)
+    rust_version              # rustc version (https://www.rust-lang.org)
     # dotnet_version          # .NET version (https://dotnet.microsoft.com)
     # php_version             # php version (https://www.php.net/)
     # laravel_version         # laravel php framework version (https://laravel.com/)
@@ -80,18 +80,19 @@
     vim_shell                 # vim shell indicator (:sh)
     # midnight_commander      # midnight commander shell (https://midnight-commander.org/)
     # nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
-    # vi_mode                   # vi mode (you don't need this if you've enabled prompt_char)
-    # vpn_ip                    # virtual private network indicator
+    # vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
+    # vpn_ip                  # virtual private network indicator
     # load                    # CPU load
-    disk_usage              # disk usage
+    disk_usage                # disk usage
     # ram                     # free RAM
     # swap                    # used swap
-    # todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
+    todo                      # todo items (https://github.com/todotxt/todo.txt-cli)
     # timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     # taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     # time                    # current time
     # =========================[ Line #2 ]=========================
     newline
+    yocto_sdk                 # Yocto SDK version
     # ip                      # ip address and bandwidth usage for a specified network interface
     # public_ip               # public IP address
     # proxy                   # system-wide http/https/ftp proxy
@@ -789,7 +790,7 @@
   ##############[ taskwarrior: taskwarrior task count (https://taskwarrior.org/) ]##############
   # Taskwarrior color.
   typeset -g POWERLEVEL9K_TASKWARRIOR_FOREGROUND=74
-  
+
   # Taskwarrior segment format. The following parameters are available within the expansion.
   #
   # - P9K_TASKWARRIOR_PENDING_COUNT   The number of pending tasks: `task +PENDING count`.
@@ -1517,6 +1518,13 @@
   # User-defined prompt segments can be customized the same way as built-in segments.
   # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=208
   # typeset -g POWERLEVEL9K_EXAMPLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  # Show Yocto SDK version
+  function prompt_yocto_sdk() {
+    if [[ ! -z "${OECORE_SDK_VERSION}" ]]; then
+        p10k segment -f 032 -i '🚗' -t "${OECORE_SDK_VERSION}"
+    fi
+  }
 
   # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt
   # when accepting a command line. Supported values:
