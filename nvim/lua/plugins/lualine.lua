@@ -22,6 +22,11 @@ return {
                             return navic.is_available()
                         end
                     },
+                },
+                lualine_z = {
+                    "selectioncount",
+                    "searchcount",
+                    "location"
                 }
             },
         })
