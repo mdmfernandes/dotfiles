@@ -42,22 +42,14 @@ map("v", "<S-j>", ":m '>+1<CR>gv=gv")
 map("n", "ç<Space>", "<Cmd>put! =repeat(nr2char(10), v:count1)<CR>")
 map("n", "º<Space>", "<Cmd>put =repeat(nr2char(10), v:count1)<CR>")
 
--- Smart delete - add deleted empty lines to the "_" register
+-- Smart delete - add deleted empty lines to the  blackhole ("_") register
 map("n", "dd", function()
     return vim.api.nvim_get_current_line():match("^%s*$") and '"_dd' or "dd"
 end, { expr = true })
 
--- Copy/paste to clipboard
--- Not required if using the "unnamedplus" clipboard
--- map("", "<C-c>", '"+y')
--- map("n", "<Leader>y", '"+y')
--- map("v", "<Leader>y", '"+y')
--- map("n", "<Leader>Y", '"+yg_')
--- map("n", "<Leader>yy", '"+yy')
--- map("n", "<Leader>p", '"+p')
--- map("v", "<Leader>p", '"+p')
--- map("n", "<Leader>P", '"+P')
--- map("v", "<Leader>P", '"+P')
+-- Delete/change into blackhole buffer
+map("n", "<Leader>d", '"_d')
+map("n", "<Leader>c", '"_c')
 
 -- Hide search highlights
 map("n", "<Leader><Space>", "<Cmd>nohlsearch<CR>")
@@ -65,16 +57,6 @@ map("n", "<Leader><Space>", "<Cmd>nohlsearch<CR>")
 -- Remove mapping from macros recording and ex mode
 map("n", "q", "<Nop>")
 map("n", "Q", "<Nop>")
-
---- Direction keys for wrapped lines
--- This is "breaking" the lines count, i.e. I need to consider the wrapped
--- lines when moving up/down
--- map("n", "k", "gk")
--- map("n", "j", "gj")
--- map("n", "<Up>", "gk")
--- map("n", "<Down>", "gj")
--- map("i", "<Up>", "<Esc>gka")
--- map("i", "<Down>", "<Esc>gja")
 
 -- Don't lose selection when shifting
 map("x", "<", "<gv")

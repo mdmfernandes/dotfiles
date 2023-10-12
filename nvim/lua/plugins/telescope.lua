@@ -111,8 +111,8 @@ return {
         map("n", "<Leader>gc", tb.git_commits)
         map("n", "<Leader>gs", tb.git_status)
         -- Diagnostics
-        map("n", "<Leader>wd", tb.diagnostics)                              -- All buffers
-        map("n", "<Leader>d", function() tb.diagnostics({ bufnr = 0 }) end) -- Current buffer
+        map("n", "<Leader>wd", tb.diagnostics)                               -- All buffers from workspace
+        map("n", "<Leader>fd", function() tb.diagnostics({ bufnr = 0 }) end) -- Current buffer
         -- Others
         map("n", "<Leader>fh", tb.help_tags)
         map("n", "<Leader>fm", tb.man_pages)
