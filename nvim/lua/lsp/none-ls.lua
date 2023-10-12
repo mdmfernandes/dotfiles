@@ -1,12 +1,12 @@
--- null-ls: https://github.com/jose-elias-alvarez/null-ls.nvim
-local null_ls_status_ok, null_ls = pcall(require, "null-ls")
-if not null_ls_status_ok then
+-- none-ls: https://github.com/nvimtools/none-ls.nvim
+local none_ls_status_ok, none_ls = pcall(require, "none-ls")
+if not none_ls_status_ok then
     return
 end
 
-local ca = null_ls.builtins.code_actions
-local fmt = null_ls.builtins.formatting
-local diag = null_ls.builtins.diagnostics
+local ca = none_ls.builtins.code_actions
+local fmt = none_ls.builtins.formatting
+local diag = none_ls.builtins.diagnostics
 
 local u = require("lsp.utils")
 
@@ -44,7 +44,7 @@ local sources = {
     }),
 }
 
-null_ls.setup({
+none_ls.setup({
     -- debug = true,
     sources = sources,
     -- <source_name>[<code>]: <message>

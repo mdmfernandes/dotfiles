@@ -20,8 +20,8 @@ for _, server in ipairs({
     require("lsp.servers." .. server).setup()
 end
 
--- null-ls
-require("lsp.null-ls")
+-- none-ls
+require("lsp.none-ls")
 
 -- Key mappings
 local map = require("utils").map
