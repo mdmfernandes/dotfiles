@@ -3,11 +3,17 @@ return {
     "akinsho/bufferline.nvim",
     version = "*",
     event = "VeryLazy",
-    dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
+    dependencies = {
+        { "kyazdani42/nvim-web-devicons", lazy = true },
+        "ThePrimeagen/harpoon",
+    },
     opts = {
         options = {
             numbers = function(opts)
-                return string.format("%s:", opts.ordinal)
+                local harpoon_idx = require("harpoon.mark").get_index_of(vim.api.nvim_buf_get_name(opts.id))
+                -- If the file is not marked, don't show the harpoon index
+                harpoon_idx = harpoon_idx and string.format("|%s", opts.raise(harpoon_idx)) or ""
+                return string.format("%s%s", opts.ordinal, harpoon_idx)
             end,
             diagnostics = "nvim_lsp",
             diagnostics_indicator = function(_, _, diagnostics_dict, _)
@@ -65,64 +71,66 @@ return {
             end,
             desc = "Close a buffer with pick"
         },
+
+        -- Better to use harpoon to move only to buffers of "interest"
         {
-            "<Leader>1",
+            "<Leader>b1",
             function()
                 require("bufferline").go_to_buffer(1)
             end,
             desc = "Go to buffer in position 1"
         },
         {
-            "<Leader>2",
+            "<Leader>b2",
             function()
                 require("bufferline").go_to_buffer(2)
             end,
             desc = "Go to buffer in position 2"
         },
         {
-            "<Leader>3",
+            "<Leader>b3",
             function()
                 require("bufferline").go_to_buffer(3)
             end,
             desc = "Go to buffer in position 3"
         },
         {
-            "<Leader>4",
+            "<Leader>b4",
             function()
                 require("bufferline").go_to_buffer(4)
             end,
             desc = "Go to buffer in position 4"
         },
         {
-            "<Leader>5",
+            "<Leader>b5",
             function()
                 require("bufferline").go_to_buffer(5)
             end,
             desc = "Go to buffer in position 5"
         },
         {
-            "<Leader>6",
+            "<Leader>b6",
             function()
                 require("bufferline").go_to_buffer(6)
             end,
             desc = "Go to buffer in position 6"
         },
         {
-            "<Leader>7",
+            "<Leader>b7",
             function()
                 require("bufferline").go_to_buffer(7)
             end,
             desc = "Go to buffer in position 7"
         },
         {
-            "<Leader>8",
+            "<Leader>b8",
             function()
                 require("bufferline").go_to_buffer(8)
             end,
             desc = "Go to buffer in position 8"
         },
         {
-            "<Leader>9",
+            "<Leader>b9",
             function()
                 require("bufferline").go_to_buffer(9)
             end,

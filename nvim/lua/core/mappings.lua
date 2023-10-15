@@ -14,23 +14,15 @@ map("n", "<C-q>", "<Cmd>bdelete<CR>")
 map("n", "<Leader>w", "<Cmd>update<CR>")
 map("n", "<Leader>W", "<Cmd>wall<CR>")
 
--- Windows
--- Navigate windows
-map("", "<C-h>", "<C-w>h")
-map("", "<C-j>", "<C-w>j")
-map("", "<C-k>", "<C-w>k")
-map("", "<C-l>", "<C-w>l")
 --- Resize windows
 map("n", "<C-Up>", "<Cmd>resize +3<CR>")
 map("n", "<C-Down>", "<Cmd>resize -3<CR>")
 map("n", "<C-Left>", "<Cmd>vertical resize +3<CR>")
 map("n", "<C-Right>", "<Cmd>vertical resize -3<CR>")
 
--- Tabs
-map("n", "<Leader>tn", "<Cmd>tabnew<CR>")
-map("n", "<Leader>tq", "<Cmd>tabclose<CR>")
-map("n", "<Leader>th", "<Cmd>tabNext<CR>")
-map("n", "<Leader>tl", "<Cmd>tabnext<CR>")
+-- Files
+-- Edit the atternate file, which typically is the previously edited file.
+map("n", "<C-\\>", "<Cmd>e #<CR>")
 
 -- Move lines around
 map("n", "çm", "<Cmd>execute 'move -1-'. v:count1<CR>")
