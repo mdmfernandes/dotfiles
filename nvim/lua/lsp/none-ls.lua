@@ -1,5 +1,5 @@
 -- none-ls: https://github.com/nvimtools/none-ls.nvim
-local none_ls_status_ok, none_ls = pcall(require, "none-ls")
+local none_ls_status_ok, none_ls = pcall(require, "null-ls")
 if not none_ls_status_ok then
     return
 end
