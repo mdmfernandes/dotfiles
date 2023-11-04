@@ -21,37 +21,13 @@ return {
                         luasnip.lsp_expand(args.body)
                     end,
                 },
+                experimental = {
+                    ghost_text = true,
+                },
                 formatting = {
                     format = function(entry, vim_item)
                         -- Completion kind symbols
-                        local symbols_map = {
-                            Text = "",
-                            Method = "",
-                            Function = "",
-                            Constructor = "",
-                            Field = "ﰠ",
-                            Variable = "",
-                            Class = "ﴯ",
-                            Interface = "",
-                            Module = "",
-                            Property = "ﰠ",
-                            Unit = "",
-                            Value = "",
-                            Enum = "",
-                            Keyword = "",
-                            Snippet = "",
-                            Color = "",
-                            File = "",
-                            Reference = "",
-                            Folder = "",
-                            EnumMember = "",
-                            Constant = "",
-                            Struct = "",
-                            Event = "",
-                            Operator = "",
-                            TypeParameter = "",
-                        }
-
+                        local symbols_map = require("icons").completion
                         -- Show item symbol and kind, e.g. " Funcion"
                         vim_item.kind = string.format("%s %s", symbols_map[vim_item.kind], vim_item.kind)
 
@@ -78,11 +54,11 @@ return {
                 },
                 mapping = {
                     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-                    ["<C-e>"] = cmp.mapping(function()
+                    ["<C-c>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.abort()
                         else
-                            cmp.complete()
+                            fallback()
                         end
                     end),
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -107,13 +83,10 @@ return {
                     end, { "i", "s" }),
                 },
                 sources = cmp.config.sources({
-                    { name = "nvim_lua" },
-                    { name = "nvim_lsp" },
-                    {
-                        name = "luasnip",
-                        keyword_length = 2,
-                        max_item_count = 6
-                    },
+                    { name = "nvim_lsp",                max_item_count = 10 },
+                    { name = "nvim_lsp_signature_help", max_item_count = 5 },
+                    { name = "luasnip",                 keyword_length = 2, max_item_count = 5 },
+                    { name = "treesitter",              max_item_count = 5 },
                     {
                         name = "buffer",
                         option = {
@@ -122,13 +95,10 @@ return {
                             end,
                         },
                         keyword_length = 3,
-                        max_item_count = 7,
+                        max_item_count = 5,
                     },
-                    {
-                        name = "path",
-                        max_item_count = 7
-                    },
-                    { name = "nvim_lsp_signature_help" },
+                    { name = "nvim_lua" },
+                    { name = "path" },
                 }),
             })
 
@@ -149,14 +119,15 @@ return {
             })
 
             -- Use cmdline & path source for ':' in command line
-            -- cmp.setup.cmdline(":", {
-            --     sources = cmp.config.sources({
-            --             { name = "path" }
-            --         },
-            --         {
-            --             { name = "cmdline" }
-            --         })
-            -- })
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                        { name = "path" }
+                    },
+                    {
+                        { name = "cmdline", keyword_length = 3 }
+                    })
+            })
         end
     },
 }

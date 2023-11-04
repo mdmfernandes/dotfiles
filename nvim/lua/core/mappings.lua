@@ -21,7 +21,7 @@ map("n", "<C-Left>", "<Cmd>vertical resize +3<CR>")
 map("n", "<C-Right>", "<Cmd>vertical resize -3<CR>")
 
 -- Files
--- Edit the atternate file, which typically is the previously edited file.
+-- Edit the alternate file, which typically is the previously edited file.
 map("n", "<C-\\>", "<Cmd>e #<CR>")
 
 -- Move lines around
@@ -37,15 +37,24 @@ map("n", "º<Space>", "<Cmd>put =repeat(nr2char(10), v:count1)<CR>")
 -- Smart delete - add deleted empty lines to the  blackhole ("_") register
 map("n", "dd", function()
     return vim.api.nvim_get_current_line():match("^%s*$") and '"_dd' or "dd"
-end, { expr = true })
+end, { expr = true, desc = "delete current line" })
 
--- Change/delete/substitute into blackhole buffer
+-- Change/delete/substitute/yank into blackhole buffer
+-- Change
 map("n", "<Leader>c", '"_c')
+map("v", "<Leader>c", '"_c')
 map("n", "<Leader>C", '"_C')
+map("v", "<Leader>C", '"_C')
+-- Delete
 map("n", "<Leader>d", '"_d')
+map("v", "<Leader>d", '"_d')
 map("n", "<Leader>D", '"_D')
+map("v", "<Leader>D", '"_D')
+-- Substitute
 map("n", "<Leader>s", '"_s')
+map("v", "<Leader>s", '"_s')
 map("n", "<Leader>S", '"_S')
+map("v", "<Leader>S", '"_S')
 
 -- Hide search highlights
 map("n", "<Leader><Space>", "<Cmd>nohlsearch<CR>")
@@ -58,7 +67,7 @@ map("n", "Q", "<Nop>")
 map("x", "<", "<gv")
 map("x", ">", ">gv")
 
--- Move next/previous ocorrence to the middle of the screen
+-- Move next/previous occurrence to the middle of the screen
 map("n", "n", "nzz")
 map("n", "N", "Nzz")
 
@@ -68,19 +77,13 @@ map("o", "A", "<Cmd>normal! mzggVG<CR>`z")
 map("x", "A", "<Cmd>normal! mzggVG<CR>`z")
 
 -- Toggle spelling
-map("", "<F3>", "<Cmd>set spell!<CR>", {})
+map("", "<F3>", function()
+    vim.cmd("set spell!")
+    vim.notify(string.format("Toggle spelling"), vim.log.levels.INFO)
+end, { desc = "Toggle spelling" })
 -- Navigate between spell errors
 map("n", "çs", "[s")
 map("n", "ºs", "]s")
-
--- Toggle between paste and nopaste modes
-map("", "<F2>", "<Cmd>set paste!<CR>", {})
-
--- Toogle line wrapping
-map("", "<F9>", "<Cmd>set wrap!<CR>", {})
-
--- Source current file
-map("n", "<Leader><CR>", "<Cmd>source %<CR>", {})
 
 -- Health check
 map("n", "<Leader>hc", "<Cmd>checkhealth<CR>")
@@ -91,13 +94,18 @@ map("n", "ºd", vim.diagnostic.goto_next)
 map("n", "<F7>", function()
     vim.diagnostic.show()
     vim.notify(string.format("Show diagnostics"), vim.log.levels.INFO)
-end)
-map("n", "<C-F7>", vim.diagnostic.hide)
+end, { desc = "Show diagnostics" })
 map("n", "<C-F7>", function()
     vim.diagnostic.hide()
     vim.notify(string.format("Hide diagnostics"), vim.log.levels.INFO)
-end)
+end, { desc = "Hide diagnostics" })
 
 -- Navigate between changes
 map("n", "çc", "[c")
 map("n", "ºc", "]c")
+
+-- Make current file executable to current user
+map("n", "<Leader>x", function()
+    vim.cmd("!chmod u+x %")
+    vim.notify(string.format("Changing file '%s' to executable (u+x)!", vim.fn.expand("%:p")), vim.log.levels.INFO)
+end, { desc = "Change current file to executable (u+x)" })

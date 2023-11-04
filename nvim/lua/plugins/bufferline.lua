@@ -6,28 +6,32 @@ return {
     dependencies = {
         { "kyazdani42/nvim-web-devicons", lazy = true },
         "ThePrimeagen/harpoon",
+        "catppuccin/nvim"
     },
-    opts = {
-        options = {
-            numbers = function(opts)
-                local harpoon_idx = require("harpoon.mark").get_index_of(vim.api.nvim_buf_get_name(opts.id))
-                -- If the file is not marked, don't show the harpoon index
-                harpoon_idx = harpoon_idx and string.format("|%s", opts.raise(harpoon_idx)) or ""
-                return string.format("%s%s", opts.ordinal, harpoon_idx)
-            end,
-            diagnostics = "nvim_lsp",
-            diagnostics_indicator = function(_, _, diagnostics_dict, _)
-                local s = " "
-                for e, n in pairs(diagnostics_dict) do
-                    local sym = e == "error" and " " or (e == "warning" and " " or " ")
-                    s = s .. n .. sym
-                end
-                return s
-            end,
-            show_buffer_close_icons = false,
-            show_close_icon = false,
-        },
-    },
+    config = function()
+        require("bufferline").setup({
+            highlights = require("catppuccin.groups.integrations.bufferline").get(),
+            options = {
+                numbers = function(opts)
+                    local harpoon_idx = require("harpoon.mark").get_index_of(vim.api.nvim_buf_get_name(opts.id))
+                    -- If the file is not marked, don't show the harpoon index
+                    harpoon_idx = harpoon_idx and string.format("|%s", opts.raise(harpoon_idx)) or ""
+                    return string.format("%s%s", opts.ordinal, harpoon_idx)
+                end,
+                diagnostics = "nvim_lsp",
+                diagnostics_indicator = function(_, _, diagnostics_dict, _)
+                    local s = " "
+                    for e, n in pairs(diagnostics_dict) do
+                        local sym = e == "error" and " " or (e == "warning" and " " or " ")
+                        s = s .. n .. sym
+                    end
+                    return s
+                end,
+                show_buffer_close_icons = false,
+                show_close_icon = false,
+            }
+        })
+    end,
     keys = {
         {
             "<S-h>",
@@ -60,14 +64,14 @@ return {
         {
             "<Leader>bp",
             function()
-                require("bufferline").pick_buffer()
+                require("bufferline").pick()
             end,
             desc = "Pick a buffer"
         },
         {
             "<Leader>bq",
             function()
-                require("bufferline").close_buffer_with_pick()
+                require("bufferline").close_with_pick()
             end,
             desc = "Close a buffer with pick"
         },
@@ -76,63 +80,63 @@ return {
         {
             "<Leader>b1",
             function()
-                require("bufferline").go_to_buffer(1)
+                require("bufferline").go_to(1)
             end,
             desc = "Go to buffer in position 1"
         },
         {
             "<Leader>b2",
             function()
-                require("bufferline").go_to_buffer(2)
+                require("bufferline").go_to(2)
             end,
             desc = "Go to buffer in position 2"
         },
         {
             "<Leader>b3",
             function()
-                require("bufferline").go_to_buffer(3)
+                require("bufferline").go_to(3)
             end,
             desc = "Go to buffer in position 3"
         },
         {
             "<Leader>b4",
             function()
-                require("bufferline").go_to_buffer(4)
+                require("bufferline").go_to(4)
             end,
             desc = "Go to buffer in position 4"
         },
         {
             "<Leader>b5",
             function()
-                require("bufferline").go_to_buffer(5)
+                require("bufferline").go_to(5)
             end,
             desc = "Go to buffer in position 5"
         },
         {
             "<Leader>b6",
             function()
-                require("bufferline").go_to_buffer(6)
+                require("bufferline").go_to(6)
             end,
             desc = "Go to buffer in position 6"
         },
         {
             "<Leader>b7",
             function()
-                require("bufferline").go_to_buffer(7)
+                require("bufferline").go_to(7)
             end,
             desc = "Go to buffer in position 7"
         },
         {
             "<Leader>b8",
             function()
-                require("bufferline").go_to_buffer(8)
+                require("bufferline").go_to(8)
             end,
             desc = "Go to buffer in position 8"
         },
         {
             "<Leader>b9",
             function()
-                require("bufferline").go_to_buffer(9)
+                require("bufferline").go_to(9)
             end,
             desc = "Go to buffer in position 9"
         },

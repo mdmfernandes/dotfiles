@@ -4,9 +4,9 @@ local o = vim.opt
 -------------
 -- General --
 -------------
-o.updatetime = 250 -- Refresh time
+o.updatetime = 100 -- Refresh time
 -- o.hidden = true  -- Do not save when switching buffers
-o.history = 50 -- Command line history
+o.history = 50     -- Command line history
 o.clipboard = "unnamedplus"
 -- Better buffer splitting
 o.splitright = true
@@ -24,7 +24,7 @@ o.scrolloff = 10 -- Show at least 10 lines above/below the cursor
 o.cursorline = true
 o.signcolumn = "yes"
 o.showmatch = true -- When a bracket is inserted, briefly jump to the matching one
-o.cmdheight = 0 -- Don't show the cmdline
+o.cmdheight = 0    -- Don't show the cmdline
 
 -- Empty characters
 -- o.list = true
@@ -43,6 +43,9 @@ o.expandtab = true
 o.wrap = true
 o.linebreak = true
 o.showbreak = "▶"
+-- Text width
+o.textwidth = 120
+o.colorcolumn = "120"
 
 ------------
 -- Search --
@@ -50,6 +53,7 @@ o.showbreak = "▶"
 o.ignorecase = true
 o.smartcase = true
 o.hlsearch = true
+o.incsearch = true
 o.inccommand = "nosplit" -- Live highlight substitutions
 
 -------------------
@@ -62,5 +66,6 @@ o.swapfile = false
 --------------------
 -- Spell Checking --
 --------------------
+o.spell = true
 o.spelllang = "en,pt_pt"
 o.spellsuggest = "10"

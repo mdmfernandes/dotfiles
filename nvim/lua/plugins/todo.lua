@@ -4,5 +4,4 @@ return {
     version = "*",
     dependencies = "nvim-lua/plenary.nvim",
     config = true,
-    cmd = "TodoTelescope"
 }

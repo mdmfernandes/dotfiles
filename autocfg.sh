@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "################################################################"
+echo "# ⚠ WARNING ⚠ - this script is not maintained!!!               #"
 echo "# This script configures 'TMUX', 'ZSH', and 'NeoVIM' for Linux #"
 echo "################################################################"
 echo ""
@@ -62,7 +63,7 @@ if [[ "$tmux" = true ]]; then
 	echo "  [+] Installing tpm..."
 	git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 	tmux source "$HOME/.tmux.conf"
-	$HOME/.tmux/plugins/tpm/bindings/install_plugins
+	"$HOME/.tmux/plugins/tpm/bindings/install_plugins"
 fi
 
 # ZSH
@@ -73,24 +74,26 @@ if [[ "$zsh" = true ]]; then
 	if ! exists zsh; then
 		echo "  [+] Installing ZSH..."
 		sudo apt install zsh --yes --quiet
-		chsh -s $(which zsh)
+		chsh -s "$(which zsh)"
 	fi
 
 	echo "  [+] Copying ZSH configuration files..."
-	mkdir -p $HOME/.config/zsh
-	echo "ZDOTDIR=$HOME/.config/zsh" >$HOME/.zshenv && . $HOME/.zshenv
+	mkdir -p "$HOME/.config/zsh"
+	# shellcheck source=/dev/null
+	echo "ZDOTDIR=$HOME/.config/zsh" >"$HOME/.zshenv" && . "$HOME/.zshenv"
 	cp "./zsh/zshrc" "$ZDOTDIR/.zshrc"
 	cp "./zsh/aliases.zsh" "$ZDOTDIR/.aliases.zsh"
 	cp "./zsh/functions.zsh" "$ZDOTDIR/.functions.zsh"
 	cp "./zsh/custom.zsh" "$ZDOTDIR/.custom.zsh"
 	cp "./zsh/p10k.zsh" "$ZDOTDIR/.p10k.zsh"
-	source $ZDOTDIR/.zshrc 2>/dev/null
+	# shellcheck source=/dev/null
+	source "$ZDOTDIR/.zshrc" 2>/dev/null
 
 	echo "  [+] Installing custom plugins..."
 	ZSH_SHARE="$HOME/.local/share/zsh"
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_SHARE}/themes/powerlevel10k
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_SHARE}/plugins/zsh-syntax-highlighting
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_SHARE}/plugins/zsh-autosuggestions
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_SHARE}/themes/powerlevel10k"
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_SHARE}/plugins/zsh-syntax-highlighting"
+	git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_SHARE}/plugins/zsh-autosuggestions"
 	curl curl -sS https://webinstall.dev/zoxide | bash
 fi
 
@@ -105,13 +108,14 @@ if [[ "$neovim" = true ]]; then
 	fi
 
 	echo "  [+] Copying NeoVIM configuration files..."
-	cp -r ./nvim $HOME/.config
+	cp -r ./nvim "$HOME/.config"
 fi
 
 if [[ "$lang" = true ]]; then
 	echo ""
 	echo "[+] Configuring linters, formatters, and type checkers..."
 	pip3 install pylint flake8 black mypy
-	cp -r ./lang/python/ $HOME/.config
-	cp ./lang/stylua.toml $HOME/.config
-	cp ./lang/markdownlint.yaml $HOME/.config
+	cp -r ./lang/python/ "$HOME/.config"
+	cp ./lang/stylua.toml "$HOME/.config"
+	cp ./lang/markdownlint.yaml "$HOME/.config"
+fi
