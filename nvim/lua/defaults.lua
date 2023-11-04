@@ -5,7 +5,7 @@ local D = {}
 -- Disable focus for floating windows to avoid entering them
 D.border_opts = { border = "rounded", focusable = false, scope = "line" }
 
--- key mapps
+-- key maps
 D.keymap_opts = { noremap = true, silent = true }
 
 return D

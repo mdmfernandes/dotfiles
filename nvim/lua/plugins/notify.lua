@@ -5,7 +5,7 @@ return {
     opts = {
         -- render = "minimal",
         minimum_width = 30,
-        timeout = 1000,
+        timeout = 2000,
     },
     init = function()
         vim.notify = require("notify")

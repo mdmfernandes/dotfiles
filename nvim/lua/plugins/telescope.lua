@@ -7,6 +7,7 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
+        "debugloop/telescope-undo.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     config = function()
@@ -35,15 +36,6 @@ return {
                     "!.git/",
                     "--glob",
                     "!node_modules/",
-                },
-                mappings = {
-                    i = {
-                        -- No "normal" mode in Telescope
-                        ["<ESC>"] = require("telescope.actions").close,
-                        -- Use Ctrl-u to clear the buffer
-                        ["<C-u>"] = false,
-                        ["<C-d>"] = false,
-                    },
                 },
             },
             pickers = {
@@ -76,8 +68,18 @@ return {
                     hidden = true,
                 },
                 ["ui-select"] = {
-                    require("telescope.themes").get_dropdown {
-                        -- even more opts
+                    require("telescope.themes").get_dropdown {}
+                },
+                undo = {
+                    layout_config = {
+                        preview_width = 0.75,
+                    },
+                    mappings = {
+                        i = {
+                            ["<C-y>"] = require("telescope-undo.actions").yank_additions,
+                            ["<S-y>"] = require("telescope-undo.actions").yank_deletions,
+                            ["<CR>"] = require("telescope-undo.actions").restore,
+                        }
                     }
                 }
             },
@@ -87,6 +89,7 @@ return {
         telescope.load_extension("fzf")
         telescope.load_extension("file_browser")
         telescope.load_extension("ui-select")
+        telescope.load_extension("undo")
 
         -- Mappings
         local map = require("utils").map
@@ -98,9 +101,17 @@ return {
         map("n", "<Leader>fg", tb.live_grep)
         -- Grep for string under cursor
         map("n", "<Leader>fc", tb.grep_string)
+        -- File browser
         map("n", "<Leader>fb", telescope.extensions.file_browser.file_browser)
+        map("n", "<Leader>.", function()
+            telescope.extensions.file_browser.file_browser({
+                path = "%:p:h",
+                hidden = true,             -- show hidden files
+                respect_gitignore = false, -- show all files
+            })
+        end, { desc = "Telescope open file browser in current directory" })
         -- Find symbols
-        map("n", "<Leader>fy", tb.treesitter)
+        map("n", "<Leader>fy", tb.treesitter, { desc = "Telescope find document symbols" })
         -- List previously opened files
         map("n", "<Leader>fo", tb.oldfiles)
         -- Search buffers
@@ -111,12 +122,15 @@ return {
         map("n", "<Leader>gc", tb.git_commits)
         map("n", "<Leader>gs", tb.git_status)
         -- Diagnostics
-        map("n", "<Leader>wd", tb.diagnostics)                               -- All buffers from workspace
-        map("n", "<Leader>fd", function() tb.diagnostics({ bufnr = 0 }) end) -- Current buffer
+        map("n", "<Leader>wd", tb.diagnostics)                               -- all buffers from workspace
+        map("n", "<Leader>fd", function() tb.diagnostics({ bufnr = 0 }) end) -- current buffer
+        -- Undo
+        map("n", "<Leader>u", telescope.extensions.undo.undo)
         -- Others
-        map("n", "<Leader>fh", tb.help_tags)
-        map("n", "<Leader>fm", tb.man_pages)
-        map("n", "<Leader>fk", tb.keymaps)
-        map("n", "<Leader>ft", "<Cmd>TodoTelescope<CR>")
+        map("n", "<Leader>fh", tb.help_tags)                       -- nvim help
+        map("n", "<Leader>fk", tb.keymaps)                         -- nvim key mappings
+        map("n", "<Leader>fm", tb.man_pages)                       -- man pages
+        map("n", "<Leader>fn", telescope.extensions.notify.notify) -- show notifications
+        map("n", "<Leader>ft", "<Cmd>TodoTelescope<CR>")           -- todo messages
     end
 }

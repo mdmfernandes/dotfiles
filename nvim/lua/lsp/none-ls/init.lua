@@ -1,18 +1,19 @@
--- none-ls: https://github.com/nvimtools/none-ls.nvim
-local none_ls_status_ok, none_ls = pcall(require, "null-ls")
-if not none_ls_status_ok then
+-- none-ls configuration: https://github.com/nvimtools/none-ls.nvim
+local NLS = {}
+
+local nls_status_ok, nls = pcall(require, "null-ls")
+if not nls_status_ok then
     return
 end
 
-local ca = none_ls.builtins.code_actions
-local fmt = none_ls.builtins.formatting
-local diag = none_ls.builtins.diagnostics
-
-local u = require("lsp.utils")
+local ca = nls.builtins.code_actions
+local fmt = nls.builtins.formatting
+local diag = nls.builtins.diagnostics
 
 local sources = {
     -- Code actions
     ca.gitsigns,
+    ca.shellcheck,
 
     -- Formatting
     fmt.black,        -- Python
@@ -23,12 +24,9 @@ local sources = {
         disabled_filetypes = { "go", "gomod", "json", "lua" },
     }),
     fmt.shfmt, -- Bash
-    -- fmt.stylua.with({ -- Lua
-    --     extra_args = { "--config-path", vim.fn.expand("~/.config/stylua.toml") },
-    -- }),
 
     -- Diagnostics
-    diag.misspell,
+    -- diag.misspell, -- Using vim spell
     diag.trail_space.with({
         diagnostics_format = "#{s}: #{m}",
         disabled_filetypes = { "gitcommit", "NeogitCommitMessage" },
@@ -44,13 +42,15 @@ local sources = {
     }),
 }
 
-none_ls.setup({
-    -- debug = true,
-    sources = sources,
-    -- <source_name>[<code>]: <message>
-    diagnostics_format = "#{s}[#{c}]: #{m}",
-    on_attach = function(client, bufnr)
-        u.mappings(client, bufnr)
-        u.format_document(client, bufnr)
-    end,
-})
+-- Setup none-ls
+function NLS.setup(opts)
+    nls.setup({
+        debug = false,
+        -- <source_name>[<code>]: <message>
+        diagnostics_format = "#{s}[#{c}]: #{m}",
+        on_attach = opts.on_attach,
+        sources = sources,
+    })
+end
+
+return NLS
