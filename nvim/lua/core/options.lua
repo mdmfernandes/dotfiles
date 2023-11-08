@@ -45,7 +45,7 @@ o.linebreak = true
 o.showbreak = "▶"
 -- Text width
 o.textwidth = 120
-o.colorcolumn = "120"
+o.colorcolumn = "+1"
 
 ------------
 -- Search --

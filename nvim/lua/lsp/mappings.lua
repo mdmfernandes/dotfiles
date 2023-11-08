@@ -30,7 +30,7 @@ local function mappings(client, bufnr)
     -- Rename all references to the symbol under the cursor
     buf_map("n", "<Leader>rn", vim.lsp.buf.rename)
 
-    --  List all the implementations for the symbol under the cursor
+    --  List all the implementations for the symbol under the cursor.
     --  `gi` is to place the cursor at the same position where it was
     --  left last time in the Insert mode.
     buf_map("n", "<Leader>gi", tb.lsp_implementations)
@@ -38,7 +38,6 @@ local function mappings(client, bufnr)
 
     -- List all the references to the symbol under the cursor
     buf_map("n", "gr", tb.lsp_references)
-    --u.map("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>")
 
     -- List code actions available at the current cursor position
     buf_map("n", "<leader>ca", vim.lsp.buf.code_action)
