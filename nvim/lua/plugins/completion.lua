@@ -9,6 +9,7 @@ return {
             "hrsh7th/cmp-nvim-lsp-signature-help",                             -- function signatures
             "hrsh7th/cmp-nvim-lua",                                            -- nvim Lua API completions
             "hrsh7th/cmp-path",                                                -- path completions
+            { "zbirenbaum/copilot-cmp",   config = true },                     -- GitHub copilot
             { "saadparwaiz1/cmp_luasnip", dependencies = "L3MON4D3/LuaSnip" }, -- completion engine
         },
         config = function()
@@ -43,7 +44,7 @@ return {
                         if entry.source.name == "nvim_lsp" then
                             vim_item.menu = alias[entry.source.name] .. "(" .. entry.source.source.client.name .. ")"
                             -- If the source is the signature help, don't show its name
-                        elseif entry.source.name == "nvim_lsp_signature_help" then
+                        elseif entry.source.name == "nvim_lsp_signature_help" or entry.source.name == "copilot" then
                             vim_item.menu = nil
                         else
                             vim_item.menu = alias[entry.source.name] or entry.source.name
@@ -83,6 +84,7 @@ return {
                     end, { "i", "s" }),
                 },
                 sources = cmp.config.sources({
+                    { name = "copilot" },
                     { name = "nvim_lsp",                max_item_count = 10 },
                     { name = "nvim_lsp_signature_help", max_item_count = 5 },
                     { name = "luasnip",                 keyword_length = 2, max_item_count = 5 },

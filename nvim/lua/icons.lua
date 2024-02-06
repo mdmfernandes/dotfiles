@@ -27,6 +27,7 @@ I.completion = {
     Unit = "",
     Value = "",
     Variable = "",
+    Copilot = "",
 }
 
 I.diagnostics = {
