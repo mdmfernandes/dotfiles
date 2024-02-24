@@ -3,7 +3,7 @@
 # ======================
 
 # Get IP info
-ipinfo() {
+function ipinfo() {
     # If it's empty
     if [ -z "$1" ]; then
         ip=""
@@ -24,7 +24,7 @@ ipinfo() {
 }
 
 # Get domain info
-domaininfo() {
+function domaininfo() {
     # If it's empty
     if [ -z "$1" ]; then
         echo "You need to provide a domain. Usage: domaininfo <domain>"
@@ -46,12 +46,12 @@ domaininfo() {
 }
 
 # Calculator
-calc() {
+function calc() {
     bc -l <<< ${*//[xX]/*}
 }
 
 # Decode JWTs
-jwtd() {
+function jwtd() {
     # This function only works if jq is installed
     if exists jq; then
         jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< $1
@@ -60,3 +60,16 @@ jwtd() {
         echo -e '\e[31m`jq` is not installed and is required\e[0m'
     fi
 }
+
+# Yazi shell wrapper
+# https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+if exists yazi; then
+    function ya() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
+    }
+fi
