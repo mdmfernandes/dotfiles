@@ -7,6 +7,7 @@ My configs for:
 - `neovim`
 - `git`
 - `yazi`
+- `wezterm`
 - linters, formatters, and type checkers
 
 ## Fonts
