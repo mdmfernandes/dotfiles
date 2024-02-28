@@ -46,6 +46,12 @@ alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox
 # ripgrep
 if exists rg; then
     alias rga='rg --text'   # Treat binary files as text
+    alias rgu='rg -uuu'     # Unrestricted grep (similar to `grep -r`)
+fi
+
+# fd
+if exists fd; then
+    alias fdu='fd -uuu'     # Unrestricted find
 fi
 
 # Make directory with parents
