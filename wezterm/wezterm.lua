@@ -5,9 +5,14 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Actual configuration
--- config.default_prog = { '/usr/bin/tmux', 'new-session', '-A', '-s', '🚗' }
 config.font_size = 15
 config.hide_tab_bar_if_only_one_tab = true
+config.window_padding = {
+    left = 5,
+    right = 5,
+    top = 0,
+    bottom = 0,
+}
 
 -- Load local configuration
 local local_config = require("wezterm_local")
