@@ -5,11 +5,12 @@
 # Theme:
 #   - Powerlevel10k (https://github.com/romkatv/powerlevel10k)
 # Plugins:
-#   - z.sh (https://github.com/rupa/z)
-#   - zsh-syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
+#   - conda-zsh-completion (https://github.com/esc/conda-zsh-completion)
+#   - zoxide (https://github.com/ajeetdsouza/zoxide)
 #   - zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
 #   - zsh-completions (https://github.com/zsh-users/zsh-completions)
-#   - conda-zsh-completion (https://github.com/esc/conda-zsh-completion)
+#   - zsh-history-substring-search (https://github.com/zsh-users/zsh-history-substring-search)
+#   - zsh-syntax-highlighting (https://github.com/zsh-users/zsh-syntax-highlighting)
 ###############################################################################
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -217,7 +218,7 @@ PROMPT_EOL_MARK='%S$%s'
 #### Theme ####################################################################
 # Powerlevel10k
 . ${ZSH_USERDATA}/themes/powerlevel10k/powerlevel10k.zsh-theme
-. ${ZDOTDIR}/.p10k.zsh
+. ${ZDOTDIR}/p10k.zsh
 
 
 #### ZSH Plugins ##############################################################
@@ -290,11 +291,22 @@ if [[ -r "${ZSH_USERDATA}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]
     # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 fi
 
+# History Search
+if [[ -r "${ZSH_USERDATA}/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh" ]]; then
+    . ${ZSH_USERDATA}/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+    # Set key-bindings for Up and Down arrow keys
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
+    bindkey -M vicmd 'k' history-substring-search-up
+    bindkey -M vicmd 'j' history-substring-search-down
+    # Highlight substring (default: magenta)
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=white,bold'
+fi
 
 #### Source aliases, functions, and user custom configurations ################
-[[ -r "${ZDOTDIR}/.aliases.zsh" ]] && source "${ZDOTDIR}/.aliases.zsh"
-[[ -r "${ZDOTDIR}/.functions.zsh" ]] && source "${ZDOTDIR}/.functions.zsh"
-[[ -r "${ZDOTDIR}/.custom.zsh" ]] && source "${ZDOTDIR}/.custom.zsh"
+[[ -r "${ZDOTDIR}/aliases.zsh" ]] && source "${ZDOTDIR}/aliases.zsh"
+[[ -r "${ZDOTDIR}/functions.zsh" ]] && source "${ZDOTDIR}/functions.zsh"
+[[ -r "${ZDOTDIR}/custom.zsh" ]] && source "${ZDOTDIR}/custom.zsh"
 
 
 #### Applications #############################################################

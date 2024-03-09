@@ -5,8 +5,8 @@ local LSP = {}
 -- All servers with custom options must be listed in this table.
 -- Servers without custom options don't need to be in the table
 -- and can be installed with `mason`. They can still be placed
--- in the table (for some reason) as `server_name = true` or
--- `server_name = {}`.
+-- in the table (so I don't forget which ones I typically use)
+-- as `server_name = true` or `server_name = {}`.
 local servers = {
     bashls = true,
     clangd = {
@@ -70,7 +70,21 @@ local servers = {
             }
         }
     },
-    pyright = true,
+    pyright = { -- Python static type checker. Replaces mypy (to a certain degree)
+        settings = {
+            pyright = {
+                -- Using Ruff's import organizer
+                disableOrganizeImports = true,
+            },
+            python = {
+                analysis = {
+                    -- Ignore all files for analysis to exclusively use Ruff for linting
+                    ignore = { "*" },
+                },
+            },
+        },
+    },
+    ruff_lsp = true, -- Python linter and formatter. Replaces: flake8, pylint (to a certain degree), black
     rust_analyzer = {
         settings = {
             ["rust-analyzer"] = {
@@ -80,6 +94,22 @@ local servers = {
             }
         }
     },
+    yamlls = {
+        settings = {
+            yaml = {
+                validate = true,
+                schemaStore = {
+                    enable = false,
+                    url = "",
+                },
+                schemas = {
+                    ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] =
+                    "docker-compose*.{yml,yaml}"
+                },
+            },
+        },
+
+    }
 }
 
 -- Operations to do when a LSP server is attached
@@ -97,6 +127,10 @@ function LSP.on_attach(client, bufnr)
     require("lsp.context").setup(client, bufnr)
 
     -- Add server specific attachments below
+    if client.name == "ruff_lsp" then
+        -- Disable hover in favor of Pyright
+        client.server_capabilities.hoverProvider = false
+    end
 end
 
 -- Setup LSP server capabilities

@@ -9,7 +9,6 @@ return {
             "hrsh7th/cmp-nvim-lsp-signature-help",                             -- function signatures
             "hrsh7th/cmp-nvim-lua",                                            -- nvim Lua API completions
             "hrsh7th/cmp-path",                                                -- path completions
-            { "zbirenbaum/copilot-cmp",   config = true },                     -- GitHub copilot
             { "saadparwaiz1/cmp_luasnip", dependencies = "L3MON4D3/LuaSnip" }, -- completion engine
         },
         config = function()
