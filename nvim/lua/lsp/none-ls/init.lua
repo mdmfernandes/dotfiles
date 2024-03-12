@@ -6,40 +6,23 @@ if not nls_status_ok then
     return
 end
 
-local ca = nls.builtins.code_actions
+-- local ca = nls.builtins.code_actions
 local fmt = nls.builtins.formatting
 local diag = nls.builtins.diagnostics
 
 local sources = {
-    -- Code actions
-    ca.gitsigns,
-    ca.shellcheck,
-
     -- Formatting
-    fmt.black,        -- Python
     fmt.clang_format, -- C/C++
-    fmt.markdownlint, -- Markdown
-    fmt.taplo,        -- TOML
-    fmt.trim_whitespace.with({
-        disabled_filetypes = { "go", "gomod", "json", "lua" },
-    }),
-    fmt.shfmt, -- Bash
+    fmt.prettier,     -- JavaScript, TypeScript, CSS, JSON, YAML, Markdown
+    fmt.shfmt,        -- Bash
 
     -- Diagnostics
-    -- diag.misspell, -- Using vim spell
-    diag.trail_space.with({
-        diagnostics_format = "#{s}: #{m}",
-        disabled_filetypes = { "gitcommit", "NeogitCommitMessage" },
-    }),
-    diag.pylint,             -- Python
-    diag.flake8,             -- Python
-    diag.mypy,               -- Python
-    diag.yamllint,           -- YAML
     diag.hadolint,           -- Docker
-    diag.zsh,                -- zsh
     diag.markdownlint.with({ -- Markdown
         extra_args = { "--config", vim.fn.expand("~/.config/markdownlint.yaml") },
     }),
+    diag.yamllint, -- YAML
+    diag.zsh,      -- zsh
 }
 
 -- Setup none-ls

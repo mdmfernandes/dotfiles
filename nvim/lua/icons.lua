@@ -35,7 +35,7 @@ I.diagnostics = {
     Hint = "",
     Info = "",
     Question = "",
-    Warn = "",
+    Warn = "⚠",
 }
 
 I.lsp = {

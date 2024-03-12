@@ -40,7 +40,6 @@ require("lazy").setup("plugins", {
                 "zipPlugin",     -- edit zip files
                 "vimballPlugin", -- create and unpack vba files
                 "matchit",       --
-                "matchparen",    -- highlight paren matching
                 "netrwPlugin",   -- navigate in directories
                 "tohtml",        -- convert syntax highlighted file to html
                 "tutor",         --
