@@ -297,6 +297,10 @@ if [[ -r "${ZSH_USERDATA}/plugins/zsh-history-substring-search/zsh-history-subst
     # Set key-bindings for Up and Down arrow keys
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
+    # The key-bindings above don't work in some cases, so we need to set the ones below
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+    # Vi mode
     bindkey -M vicmd 'k' history-substring-search-up
     bindkey -M vicmd 'j' history-substring-search-down
     # Highlight substring (default: magenta)
