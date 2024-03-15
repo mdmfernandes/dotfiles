@@ -8,6 +8,7 @@
 -- Load core configurations
 require("core.options")
 require("core.mappings")
+require("core.commands")
 require("core.diagnostic")
 require("core.filetype")
 require("core.autocmd")

@@ -6,7 +6,7 @@ return {
         enabled = true,
         name = "catppuccin",
         priority = 1000,
-        dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
+        dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
         config = function()
             require("catppuccin").setup({
                 flavour = "mocha",
@@ -27,7 +27,7 @@ return {
         "navarasu/onedark.nvim",
         enabled = false,
         priority = 1000, -- load the theme before all the other start plugins
-        dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
+        dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
         opts = {
             style = "cool",
             toggle_style_key = nil,

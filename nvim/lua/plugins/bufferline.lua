@@ -4,7 +4,7 @@ return {
     version = "*",
     event = "VeryLazy",
     dependencies = {
-        { "kyazdani42/nvim-web-devicons", lazy = true },
+        { "nvim-tree/nvim-web-devicons", lazy = true },
         "ThePrimeagen/harpoon",
         "catppuccin/nvim"
     },
@@ -21,8 +21,9 @@ return {
                 diagnostics = "nvim_lsp",
                 diagnostics_indicator = function(_, _, diagnostics_dict, _)
                     local s = " "
+                    local signs = require("icons").diagnostics
                     for e, n in pairs(diagnostics_dict) do
-                        local sym = e == "error" and " " or (e == "warning" and " " or " ")
+                        local sym = e == "error" and signs.Error or (e == "warning" and signs.Warn or signs.Info)
                         s = s .. n .. sym
                     end
                     return s
