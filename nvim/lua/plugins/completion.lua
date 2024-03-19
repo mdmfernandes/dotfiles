@@ -90,10 +90,10 @@ return {
                 },
                 sources = cmp.config.sources({
                     { name = "copilot" },
-                    { name = "nvim_lsp",                max_item_count = 10 },
-                    { name = "nvim_lsp_signature_help", max_item_count = 5 },
-                    { name = "luasnip",                 keyword_length = 2, max_item_count = 5 },
-                    { name = "treesitter",              max_item_count = 5 },
+                    { name = "nvim_lsp" },
+                    { name = "nvim_lsp_signature_help" },
+                    { name = "luasnip",                keyword_length = 2, max_item_count = 5 },
+                    { name = "treesitter",             max_item_count = 5 },
                     {
                         name = "buffer",
                         option = {
@@ -102,7 +102,7 @@ return {
                             end,
                         },
                         keyword_length = 3,
-                        max_item_count = 5,
+                        max_item_count = 10,
                     },
                     { name = "nvim_lua" },
                     { name = "path" },
