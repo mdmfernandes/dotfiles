@@ -5,17 +5,20 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
+indent_size = 4
 indent_style = space
 max_line_length = 120
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+[*.go]
+indent_style = tab
 
 [*.{json,yml}]
 indent_size = 2
 
 [Makefile]
 indent_style = tab
-indent_size = 4
 
 # Git commit message
 [COMMIT_EDITMSG]
