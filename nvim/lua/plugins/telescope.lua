@@ -46,6 +46,7 @@ return {
                         "f",
                         "--strip-cwd-prefix", -- don't show the CWD prefix
                         "--hidden",
+                        "--no-ignore",
                         "--exclude",
                         ".git/",
                         "--exclude",
