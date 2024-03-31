@@ -10,9 +10,6 @@ local map = require("utils").map
 map("n", "<Leader>bn", "<Cmd>enew<CR>")
 map("n", "<Leader>bz", "<Cmd>only<CR>")
 map("n", "<C-q>", "<Cmd>bdelete<CR>")
--- Quickly save the current buffer or all buffers
-map("n", "<Leader>w", "<Cmd>update<CR>")
-map("n", "<Leader>W", "<Cmd>wall<CR>")
 
 --- Resize windows
 map("n", "<C-Up>", "<Cmd>resize +3<CR>")
@@ -71,22 +68,18 @@ map("x", ">", ">gv")
 map("n", "n", "nzz")
 map("n", "N", "Nzz")
 
--- Use operator pending mode to visually select the whole buffer
--- e.g. dA = delete buffer ALL, yA = copy whole buffer ALL
+-- Use operator pending mode to visually select the whole buffer (All)
+-- e.g. dA = delete whole buffer, yA = copy whole buffer
 map("o", "A", "<Cmd>normal! mzggVG<CR>`z")
 map("x", "A", "<Cmd>normal! mzggVG<CR>`z")
 
--- Toggle spelling
-map("", "<F3>", function()
-    vim.cmd("set spell!")
-    vim.notify(string.format("Toggle spelling"), vim.log.levels.INFO)
-end, { desc = "Toggle spelling" })
+-- Navigation
 -- Navigate between spell errors
 map("n", "çs", "[s")
 map("n", "ºs", "]s")
-
--- Health check
-map("n", "<Leader>hc", "<Cmd>checkhealth<CR>")
+-- Navigate between changes
+map("n", "çc", "[c")
+map("n", "ºc", "]c")
 
 -- Diagnostics
 map("n", "çd", vim.diagnostic.goto_prev)
@@ -99,10 +92,6 @@ map("n", "<C-F7>", function()
     vim.diagnostic.hide()
     vim.notify(string.format("Hide diagnostics"), vim.log.levels.INFO)
 end, { desc = "Hide diagnostics" })
-
--- Navigate between changes
-map("n", "çc", "[c")
-map("n", "ºc", "]c")
 
 -- Make current file executable to current user
 map("n", "<Leader>x", function()

@@ -49,3 +49,7 @@ require("lazy").setup("plugins", {
         },
     },
 })
+
+-- netrw configuration (useful when netrwPlugin is enabled)
+-- vim.g.netrw_browse_split = 0
+-- vim.g.netrw_banner = 0

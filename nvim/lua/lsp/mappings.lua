@@ -30,11 +30,8 @@ local function mappings(client, bufnr)
     -- Rename all references to the symbol under the cursor
     buf_map("n", "<Leader>rn", vim.lsp.buf.rename)
 
-    --  List all the implementations for the symbol under the cursor.
-    --  `gi` is to place the cursor at the same position where it was
-    --  left last time in the Insert mode.
-    buf_map("n", "<Leader>gi", tb.lsp_implementations)
-    --u.buf_map("n", "gi", vim.lsp.buf.implementation())
+    --  Find all the implementations for the symbol under the cursor.
+    buf_map("n", "<Leader>fi", tb.lsp_implementations)
 
     -- List all the references to the symbol under the cursor
     buf_map("n", "gr", tb.lsp_references)
@@ -50,13 +47,6 @@ local function mappings(client, bufnr)
         -- Worspace symbols
         buf_map("n", "<Leader>fw", tb.lsp_workspace_symbols)
     end
-
-    -- Workspaces
-    buf_map("n", "<space>wa", vim.lsp.buf.add_workspace_folder)
-    buf_map("n", "<space>wr", vim.lsp.buf.remove_workspace_folder)
-    map("n", "<space>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, { buffer = bufnr, desc = "LSP list workspace folders" })
 end
 
 -- Global mappings (only set once)
@@ -66,21 +56,6 @@ function M.global_mappings()
         vim.notify(string.format("Active LSP sources: %s", require("lsp.sources").active_sources()),
             vim.log.levels.INFO)
     end, { desc = "Print active LSP sources" })
-
-    -- Get info
-    map("", "<F6>", function()
-        require("lspconfig.ui.lspinfo")()
-    end, { desc = "Show LSP info" })
-
-    -- Start and stop clients
-    map("", "<F8>", function()
-        vim.cmd("LspStart")
-        vim.notify(string.format("Start LSP server"), vim.log.levels.INFO)
-    end, { desc = "Start LSP" })
-    map("", "<C-F8>", function()
-        vim.cmd("LspStop")
-        vim.notify(string.format("Stop LSP server"), vim.log.levels.INFO)
-    end, { desc = "Stop LSP" })
 end
 
 function M.setup(client, bufnr)
