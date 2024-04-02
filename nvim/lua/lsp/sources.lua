@@ -13,30 +13,12 @@ function S.active_sources()
         return Msg
     end
 
-    local buf_ft = vim.bo.filetype
     local buf_client_names = {}
 
     -- Add LSP servers
     for _, client in pairs(buf_clients) do
-        if client.name ~= "null-ls" then
-            table.insert(buf_client_names, client.name)
-        end
+        table.insert(buf_client_names, client.name)
     end
-
-    -- Add none-ls code actions
-    local ca = require("lsp.none-ls.code_actions")
-    local supported_ca = ca.list_registered(buf_ft)
-    vim.list_extend(buf_client_names, supported_ca)
-
-    -- Add none-ls diagnostics
-    local diagnostics = require("lsp.none-ls.diagnostics")
-    local supported_diagnostics = diagnostics.list_registered(buf_ft)
-    vim.list_extend(buf_client_names, supported_diagnostics)
-
-    -- Add none-ls formatters
-    local formatters = require("lsp.none-ls.formatters")
-    local supported_formatters = formatters.list_registered(buf_ft)
-    vim.list_extend(buf_client_names, supported_formatters)
 
     -- After
     local hash = {}
@@ -63,23 +45,7 @@ function S.supported_sources()
         return Msg
     end
 
-    local buf_ft = vim.bo.filetype
     local buf_client_names = {}
-
-    -- Add none-ls code actions
-    local ca = require("lsp.none-ls.code_actions")
-    local supported_ca = ca.list_supported(buf_ft)
-    vim.list_extend(buf_client_names, supported_ca)
-
-    -- Add none-ls diagnostics
-    local diagnostics = require("lsp.none-ls.diagnostics")
-    local supported_diagnostics = diagnostics.list_supported(buf_ft)
-    vim.list_extend(buf_client_names, supported_diagnostics)
-
-    -- Add none-ls formatters
-    local formatters = require("lsp.none-ls.formatters")
-    local supported_formatters = formatters.list_supported(buf_ft)
-    vim.list_extend(buf_client_names, supported_formatters)
 
     -- After
     local hash = {}

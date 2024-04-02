@@ -51,11 +51,47 @@ end
 
 -- Global mappings (only set once)
 function M.global_mappings()
-    -- Print active LSP sources
+    -- Print active LSP sources, formatters, and linters
     map("n", "<Leader>\\", function()
-        vim.notify(string.format("Active LSP sources: %s", require("lsp.sources").active_sources()),
-            vim.log.levels.INFO)
-    end, { desc = "Print active LSP sources" })
+        -- LSP sources
+        local lsp_sources = require("lsp.sources").active_sources()
+
+        if lsp_sources ~= "" then
+            vim.notify(string.format("Active LSP sources: %s", require("lsp.sources").active_sources()),
+                vim.log.levels.INFO)
+        else
+            vim.notify("No active LSP sources", vim.log.levels.WARN)
+        end
+
+        -- Formatters
+        -- Conform formatters (priority)
+        local formatters = require("conform").list_formatters_for_buffer()
+
+        -- LSP formatters
+        local formatters_lsp = require("conform.lsp_format").get_format_clients({ bufnr = vim.api.nvim_get_current_buf() })
+        if not vim.tbl_isempty(formatters_lsp) then
+            local formatters_lsp_name = vim.tbl_map(function(c)
+                return c.name
+            end, formatters_lsp)
+
+            formatters = vim.tbl_extend("error", formatters, formatters_lsp_name)
+        end
+
+        if not vim.tbl_isempty(formatters) then
+            vim.notify(string.format("Active formatters: %s", table.concat(formatters, ", ")),
+                vim.log.levels.INFO)
+        else
+            vim.notify("No available formatters", vim.log.levels.WARN)
+        end
+
+        -- Linters
+        local linters = require("lint")._resolve_linter_by_ft(vim.bo.filetype)
+        if not vim.tbl_isempty(linters) then
+            vim.notify(string.format("Active linters: %s", table.concat(linters, ", ")), vim.log.levels.INFO)
+        else
+            vim.notify("No available linters", vim.log.levels.WARN)
+        end
+    end, { desc = "Print active LSP sources, formatters, and linters" })
 end
 
 function M.setup(client, bufnr)

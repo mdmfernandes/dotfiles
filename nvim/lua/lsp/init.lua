@@ -120,8 +120,12 @@ function LSP.on_attach(client, bufnr)
     -- Setup highlight
     require("lsp.highlighter").setup(client, bufnr)
 
+    -- Use conform.nvim to format, instead of vim.lsp.buf.format.
+    -- It falls back to the LSP if conform.nvim has no available
+    -- formatter for the current filetype. See plugin config for
+    -- details.
     -- Setup formatting
-    require("lsp.formatter").setup(client, bufnr)
+    -- require("lsp.formatter").setup(client, bufnr)
 
     -- Setup code context (navic)
     require("lsp.context").setup(client, bufnr)
@@ -152,9 +156,6 @@ local opts = {
 function LSP.setup()
     -- LSP handlers
     require("lsp.handlers").setup()
-
-    -- none-ls
-    require("lsp.none-ls").setup(opts)
 
     -- LSP installer
     require("lsp.installer").setup(servers, opts)
