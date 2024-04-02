@@ -10,6 +10,9 @@ vim.filetype.add({
         _log = "log",
         LOG = "log",
         _LOG = "log",
+        te = "selinux",
+        fc = "selinux",
+        ["if"] = "selinux",
     },
     filename = {
         ["docker-compose.yml"] = "yaml.docker-compose",

@@ -5,12 +5,6 @@ local F = {}
 local function print_formatter(client)
     local formatter = client.name
 
-    if formatter == "null-ls" then
-        local formatter_tbl = require("lsp.none-ls.formatters").list_registered(vim.bo.filetype)
-        table.sort(formatter_tbl)
-        formatter = table.concat(formatter_tbl, " ◆ ")
-    end
-
     vim.notify(string.format("Formatter(s): %s", formatter), vim.log.levels.INFO)
 end
 
@@ -28,21 +22,21 @@ local function format_document(client, bufnr, filter)
                 vim.lsp.buf.format({
                     bufnr = bufnr,
                     filter = filter,
-                    timeout_ms = 2000,
+                    timeout_ms = 500,
                 })
                 print_formatter(client)
             end,
         })
     end
 
-    -- Manually
+    -- Manually (live formatting)
     local map = require("utils").map
     if client.supports_method("textDocument/formatting") then
-        map("n", "<Leader>bf", function()
+        map("n", "<Leader>lf", function()
             vim.lsp.buf.format({
                 bufnr = bufnr,
                 filter = filter,
-                timeout_ms = 2000,
+                async = true,
             })
             print_formatter(client)
         end, { buffer = bufnr, desc = "Format current buffer" })

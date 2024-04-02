@@ -32,6 +32,8 @@ return {
                     ghost_text = true,
                 },
                 formatting = {
+                    expandable_indicator = true,         -- default
+                    fields = { "abbr", "kind", "menu" }, -- default
                     format = function(entry, vim_item)
                         -- Completion kind symbols
                         local symbols_map = require("icons").completion
@@ -110,20 +112,12 @@ return {
                 }),
             })
 
-            -- Use buffer source for forward-search in command line
-            cmp.setup.cmdline("/", {
+            -- Use buffer source for searching in command line
+            cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = {
+                sources = cmp.config.sources({
                     { name = "buffer" },
-                },
-            })
-
-            -- Use buffer source for backward-search in command line
-            cmp.setup.cmdline("?", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = "buffer" },
-                },
+                }),
             })
 
             -- Use cmdline & path source for ':' in command line
@@ -134,7 +128,7 @@ return {
                     },
                     {
                         { name = "cmdline", keyword_length = 3 }
-                    })
+                    }),
             })
         end
     },
