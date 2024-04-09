@@ -1,7 +1,7 @@
 -- nvim-lint: https://github.com/mfussenegger/nvim-lint
 return {
     "mfussenegger/nvim-lint",
-    -- event = { "BufReadPre" },
+    event = { "BufReadPre" },
     config = function()
         local lint = require("lint")
 
