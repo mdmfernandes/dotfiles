@@ -18,13 +18,18 @@ function F.format(lines)
     -- Prepend the count to each line
     local result_lines = {}
     for _, line in ipairs(unique_lines) do
-        table.insert(result_lines, counts[line] .. " " .. line)
+        table.insert(result_lines, { number = counts[line], text = line })
     end
 
     -- Sort lines by count (descending)
-    table.sort(result_lines, function(a, b) return a > b end)
+    table.sort(result_lines, function(a, b) return a.number > b.number end)
 
-    return result_lines
+    local sorted_lines = {}
+    for _, line in ipairs(result_lines) do
+        table.insert(sorted_lines, line.number .. " " .. line.text)
+    end
+
+    return sorted_lines
 end
 
 return F

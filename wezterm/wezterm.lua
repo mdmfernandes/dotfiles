@@ -8,8 +8,8 @@ local config = wezterm.config_builder()
 config.font_size = 15
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = {
-    left = 5,
-    right = 5,
+    left = "1cell",
+    right = "1cell",
     top = 0,
     bottom = 0,
 }
