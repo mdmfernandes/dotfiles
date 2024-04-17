@@ -14,6 +14,9 @@ config.window_padding = {
     bottom = 0,
 }
 
+-- Force the cursor to use reverse video colors based on the foreground and background colors
+config.force_reverse_video_cursor = true
+
 -- Load local configuration
 local local_config = require("wezterm_local")
 local_config.apply(config)
