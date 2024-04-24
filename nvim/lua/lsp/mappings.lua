@@ -64,24 +64,27 @@ function M.global_mappings()
         end
 
         -- Formatters
-        -- Conform formatters (priority)
-        local formatters = require("conform").list_formatters_for_buffer()
-
-        -- LSP formatters
-        local formatters_lsp = require("conform.lsp_format").get_format_clients({ bufnr = vim.api.nvim_get_current_buf() })
-        if not vim.tbl_isempty(formatters_lsp) then
-            local formatters_lsp_name = vim.tbl_map(function(c)
-                return c.name
-            end, formatters_lsp)
-
-            formatters = vim.tbl_extend("error", formatters, formatters_lsp_name)
-        end
-
-        if not vim.tbl_isempty(formatters) then
+        local print_active_formaters = function(formatters)
             vim.notify(string.format("Active formatters: %s", table.concat(formatters, ", ")),
                 vim.log.levels.INFO)
+        end
+        -- Get conform formatters (priority)
+        local formatters = require("conform").list_formatters_for_buffer()
+        if not vim.tbl_isempty(formatters) then
+            print_active_formaters(formatters)
         else
-            vim.notify("No available formatters", vim.log.levels.WARN)
+            -- If there are not conform formatters, check for LSP formatters
+            local formatters_lsp = require("conform.lsp_format").get_format_clients({
+                bufnr = vim.api
+                    .nvim_get_current_buf()
+            })
+            if not vim.tbl_isempty(formatters_lsp) then
+                print_active_formaters(vim.tbl_map(function(c)
+                    return c.name
+                end, formatters_lsp))
+            else
+                vim.notify("No available formatters", vim.log.levels.WARN)
+            end
         end
 
         -- Linters
