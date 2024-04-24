@@ -16,6 +16,8 @@ return {
     cmd = "selint",
     stdin = false,
     stream = "stdout",
+    -- Set working directory to the parent directory of the file to be linted
+    cwd = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
     args = {
         "--disable=E-003", -- Nonexistent user listed in fc file
         "--disable=E-004", -- Nonexistent role listed in fc file

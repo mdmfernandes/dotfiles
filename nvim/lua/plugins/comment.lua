@@ -26,5 +26,9 @@ return {
             vim.api.nvim_feedkeys(esc, "nx", false)
             api.locked("uncomment.linewise")(vim.fn.visualmode())
         end, { desc = "Uncomment region linewise (visual)" })
+
+        -- Set comment format for custom file types
+        local ft = require("Comment.ft")
+        ft.selinux = {"#%s"}
     end
 }
