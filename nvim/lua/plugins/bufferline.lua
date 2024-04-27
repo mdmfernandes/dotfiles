@@ -1,7 +1,9 @@
 -- BufferLine: https://github.com/akinsho/bufferline.nvim
 return {
     "akinsho/bufferline.nvim",
-    version = "*",
+    -- TODO: Revert when stable
+    -- version = "*",
+    branch = "main",
     event = "VeryLazy",
     dependencies = {
         { "nvim-tree/nvim-web-devicons", lazy = true },
@@ -28,6 +30,7 @@ return {
                     end
                     return s
                 end,
+                separator_style = "slant",
                 show_buffer_close_icons = false,
                 show_close_icon = false,
             }

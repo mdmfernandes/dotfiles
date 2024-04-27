@@ -82,8 +82,17 @@ map("n", "çc", "[c")
 map("n", "ºc", "]c")
 
 -- Diagnostics
-map("n", "çd", vim.diagnostic.goto_prev)
-map("n", "ºd", vim.diagnostic.goto_next)
+-- By default vim.diagnostic.goto_* jumps to the diagnostic with the highest severity,
+-- but we want to jump to all diagnostics.
+map("n", "çd", function()
+    vim.diagnostic.goto_prev()
+    vim.cmd("normal! zz")
+end)
+map("n", "ºd", function()
+    vim.diagnostic.goto_next()
+    vim.cmd("normal! zz")
+end)
+
 map("n", "<F7>", function()
     vim.diagnostic.show()
     vim.notify(string.format("Show diagnostics"), vim.log.levels.INFO)

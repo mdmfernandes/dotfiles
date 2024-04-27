@@ -45,7 +45,7 @@ function I.setup(servers, global_opts)
         -- lua-ls -> setup neodev
         ["lua_ls"] = function()
             local opts = vim.tbl_deep_extend("force", global_opts, servers["lua_ls"])
-            require("neodev").setup {}
+            require("neodev").setup()
             lspconfig.lua_ls.setup(opts)
         end,
 

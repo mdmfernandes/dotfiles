@@ -2,7 +2,7 @@
 return {
     "ThePrimeagen/harpoon",
     config = function()
-        local harpoon = require "harpoon"
+        local harpoon = require("harpoon")
         harpoon.setup()
 
         -- Create mappings
