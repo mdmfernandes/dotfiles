@@ -8,16 +8,20 @@ return {
         -- Linters
         lint.linters_by_ft = {
             ansible = { "ansible_lint" },
+            bitbake = { "oelint-adv" },
             c = { "clangtidy" },
             cpp = { "clangtidy" },
             dockerfile = { "hadolint" },
             markdown = { "markdownlint" },
-            sh = { "shellcheck" },
+            -- sh = { "shellcheck" }, -- bashls (LSP) uses shellcheck for linting
             yaml = { "yamllint" },
             selinux = { "selint" },
         }
 
-        -- Linters options
+        ---------------------
+        -- Linters options --
+        ---------------------
+        -- markdownlint
         lint.linters.markdownlint.args = {
             "--disable",
             "MD013", -- disable line length limit
@@ -27,14 +31,19 @@ return {
             "--"
         }
 
-        -- Custom linters
+        -- oelint-adv
+        require('lint.linters.oelint-adv').cmd = 'oelint.sh'
+
+        --------------------
+        -- Custom linters --
+        --------------------
         -- SELint
         lint.linters.selint = require("linters.selint")
 
         -- Try to lint after reading the file into the buffer, after writing the file,
-        -- when leaving insert mode, when text is changed in Normal mode.
+        -- when leaving insert mode.
         local lint_au = vim.api.nvim_create_augroup("LintGroup", { clear = true })
-        vim.api.nvim_create_autocmd({ "BufRead", "BufWritePost", "InsertLeave", "TextChanged" }, {
+        vim.api.nvim_create_autocmd({ "BufRead", "BufWritePost", "InsertLeave" }, {
             group = lint_au,
             callback = function()
                 lint.try_lint()
