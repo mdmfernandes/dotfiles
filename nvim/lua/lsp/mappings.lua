@@ -25,7 +25,7 @@ local function mappings(client, bufnr)
     buf_map("n", "gD", vim.lsp.buf.declaration)
 
     -- Jump to the definition of the type of the symbol under the cursor
-    buf_map("n", "gt", vim.lsp.buf.type_definition)
+    buf_map("n", "gt", tb.lsp_type_definitions)
 
     -- Rename all references to the symbol under the cursor
     buf_map("n", "<Leader>rn", vim.lsp.buf.rename)
@@ -43,9 +43,9 @@ local function mappings(client, bufnr)
     if client.supports_method("textDocument/documentSymbolProvider") then
         -- Document symbols. If not supported by the LSP client it uses
         -- Treesitter to show the symbols (defined in telescope.lua).
-        buf_map("n", "<Leader>fy", tb.lsp_document_symbols)
+        buf_map("n", "<Leader>ls", tb.lsp_document_symbols)
         -- Worspace symbols
-        buf_map("n", "<Leader>fw", tb.lsp_workspace_symbols)
+        buf_map("n", "<Leader>lS", tb.lsp_dynamic_workspace_symbols)
     end
 end
 

@@ -22,7 +22,7 @@ return {
             javascript = { "prettier" },
             json = { "prettier" },
             markdown = { "prettier" },
-            sh = { "shfmt" },
+            -- sh = { "shfmt" }, -- bashls (LSP) uses shfmt for formatting
             yaml = { "prettier" },
 
         },

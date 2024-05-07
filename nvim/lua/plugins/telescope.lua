@@ -96,8 +96,8 @@ return {
         local map = require("utils").map
         local tb = require("telescope.builtin")
 
-        map("n", "gf", tb.find_files)
-        map("n", "<Leader>ff", tb.current_buffer_fuzzy_find)
+        map("n", "<C-p>", tb.find_files)
+        map("n", "<Leader>/", tb.current_buffer_fuzzy_find)
         map("n", "<Leader>fs", tb.git_files)
         map("n", "<Leader>fg", tb.live_grep)
         -- Grep for string under cursor
@@ -112,7 +112,7 @@ return {
             })
         end, { desc = "Telescope open file browser in current directory" })
         -- Find symbols
-        map("n", "<Leader>fy", tb.treesitter, { desc = "Telescope find document symbols" })
+        map("n", "<Leader>ls", tb.treesitter, { desc = "Telescope find document symbols" })
         -- List previously opened files
         map("n", "<Leader>fo", tb.oldfiles)
         -- Search buffers
@@ -123,14 +123,13 @@ return {
         map("n", "<Leader>gc", tb.git_commits)
         map("n", "<Leader>gs", tb.git_status)
         -- Diagnostics
-        map("n", "<Leader>wd", tb.diagnostics)                               -- all buffers from workspace
         map("n", "<Leader>fd", function() tb.diagnostics({ bufnr = 0 }) end) -- current buffer
+        map("n", "<Leader>fD", tb.diagnostics)                               -- all diagnostics from workspace
         -- Undo
         map("n", "<Leader>u", telescope.extensions.undo.undo)
         -- Others
         map("n", "<Leader>fh", tb.help_tags)                       -- nvim help
         map("n", "<Leader>fk", tb.keymaps)                         -- nvim key mappings
-        map("n", "<Leader>fm", tb.man_pages)                       -- man pages
         map("n", "<Leader>fn", telescope.extensions.notify.notify) -- show notifications
         map("n", "<Leader>ft", "<Cmd>TodoTelescope<CR>")           -- todo messages
     end
