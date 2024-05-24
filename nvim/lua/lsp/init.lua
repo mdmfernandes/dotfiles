@@ -20,10 +20,39 @@ local servers = {
     gopls = {
         settings = {
             gopls = {
+                gofumpt = true,
+                -- Enable code lenses
+                codelenses = {
+                    gc_details = true,
+                    generate = true,
+                    run_govulncheck = true,
+                    test = true,
+                    tidy = true,
+                    upgrade_dependency = true,
+                    vendor = true,
+                },
+                -- Enable all inlay hints
+                hints = {
+                    assignVariableTypes = true,
+                    compositeLiteralFields = true,
+                    compositeLiteralTypes = true,
+                    constantValues = true,
+                    functionTypeParameters = true,
+                    parameterNames = true,
+                    rangeVariableTypes = true,
+                },
+                -- Enable all analyses except "shadow"
                 analyses = {
+                    fieldalignment = true,
+                    nilness = true,
                     unusedparams = true,
+                    unusedvariable = true,
+                    unusedwrite = true,
+                    useany = true,
                 },
                 staticcheck = true,
+                semanticTokens = true,
+                directoryFilters = { "-.git", "-node_modules" },
             },
         },
         flags = {
@@ -112,7 +141,7 @@ local servers = {
     }
 }
 
--- Operations to do when a LSP server is attached
+-- Operations to do when a LSP client is attached
 function LSP.on_attach(client, bufnr)
     -- Setup key mappings
     require("lsp.mappings").setup(client, bufnr)
@@ -120,11 +149,14 @@ function LSP.on_attach(client, bufnr)
     -- Setup highlight
     require("lsp.highlighter").setup(client, bufnr)
 
+    -- Setup code lenses
+    require("lsp.codelens").setup(client, bufnr)
+
+    -- Setup formatting
     -- Use conform.nvim to format, instead of vim.lsp.buf.format.
     -- It falls back to the LSP if conform.nvim has no available
     -- formatter for the current filetype. See plugin config for
     -- details.
-    -- Setup formatting
     -- require("lsp.formatter").setup(client, bufnr)
 
     -- Setup code context (navic)
@@ -137,7 +169,7 @@ function LSP.on_attach(client, bufnr)
     end
 end
 
--- Setup LSP server capabilities
+-- Setup LSP client capabilities
 LSP.capabilities = vim.lsp.protocol.make_client_capabilities()
 -- Add nvim-cmp to the LS capabilities with cmp-nvim-lsp
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -146,7 +178,7 @@ if status_cmp_ok then
     LSP.capabilities = cmp_nvim_lsp.default_capabilities(LSP.capabilities)
 end
 
--- Setup options for LSP servers
+-- Setup options for LSP clients
 local opts = {
     on_attach = LSP.on_attach,
     capabilities = LSP.capabilities,
@@ -156,6 +188,9 @@ local opts = {
 function LSP.setup()
     -- LSP handlers
     require("lsp.handlers").setup()
+
+    -- LSP inlay hints
+    require("lsp.inlayhints").setup()
 
     -- LSP installer
     require("lsp.installer").setup(servers, opts)

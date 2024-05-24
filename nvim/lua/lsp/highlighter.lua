@@ -4,9 +4,10 @@ local H = {}
 local ts_utils = require("nvim-treesitter.ts_utils")
 
 local highlight_au = vim.api.nvim_create_augroup("LspDocumentHighlight", {})
+local documentHighlight = require("vim.lsp.protocol").Methods.textDocument_documentHighlight
 
 local function document_highlight(client, bufnr)
-    if client.supports_method("textDocument/documentHighlight") then
+    if client.supports_method(documentHighlight) then
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             group = highlight_au,
             buffer = bufnr,

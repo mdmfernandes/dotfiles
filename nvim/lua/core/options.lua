@@ -4,10 +4,10 @@ local o = vim.opt
 -------------
 -- General --
 -------------
+o.mouse = ""       -- disable mouse
 o.updatetime = 100 -- Refresh time
--- o.hidden = true  -- Do not save when switching buffers
 o.history = 50     -- Command line history
-o.clipboard = "unnamedplus"
+-- o.clipboard = "unnamedplus"
 -- Better buffer splitting
 o.splitright = true
 o.splitbelow = true
@@ -16,11 +16,11 @@ o.completeopt = { "menu", "menuone", "noselect" }
 -------------
 -- Display --
 -------------
-o.termguicolors = true -- GUI colors
--- o.showcmd = true       -- Show commands on bottom right corner
+-- o.termguicolors = true -- GUI colors (automatically detected since Neovim 0.10.0)
+o.showcmd = true -- Show commands on bottom right corner (default). Disable if slow
 o.number = true
 o.relativenumber = true
-o.scrolloff = 10      -- Show at least 10 lines above/below the cursor
+o.scrolloff = 10 -- Show at least 10 lines above/below the cursor
 -- o.smoothscroll = true -- Scroll by screen lines instead of text lines
 o.cursorline = true
 o.signcolumn = "yes"
@@ -45,7 +45,7 @@ o.wrap = true
 o.linebreak = true
 o.showbreak = "▶"
 -- Text width
-o.textwidth = 120
+o.textwidth = 120 -- Default
 o.colorcolumn = "+1"
 
 ------------

@@ -10,6 +10,14 @@ ignore = [
     # "ANN", # flake8-annotations
 
     #### specific rules
-    "ANN101", # Missing type annotation for self in method
-    "TD002", # Missing TODO author
+    "ANN101", # missing type annotation for self in method
+    "D203", # one blank line before class (incompatible with D211)
+    "D213", # multi line summary second line (incompatible with D212)
+    "INP001", # implicit namespace package
+    # "PTH123", # use `Path.open()` instead of `open()`
+    "TD002", # missing TODO author
+
+    # Rules incompatible with the formatter
+    "COM812", # missing trailing comma
+    "ISC001", # single line implicit string concatenation
 ]

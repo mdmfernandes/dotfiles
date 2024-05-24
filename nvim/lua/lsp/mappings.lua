@@ -13,7 +13,8 @@ local function mappings(client, bufnr)
     local tb = require("telescope.builtin")
 
     -- Display hover information about the symbol under the cursor
-    buf_map("n", "K", vim.lsp.buf.hover)
+    -- Not needed anymore since it's enabled by default
+    -- buf_map("n", "K", vim.lsp.buf.hover)
 
     -- Display signature information about the symbol under the cursor
     buf_map("n", "<Leader>k", vim.lsp.buf.signature_help)
@@ -39,13 +40,25 @@ local function mappings(client, bufnr)
     -- List code actions available at the current cursor position
     buf_map("n", "<leader>ca", vim.lsp.buf.code_action)
 
+    -- Run the code lens in the current line
+    buf_map("n", "<leader>cl", vim.lsp.codelens.run)
+
     -- Show LSP symbols, if supported.
-    if client.supports_method("textDocument/documentSymbolProvider") then
+    local documentSymbol = require("vim.lsp.protocol").Methods.textDocument_documentSymbol
+    if client.supports_method(documentSymbol) then
         -- Document symbols. If not supported by the LSP client it uses
         -- Treesitter to show the symbols (defined in telescope.lua).
         buf_map("n", "<Leader>ls", tb.lsp_document_symbols)
         -- Worspace symbols
         buf_map("n", "<Leader>lS", tb.lsp_dynamic_workspace_symbols)
+    end
+
+    -- Toggle LSP inlay hints, if supported.
+    local inlayHint = require("vim.lsp.protocol").Methods.textDocument_inlayHint
+    if client.supports_method(inlayHint) then
+        buf_map("n", "<Leader>th", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end)
     end
 end
 

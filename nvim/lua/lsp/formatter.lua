@@ -1,6 +1,8 @@
 -- LSP document formatting
 local F = {}
 
+local formatting = require("vim.lsp.protocol").Methods.textDocument_formatting
+
 -- Print formatter(s) used to format the buffer
 local function print_formatter(client)
     local formatter = client.name
@@ -13,7 +15,7 @@ local format_au = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local function format_document(client, bufnr, filter)
     -- Format on save
-    if client.supports_method("textDocument/formatting") then
+    if client.supports_method(formatting) then
         vim.api.nvim_clear_autocmds({ group = format_au, buffer = bufnr })
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = format_au,
@@ -31,7 +33,7 @@ local function format_document(client, bufnr, filter)
 
     -- Manually (live formatting)
     local map = require("utils").map
-    if client.supports_method("textDocument/formatting") then
+    if client.supports_method(formatting) then
         map("n", "<Leader>lf", function()
             vim.lsp.buf.format({
                 bufnr = bufnr,
