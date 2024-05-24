@@ -3,11 +3,6 @@ local M = {}
 
 local map = require("utils").map
 
--- Toggle inlay hints
-local function toggle_inlay_hints()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end
-
 -- LSP server mappings
 local function mappings(client, bufnr)
     -- Helper for buffer funtions
@@ -61,7 +56,9 @@ local function mappings(client, bufnr)
     -- Toggle LSP inlay hints, if supported.
     local inlayHint = require("vim.lsp.protocol").Methods.textDocument_inlayHint
     if client.supports_method(inlayHint) then
-        buf_map("n", "<Leader>th", toggle_inlay_hints)
+        buf_map("n", "<Leader>th", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end)
     end
 end
 

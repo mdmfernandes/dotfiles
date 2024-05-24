@@ -81,9 +81,7 @@ map("n", "ºs", "]s")
 map("n", "çc", "[c")
 map("n", "ºc", "]c")
 
--- Diagnostics
--- By default vim.diagnostic.goto_* jumps to the diagnostic with the highest severity,
--- but we want to jump to all diagnostics.
+-- Diagnostics (center diagnostic in the screen)
 map("n", "çd", function()
     vim.diagnostic.goto_prev()
     vim.cmd("normal! zz")

@@ -143,6 +143,15 @@ local servers = {
 
 -- Operations to do when a LSP client is attached
 function LSP.on_attach(client, bufnr)
+    -- Setup key mappings
+    require("lsp.mappings").setup(client, bufnr)
+
+    -- Setup highlight
+    require("lsp.highlighter").setup(client, bufnr)
+
+    -- Setup code lenses
+    require("lsp.codelens").setup(client, bufnr)
+
     -- Setup formatting
     -- Use conform.nvim to format, instead of vim.lsp.buf.format.
     -- It falls back to the LSP if conform.nvim has no available
@@ -152,15 +161,6 @@ function LSP.on_attach(client, bufnr)
 
     -- Setup code context (navic)
     require("lsp.context").setup(client, bufnr)
-
-    -- Setup key mappings
-    require("lsp.mappings").setup(client, bufnr)
-
-    -- Setup highlight
-    require("lsp.highlighter").setup(client, bufnr)
-
-    -- Setup code lenses
-    require("lsp.codelens").setup(client, bufnr)
 
     -- Add server specific attachments below
     if client.name == "ruff_lsp" then
