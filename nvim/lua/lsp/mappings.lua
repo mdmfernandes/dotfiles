@@ -6,8 +6,8 @@ local map = require("utils").map
 -- LSP server mappings
 local function mappings(client, bufnr)
     -- Helper for buffer funtions
-    local function buf_map(mode, target, source)
-        map(mode, target, source, { buffer = bufnr })
+    local function buf_map(mode, target, source, desc)
+        map(mode, target, source, { buffer = bufnr, desc = desc })
     end
 
     local tb = require("telescope.builtin")
@@ -16,41 +16,30 @@ local function mappings(client, bufnr)
     -- Not needed anymore since it's enabled by default
     -- buf_map("n", "K", vim.lsp.buf.hover)
 
-    -- Display signature information about the symbol under the cursor
-    buf_map("n", "<Leader>k", vim.lsp.buf.signature_help)
+    buf_map("n", "<Leader>k", vim.lsp.buf.signature_help,
+        "Display signature information about the symbol under the cursor")
+    buf_map("n", "gd", vim.lsp.buf.definition, "Jump to the definition of the symbol under the cursor")
+    buf_map("n", "gD", vim.lsp.buf.declaration, "Jump to the declaration of the symbol under the cursor")
+    buf_map("n", "gt", tb.lsp_type_definitions, "Jump to the definition of the type of the symbol under the cursor")
+    buf_map("n", "<Leader>rn", vim.lsp.buf.rename, "Rename all references to the symbol under the cursor")
+    buf_map("n", "<Leader>fi", tb.lsp_implementations, "Find all the implementations for the symbol under the cursor")
+    buf_map("n", "gr", tb.lsp_references, "List all the references to the symbol under the cursor")
+    buf_map("n", "<Leader>ca", vim.lsp.buf.code_action, "List code actions available at the current cursor position")
+    buf_map("n", "<Leader>cl", vim.lsp.codelens.run, "Run code lens in the current line")
 
-    -- Jump to the definition of the symbol under the cursor
-    buf_map("n", "gd", vim.lsp.buf.definition)
-
-    -- Jump to the declaration of the symbol under the cursor
-    buf_map("n", "gD", vim.lsp.buf.declaration)
-
-    -- Jump to the definition of the type of the symbol under the cursor
-    buf_map("n", "gt", tb.lsp_type_definitions)
-
-    -- Rename all references to the symbol under the cursor
-    buf_map("n", "<Leader>rn", vim.lsp.buf.rename)
-
-    --  Find all the implementations for the symbol under the cursor.
-    buf_map("n", "<Leader>fi", tb.lsp_implementations)
-
-    -- List all the references to the symbol under the cursor
-    buf_map("n", "gr", tb.lsp_references)
-
-    -- List code actions available at the current cursor position
-    buf_map("n", "<leader>ca", vim.lsp.buf.code_action)
-
-    -- Run the code lens in the current line
-    buf_map("n", "<leader>cl", vim.lsp.codelens.run)
+    -- Language specific mappings
+    if client.name == "clangd" then
+        buf_map("n", "<Leader>ch", "<Cmd>ClangdSwitchSourceHeader<CR>", "Switch source/header (C/C++)")
+        buf_map("n", "<Leader>cs", "<Cmd>ClangdShowSymbolInfo<CR>", "Show symbol info (C/C++)")
+    end
 
     -- Show LSP symbols, if supported.
     local documentSymbol = require("vim.lsp.protocol").Methods.textDocument_documentSymbol
     if client.supports_method(documentSymbol) then
         -- Document symbols. If not supported by the LSP client it uses
         -- Treesitter to show the symbols (defined in telescope.lua).
-        buf_map("n", "<Leader>ls", tb.lsp_document_symbols)
-        -- Worspace symbols
-        buf_map("n", "<Leader>lS", tb.lsp_dynamic_workspace_symbols)
+        buf_map("n", "<Leader>ls", tb.lsp_document_symbols, "Show LSP symbols (document)")
+        buf_map("n", "<Leader>lS", tb.lsp_dynamic_workspace_symbols, "Show LSP symbols (workspace)")
     end
 
     -- Toggle LSP inlay hints, if supported.
@@ -58,7 +47,7 @@ local function mappings(client, bufnr)
     if client.supports_method(inlayHint) then
         buf_map("n", "<Leader>th", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        end)
+        end, "Toggle LSP inlay hints")
     end
 end
 

@@ -9,8 +9,6 @@ return {
         lint.linters_by_ft = {
             ansible = { "ansible_lint" },
             bitbake = { "oelint-adv" },
-            c = { "clangtidy" },
-            cpp = { "clangtidy" },
             dockerfile = { "hadolint" },
             markdown = { "markdownlint" },
             -- sh = { "shellcheck" }, -- bashls (LSP) uses shellcheck for linting
@@ -32,7 +30,7 @@ return {
         }
 
         -- oelint-adv
-        require('lint.linters.oelint-adv').cmd = 'oelint.sh'
+        require("lint.linters.oelint-adv").cmd = "oelint.sh"
 
         --------------------
         -- Custom linters --
