@@ -9,7 +9,7 @@ config.font_size = 15
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = {
     left = "1cell",
-    right = "1cell",
+    right = "0cell",
     top = 0,
     bottom = 0,
 }

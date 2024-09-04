@@ -23,7 +23,7 @@ vim.filetype.add({
         [".*%.inc"] = {
             priority = vim.g.filetype_inc,
             function(path, bufnr)
-                local content = vim.api.nvim_buf_get_lines(bufnr, 0, 50, false)
+                local content = vim.api.nvim_buf_get_lines(bufnr, 0, 100, false)
                 for _, line in ipairs(content) do
                     --  Detect BitBake files by the presence of ".*:append =" or ".*:remove ="
                     if line:match(":append =") or line:match(":remove =") then
