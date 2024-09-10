@@ -60,14 +60,3 @@ function jwtd() {
         echo -e '\e[31m`jq` is not installed and is required\e[0m'
     fi
 }
-
-# Yazi shell wrapper
-# https://yazi-rs.github.io/docs/quick-start#shell-wrapper
-function ya() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-    yazi "$@" --cwd-file="$tmp"
-    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
-}
