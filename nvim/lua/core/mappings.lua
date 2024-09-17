@@ -36,23 +36,6 @@ map("n", "dd", function()
     return vim.api.nvim_get_current_line():match("^%s*$") and '"_dd' or "dd"
 end, { expr = true, desc = "delete current line" })
 
--- Change/delete/substitute/yank into blackhole buffer
--- Change
-map("n", "<Leader>c", '"_c')
-map("v", "<Leader>c", '"_c')
-map("n", "<Leader>C", '"_C')
-map("v", "<Leader>C", '"_C')
--- Delete
-map("n", "<Leader>d", '"_d')
-map("v", "<Leader>d", '"_d')
-map("n", "<Leader>D", '"_D')
-map("v", "<Leader>D", '"_D')
--- Substitute
-map("n", "<Leader>s", '"_s')
-map("v", "<Leader>s", '"_s')
-map("n", "<Leader>S", '"_S')
-map("v", "<Leader>S", '"_S')
-
 -- Hide search highlights
 map("n", "<Leader><Space>", "<Cmd>nohlsearch<CR>")
 
