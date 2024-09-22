@@ -9,6 +9,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+-- Set format options for all files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    group = group,
+    pattern = { "*" },
+    callback = function()
+        -- Remove the following format options:
+        -- o - insert comment leader after 'o' or 'O' in Normal mode
+        -- r - insert comment leader after hitting <Enter> in Insert mode
+        vim.opt_local.formatoptions:remove({ "o", "r" })
+    end
+})
+
 -- Set commentstring for SELinux files, for commenting the files
 vim.api.nvim_create_autocmd({ "FileType" }, {
     group = group,
