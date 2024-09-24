@@ -1,0 +1,22 @@
+# Config file for yamllint
+# see: http://yamllint.readthedocs.io/en/stable/configuration.html
+
+extends: default
+
+# Ignore paths, since yamllint will lint all yaml files in the specified dir.
+ignore: |
+  .git/
+  .tox/
+
+rules:
+  comments:
+    min-spaces-from-content: 1
+  document-start:
+    level: error
+    # don't use document start markers ("---")
+    present: false
+  line-length:
+    allow-non-breakable-inline-mappings: true
+    allow-non-breakable-words: true
+    max: 120
+  truthy: disable

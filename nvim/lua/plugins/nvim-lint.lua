@@ -19,14 +19,19 @@ return {
         ---------------------
         -- Linters options --
         ---------------------
+        local config_dir = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config") .. "/"
+
         -- markdownlint
         lint.linters.markdownlint.args = {
-            "--disable",
-            "MD013", -- disable line length limit
-            "MD024", -- allow multiple headings with the same comment
-            "MD033", -- allow inline HTML
-            "MD041", -- allow non-headers on the first line, e.g. meta section
+            "--config", config_dir .. "markdownlint.yaml",
             "--"
+        }
+
+        -- yamllint
+        lint.linters.yamllint.args = {
+            "--config-file", config_dir .. "yamllint.yaml",
+            "--format", "parsable",
+            "-"
         }
 
         -- oelint-adv
