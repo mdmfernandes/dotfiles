@@ -20,8 +20,7 @@ local servers = {
         init_options = {
             usePlaceholders = true,
             completeUnimported = true,
-            clangdFileStatus = true,
-            fallbackFlags = { "--std=c++17" }
+            clangdFileStatus = true
         },
     },
     gopls = {

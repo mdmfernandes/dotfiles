@@ -28,7 +28,10 @@ local_config.apply(config)
 config.color_scheme = "catppuccin-mocha"
 
 -- Font
-config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Noto Color Emoji" })
+config.font = wezterm.font_with_fallback({ "JetBrains Mono", "Noto Color Emoji", "DengXian" })
+
+-- Don't complain about missing glyphs
+config.warn_about_missing_glyphs = false
 
 -- Return the configuration to wezterm
 return config
