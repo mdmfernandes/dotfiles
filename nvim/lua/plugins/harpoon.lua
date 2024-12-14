@@ -24,8 +24,8 @@ return {
                 vim.log.levels.INFO)
         end, { desc = "Harpoon mark current file" })
         map("n", "<Leader>h", ui.toggle_quick_menu, { desc = "Harpoon toggle quick menu" })
-        map("", "<C-h>", ui.nav_prev, { desc = "Harpoon goto next marker" })
-        map("", "<C-l>", ui.nav_next, { desc = "Harpoon goto previous marker" })
+        map("", "<S-h>", ui.nav_prev, { desc = "Harpoon goto next marker" })
+        map("", "<S-l>", ui.nav_next, { desc = "Harpoon goto previous marker" })
 
         -- Navigate windows
         for i = 1, 9 do

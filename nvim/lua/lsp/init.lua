@@ -23,6 +23,7 @@ local servers = {
             clangdFileStatus = true
         },
     },
+    -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
     gopls = {
         settings = {
             gopls = {
@@ -48,12 +49,9 @@ local servers = {
                     rangeVariableTypes = true,
                 },
                 -- Enable all analyses except "shadow"
+                -- See: https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
                 analyses = {
-                    fieldalignment = true,
-                    nilness = true,
-                    unusedparams = true,
                     unusedvariable = true,
-                    unusedwrite = true,
                     useany = true,
                 },
                 staticcheck = true,
@@ -119,7 +117,7 @@ local servers = {
             },
         },
     },
-    ruff_lsp = true, -- Python linter and formatter. Replaces: flake8, pylint (to a certain degree), black
+    ruff = true, -- Python linter and formatter. Replaces: flake8, pylint (to a certain degree), black
     rust_analyzer = {
         settings = {
             ["rust-analyzer"] = {
@@ -169,7 +167,7 @@ function LSP.on_attach(client, bufnr)
     require("lsp.context").setup(client, bufnr)
 
     -- Add server specific attachments below
-    if client.name == "ruff_lsp" then
+    if client.name == "ruff" then
         -- Disable hover in favor of Pyright
         client.server_capabilities.hoverProvider = false
     end

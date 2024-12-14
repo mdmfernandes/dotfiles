@@ -23,7 +23,7 @@ function I.setup(servers, global_opts)
     local mason_lspconfig = require("mason-lspconfig")
     mason_lspconfig.setup({
         -- Ensure that the following LSP servers are always installed
-        ensure_installed = { "bashls", "jsonls", "ruff_lsp" }
+        ensure_installed = { "bashls", "jsonls", "ruff" }
     })
 
     mason_lspconfig.setup_handlers({
