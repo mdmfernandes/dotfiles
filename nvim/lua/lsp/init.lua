@@ -173,14 +173,8 @@ function LSP.on_attach(client, bufnr)
     end
 end
 
--- Setup LSP client capabilities
-LSP.capabilities = vim.lsp.protocol.make_client_capabilities()
--- Add nvim-cmp to the LS capabilities with cmp-nvim-lsp
-local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if status_cmp_ok then
-    LSP.capabilities.textDocument.completion.completionItem.snippetSupport = true
-    LSP.capabilities = cmp_nvim_lsp.default_capabilities(LSP.capabilities)
-end
+-- Setup LSP client capabilities, with blink.cmp
+LSP.capabilities = require("blink.cmp").get_lsp_capabilities()
 
 -- Setup options for LSP clients
 local opts = {

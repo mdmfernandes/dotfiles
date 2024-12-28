@@ -1,17 +1,13 @@
 -- Neogen: https://github.com/danymat/neogen
 return {
     "danymat/neogen",
-    dependencies = {
-        "L3MON4D3/LuaSnip",
-        "nvim-treesitter/nvim-treesitter"
-    },
     version = "*", -- Only follow stable versions
     opts = {
-        snippet_engine = "luasnip",
+        snippet_engine = "nvim",
         languages = {
             python = {
                 template = {
-                    annotation_convention = "reST",
+                    annotation_convention = "google_docstrings",
                 },
             },
         },
