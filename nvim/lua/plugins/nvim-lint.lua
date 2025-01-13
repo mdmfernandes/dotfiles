@@ -11,6 +11,7 @@ return {
             bitbake = { "oelint-adv" },
             dockerfile = { "hadolint" },
             markdown = { "markdownlint" },
+            python = { "mypy" },
             -- sh = { "shellcheck" }, -- bashls (LSP) uses shellcheck for linting
             yaml = { "yamllint" },
             selinux = { "selint" },
