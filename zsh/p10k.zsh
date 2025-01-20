@@ -1522,7 +1522,7 @@
   # Show Yocto SDK version
   function prompt_yocto_sdk() {
     if [[ ! -z "${OECORE_SDK_VERSION}" ]]; then
-        p10k segment -f 032 -i '🚗' -t "${OECORE_SDK_VERSION}"
+        p10k segment -f 032 -i '🛠 ' -t "${OECORE_SDK_VERSION}"
     fi
   }
 
