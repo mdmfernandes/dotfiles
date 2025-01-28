@@ -1,0 +1,24 @@
+theme = "catppuccin-mocha"
+
+# Windows
+window-decoration = false
+window-padding-x = 5,0
+window-padding-y = 0,0
+window-padding-balance = true
+
+# Font
+# Default is JetBrains Mono
+# font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+
+# Keybinds
+keybind = performable:ctrl+c=copy_to_clipboard
+keybind = ctrl+v=paste_from_clipboard
+
+# Others
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+
+# Append to config (keep this at the EOF)
+config-file = ?macos.config
+config-file = ?custom.config
