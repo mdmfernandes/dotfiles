@@ -43,6 +43,11 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias egrep='egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias fgrep='fgrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 
+# Man pages
+# `GROFF_NO_SGR=1` is required in some terminals to show color on man pages
+alias man='GROFF_NO_SGR=1 man'
+alias help='man'
+
 # ripgrep
 if exists rg; then
     alias rga='rg --text'   # Treat binary files as text
@@ -90,7 +95,7 @@ alias svi='sudo -e' # Requires 'EDITOR=nvim'
 # Show all ports
 alias ports='ss -tulpan'
 
-## Securtiy
+## Security
 # Confirmation before override
 alias mv='mv -i'
 alias rm='rm -i'
@@ -221,7 +226,6 @@ alias tk='tmux kill-session -t'
 
 # Other commands
 alias h='history'
-alias help='man'
 alias j='jobs -l'
 alias :q='exit'
 alias copy='xclip -in -selection clipboard'
