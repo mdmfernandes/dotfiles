@@ -307,6 +307,12 @@ if [[ -r "${ZSH_USERDATA}/plugins/zsh-history-substring-search/zsh-history-subst
     HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=white,bold'
 fi
 
+# zsh-vi-mode
+if [[ -r "${ZSH_USERDATA}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ]]; then
+    ZVM_INIT_MODE="sourcing" # need to use this otherwise FZF doesn't work in insert mode
+    . ${ZSH_USERDATA}/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+fi
+
 #### Source aliases, functions, and user custom configurations ################
 [[ -r "${ZDOTDIR}/aliases.zsh" ]] && source "${ZDOTDIR}/aliases.zsh"
 [[ -r "${ZDOTDIR}/functions.zsh" ]] && source "${ZDOTDIR}/functions.zsh"
@@ -316,6 +322,9 @@ fi
 #### Applications #############################################################
 # Less
 export LESS='-R -i'     # -i is for insensitive search
+
+# Man pages - show location in document as percentage
+export MANPAGER='less -s -M +Gg'
 
 # FZF
 if exists fzf; then
