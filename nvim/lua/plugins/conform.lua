@@ -14,14 +14,15 @@ return {
         },
     },
     opts = {
+        -- Conform runs the first available formatter in the list
         formatters_by_ft = {
-            css = { "prettier" },
-            html = { "prettier" },
-            javascript = { "prettier" },
-            json = { "prettier" },
-            markdown = { "prettier" },
+            css = { "prettierd", "prettier" },
+            html = { "prettierd", "prettier" },
+            javascript = { "prettierd", "prettier" },
+            json = { "prettierd", "prettier" },
+            markdown = { "prettierd", "prettier" },
             -- sh = { "shfmt" }, -- bashls (LSP) uses shfmt for formatting
-            yaml = { "prettier" },
+            yaml = { "prettierd", "prettier" },
 
         },
         format_on_save = {
