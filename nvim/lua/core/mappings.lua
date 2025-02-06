@@ -39,9 +39,10 @@ end, { expr = true, desc = "delete current line" })
 -- Hide search highlights
 map("n", "<Leader><Space>", "<Cmd>nohlsearch<CR>")
 
--- Remove mapping from macros recording and ex mode
+-- Remove mapping from macros recording, ex mode, F1
 map("n", "q", "<Nop>")
 map("n", "Q", "<Nop>")
+map({ "n", "i", "v" }, "<F1>", "<Nop>")
 
 -- Don't lose selection when shifting
 map("x", "<", "<gv")
@@ -54,7 +55,7 @@ map("n", "N", "Nzz")
 -- Use operator pending mode to visually select the whole buffer (All)
 -- e.g. dA = delete whole buffer, yA = copy whole buffer
 map("o", "A", "<Cmd>normal! mzggVG<CR>`z")
-map("x", "A", "<Cmd>normal! mzggVG<CR>`z")
+map("x", "A", "<Cmd>normal! ggVG<CR>")
 
 -- Navigation
 -- Navigate between spell errors
@@ -68,11 +69,11 @@ map("n", "ºc", "]c")
 map("n", "çd", function()
     vim.diagnostic.goto_prev()
     vim.cmd("normal! zz")
-end)
+end, { desc = "Go to previous diagnostic" })
 map("n", "ºd", function()
     vim.diagnostic.goto_next()
     vim.cmd("normal! zz")
-end)
+end, { desc = "Go to next diagnostic" })
 
 map("n", "<F7>", function()
     vim.diagnostic.show()
