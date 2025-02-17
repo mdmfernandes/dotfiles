@@ -1,5 +1,24 @@
-[plugin]
-deps = [{ use = "yazi-rs/plugins:full-border", rev = "b659791" }]
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "beb586a"
+hash = "ae9e1d0c6bfd68cdebc98cc684c22b45"
 
-[flavor]
-deps = []
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "beb586a"
+hash = "f28138c2e11e87962b66d583fef724c3"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "beb586a"
+hash = "771f18427fb75fb19990ce602bb322f4"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "beb586a"
+hash = "aef2b1a805b80cce573bb766f1459d88"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "1a419b2"
+hash = "c40e434318a8ceffd01842f8dfb2390e"
