@@ -9,11 +9,10 @@ window-padding-balance = true
 # Font
 # Default is JetBrains Mono
 # font-family = "JetBrainsMono Nerd Font Mono"
-font-size = 14
+font-size = 13
 
 # Keybinds
-keybind = performable:ctrl+c=copy_to_clipboard
-keybind = ctrl+v=paste_from_clipboard
+# keybind = performable:ctrl+c=copy_to_clipboard
 
 # Others
 mouse-hide-while-typing = true
