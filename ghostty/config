@@ -12,6 +12,9 @@ window-padding-balance = true
 font-size = 13
 
 # Keybinds
+# Switch 'open_config' from 'Ctrl+, to Ctrl+Alt+,'
+keybind = ctrl+comma=unbind
+keybind = ctrl+alt+comma=open_config
 # keybind = performable:ctrl+c=copy_to_clipboard
 
 # Others
