@@ -1,0 +1,18 @@
+# pwndbg
+source ~/src/pwndbg/gdbinit.py
+
+set show-flags on
+#set context-clear-screen on
+
+# History
+set history save on
+set history size unlimited
+set history remove-duplicates unlimited
+set history filename ~/.gdb_history
+
+# TMUX
+source ~/src/pwndbgtmux.py
+
+# GEP
+# Please make sure the following line is always the last in this file
+source ~/src/GEP/gdbinit-gep.py
