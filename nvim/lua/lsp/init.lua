@@ -63,6 +63,17 @@ local servers = {
             debounce_text_changes = 200,
         }
     },
+    harper_ls = {
+        settings = {
+            ["harper-ls"] = {
+                linters = {
+                    BoringWords = true,
+                    SentenceCapitalization = false,
+                    ToDoHyphen = false,
+                }
+            }
+        }
+    },
     jsonls = true,
     lua_ls = {
         settings = {

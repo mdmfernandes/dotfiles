@@ -30,6 +30,7 @@ return {
             Event = " ",
             Operator = " ",
             TypeParameter = " "
-        }
+        },
+        depth_limit = 3,
     }
 }
