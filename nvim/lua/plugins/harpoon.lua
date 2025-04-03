@@ -1,40 +1,53 @@
 -- harpoon: https://github.com/ThePrimeagen/harpoon
 return {
     "ThePrimeagen/harpoon",
-    config = function()
-        vim.cmd("highlight! HarpoonInactive guibg=NONE guifg=#63698c")
-        vim.cmd("highlight! HarpoonActive guibg=NONE guifg=white")
-        vim.cmd("highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7")
-        vim.cmd("highlight! HarpoonNumberInactive guibg=NONE guifg=#7aa2f7")
-        vim.cmd("highlight! TabLineFill guibg=NONE guifg=white")
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim", "jasonpanosso/harpoon-tabline.nvim" },
+    opts = {
+        settings = {
+            save_on_toggle = true
+        }
+    },
+    config = function(_, opt)
+        local harpoon = require("harpoon")
 
-        require("harpoon").setup({
-            tabline = true,
-        })
+        harpoon.setup(opt)
+        require("harpoon-tabline").setup({ use_editor_color_scheme = false })
 
         -- Create mappings
         local map = require("utils").map
 
-        local mark = require("harpoon.mark")
-        local ui = require("harpoon.ui")
-
         map("n", "<Leader>H", function()
-            mark.add_file()
-            vim.notify(string.format("File marked as '%s'", mark.get_current_index()),
+            harpoon:list():add()
+            vim.notify(string.format("File marked as '%s'", harpoon:list():length()),
                 vim.log.levels.INFO)
         end, { desc = "Harpoon mark current file" })
-        map("n", "<Leader>h", ui.toggle_quick_menu, { desc = "Harpoon toggle quick menu" })
-        map("", "<S-h>", ui.nav_prev, { desc = "Harpoon goto next marker" })
-        map("", "<S-l>", ui.nav_next, { desc = "Harpoon goto previous marker" })
+        map("n", "<Leader>h", function()
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+        end, { desc = "Harpoon toggle quick menu" })
+        map("", "<C-h>", function()
+            harpoon:list():prev()
+        end, { desc = "Harpoon goto pevious marker" })
+        map("", "<C-l>", function()
+            harpoon:list():next()
+        end, { desc = "Harpoon goto next marker" })
 
         -- Navigate windows
         for i = 1, 9 do
             map("n",
                 string.format("<Leader>%s", i),
                 function()
-                    ui.nav_file(i)
+                    harpoon:list():select(i)
                 end, { desc = string.format("Harpoon navigate to marker %d", i) }
             )
         end
+
+        -- Custom colors
+        vim.api.nvim_set_hl(0, "HarpoonActive", { foreground = "white", background = "NONE" })
+        vim.api.nvim_set_hl(0, "HarpoonInactive", { foreground = "#63698c", background = "NONE" })
+        vim.api.nvim_set_hl(0, "HarpoonNumberActive", { foreground = "#7aa2f7", background = "NONE" })
+        vim.api.nvim_set_hl(0, "HarpoonNumberInactive", { foreground = "#7aa2f7", background = "NONE" })
+        vim.api.nvim_set_hl(0, "TabLineFill", { foreground = "white", background = "NONE" })
     end,
+
 }
