@@ -13,6 +13,9 @@ require("core.diagnostic")
 require("core.filetype")
 require("core.autocmd")
 
+-- Load LSP
+require("lsp")
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 

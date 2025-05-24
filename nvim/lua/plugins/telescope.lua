@@ -80,9 +80,9 @@ return {
                             ["<C-y>"] = require("telescope-undo.actions").yank_additions,
                             ["<S-y>"] = require("telescope-undo.actions").yank_deletions,
                             ["<CR>"] = require("telescope-undo.actions").restore,
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             },
         })
 
@@ -114,23 +114,24 @@ return {
         -- Find symbols
         map("n", "<Leader>ls", tb.treesitter, { desc = "Telescope find document symbols" })
         -- List previously opened files
-        map("n", "<Leader>fo", tb.oldfiles)
+        map("n", "<Leader>fo", tb.oldfiles, { desc = "List previously open files" })
         -- Search buffers
-        map("n", "<Leader>bb", tb.buffers)
+        map("n", "<Leader>bb", tb.buffers, { desc = "List open buffers" })
         -- Search registers
-        map("n", "<Leader>rr", tb.registers)
+        map("n", "<Leader>rr", tb.registers, { desc = "List vim rgisters" })
         -- Git
-        map("n", "<Leader>gc", tb.git_commits)
-        map("n", "<Leader>gs", tb.git_status)
+        map("n", "<Leader>gc", tb.git_commits, { desc = "List git commits with diff preview" })
+        map("n", "<Leader>gs", tb.git_status, { desc = "List current changes per file with diff preview and add action" })
         -- Diagnostics
-        map("n", "<Leader>fd", function() tb.diagnostics({ bufnr = 0 }) end) -- current buffer
-        map("n", "<Leader>fD", tb.diagnostics)                               -- all diagnostics from workspace
+        map("n", "<Leader>fd", function() tb.diagnostics({ bufnr = 0 }) end,
+            { desc = "Show diagnostics from current buffer" })
+        map("n", "<Leader>fD", tb.diagnostics, { desc = "Show diagnostics from workspace" })
         -- Undo
-        map("n", "<Leader>u", telescope.extensions.undo.undo)
+        map("n", "<Leader>u", telescope.extensions.undo.undo, { desc = "Show undo history" })
         -- Others
-        map("n", "<Leader>fh", tb.help_tags)                       -- nvim help
-        map("n", "<Leader>fk", tb.keymaps)                         -- nvim key mappings
-        map("n", "<Leader>fn", telescope.extensions.notify.notify) -- show notifications
-        map("n", "<Leader>ft", "<Cmd>TodoTelescope<CR>")           -- todo messages
+        map("n", "<Leader>fh", tb.help_tags, { desc = "List available help tags" })
+        map("n", "<Leader>fk", tb.keymaps, { desc = "List key mappings" })
+        map("n", "<Leader>fn", telescope.extensions.notify.notify, { desc = "List vim notifications" })
+        map("n", "<Leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "List to do comments" })
     end
 }

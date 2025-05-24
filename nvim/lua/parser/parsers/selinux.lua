@@ -1,7 +1,7 @@
--- Format SELinux logs
-local F = {}
+-- Parse SELinux logs
+local P = {}
 
-function F.format(lines)
+function P.parse(lines)
     for i, line in ipairs(lines) do
         -- Simplify lines starting with "...avc:" to just "avc:"
         lines[i] = line:gsub("^.*avc:", "avc:")
@@ -12,4 +12,4 @@ function F.format(lines)
     return lines
 end
 
-return F
+return P

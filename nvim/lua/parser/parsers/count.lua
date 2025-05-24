@@ -1,7 +1,7 @@
 -- Count unique lines
-local F = {}
+local P = {}
 
-function F.format(lines)
+function P.parse(lines)
     local counts = {}
     local unique_lines = {}
 
@@ -32,4 +32,4 @@ function F.format(lines)
     return sorted_lines
 end
 
-return F
+return P

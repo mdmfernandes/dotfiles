@@ -2,11 +2,10 @@
 local C = {}
 
 local group = vim.api.nvim_create_augroup("LSPCodeLens", { clear = true })
-local codeLens = require("vim.lsp.protocol").Methods.textDocument_codeLens
 
 -- Code lenses
 local function code_lens(client, bufnr)
-    if client.supports_method(codeLens) then
+    if client.server_capabilities.codeLensProvider then
         vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
             group = group,
             callback = function()
