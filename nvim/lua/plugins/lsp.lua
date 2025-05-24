@@ -1,19 +1,4 @@
 return {
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = { "saghen/blink.cmp" },
-        config = function()
-            require("lsp").setup()
-        end,
-    },
-
-    -- LSP servers package manager
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-
-    -- Neovim setup for init.lua and plugin development
-    "folke/neodev.nvim",
-
     -- LSP progress status
     {
         "j-hui/fidget.nvim",
@@ -22,4 +7,17 @@ return {
         opts = {}
     },
 
+    -- LSP servers package manager
+    {
+        "williamboman/mason.nvim",
+        opts = {
+            ui = {
+                icons = {
+                    package_installed = require("icons").lsp.source_installed,
+                    package_pending = require("icons").lsp.source_pending,
+                    package_uninstalled = require("icons").lsp.source_uninstalled
+                },
+            },
+        },
+    },
 }
