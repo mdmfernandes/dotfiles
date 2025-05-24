@@ -20,7 +20,7 @@ panes = {
     .strip()
     .split(":"),
     "backtrace": os.popen(
-        ' tmux split-window -v -d -P -F "#{pane_id}:#{pane_tty}" -t -1 -l 20% "cat -"'
+        ' tmux split-window -v -d -P -F "#{pane_id}:#{pane_tty}" -t -1 -l 10% "cat -"'
     )
     .read()
     .strip()
@@ -36,7 +36,7 @@ contextoutput("legend", panes["regs"][1], True)
 contextoutput("expressions", panes["regs"][1], True, "top", False)
 
 # To see more options to customize run `theme` and `config` in gdb
-pwndbg.config.context_stack_lines.value = 10
+# pwndbg.config.context_stack_lines.value = 10
 # Give backtrace a little more color
 pwndbg.config.backtrace_prefix_color.value = "red,bold"
 pwndbg.config.backtrace_frame_label_color.value = "green"
