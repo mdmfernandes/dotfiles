@@ -44,7 +44,6 @@ return {
                         "fd",
                         "--type",
                         "f",
-                        "--strip-cwd-prefix", -- don't show the CWD prefix
                         "--hidden",
                         "--no-ignore",
                         "--exclude",
@@ -126,6 +125,8 @@ return {
         map("n", "<Leader>fd", function() tb.diagnostics({ bufnr = 0 }) end,
             { desc = "Show diagnostics from current buffer" })
         map("n", "<Leader>fD", tb.diagnostics, { desc = "Show diagnostics from workspace" })
+        -- Marks
+        map("n", "<Leader>fm", tb.marks)
         -- Undo
         map("n", "<Leader>u", telescope.extensions.undo.undo, { desc = "Show undo history" })
         -- Others

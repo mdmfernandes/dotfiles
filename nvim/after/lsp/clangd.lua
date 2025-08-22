@@ -76,7 +76,8 @@ return {
     init_options = {
         usePlaceholders = true,
         completeUnimported = true,
-        clangdFileStatus = true
+        clangdFileStatus = true,
+        offsetEncoding = "utf-16"
     },
     on_attach = function()
         vim.api.nvim_buf_create_user_command(0, "LspClangdSwitchSourceHeader", function()

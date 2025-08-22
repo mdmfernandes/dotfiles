@@ -67,7 +67,6 @@ o.swapfile = false
 --------------------
 -- Spell Checking --
 --------------------
--- Currently using harper-ls
--- o.spell = true
--- o.spelllang = "en,pt_pt"
--- o.spellsuggest = "10"
+o.spell = true
+o.spelllang = "en"
+o.spellsuggest = "10"

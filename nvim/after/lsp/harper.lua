@@ -43,6 +43,7 @@ return {
             linters = {
                 BoringWords = true,
                 SentenceCapitalization = false,
+                SpellCheck = false,
                 ToDoHyphen = false,
             },
         },
