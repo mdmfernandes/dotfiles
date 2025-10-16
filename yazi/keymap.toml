@@ -1,54 +1,33 @@
 # Search
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "s"
 run = "search --via=fd --args='--full-path'"
 desc = "Search files by name via fd"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "z"
 run = "plugin fzf"
 desc = "Jump to a file/directory via fzf"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "Z"
 run = "plugin zoxide"
 desc = "Jump to a directory via zoxide"
 
 # Run shell
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "!"
 run  = 'shell "$SHELL" --block'
 desc = "Open shell here"
 
 # smart-enter: https://github.com/yazi-rs/plugins/tree/main/smart-enter.yazi
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "l"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 # chmod: https://github.com/yazi-rs/plugins/tree/main/chmod.yazi
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "c", "m" ]
 run  = "plugin chmod"
 desc = "Chmod on selected files"
-
-# Tabs
-[[manager.prepend_keymap]]
-on = "ç"
-run = "tab_switch -1 --relative"
-desc = "Switch to the previous tab"
-
-[[manager.prepend_keymap]]
-on = "º"
-run = "tab_switch 1 --relative"
- desc = "Switch to the next tab"
-
-[[manager.prepend_keymap]]
-on = "Ç"
-run = "tab_swap -1"
-desc = "Swap current tab with previous tab"
-
-[[manager.prepend_keymap]]
-on = "ª"
-run = "tab_swap 1"
-desc = "Swap current tab with next tab"

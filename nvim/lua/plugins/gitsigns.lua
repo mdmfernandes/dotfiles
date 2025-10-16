@@ -15,9 +15,9 @@ return {
                 end
 
                 -- Navigation
-                buf_map("n", "çg", function()
+                buf_map("n", "[g", function()
                     if vim.wo.diff then
-                        return "çg"
+                        return "[g"
                     end
                     vim.schedule(function()
                         gs.prev_hunk()
@@ -25,9 +25,9 @@ return {
                     return "<Ignore>"
                 end, { expr = true, desc = "Goto previous git hunk" })
 
-                buf_map("n", "ºg", function()
+                buf_map("n", "]g", function()
                     if vim.wo.diff then
-                        return "ºg"
+                        return "]g"
                     end
                     vim.schedule(function()
                         gs.next_hunk()

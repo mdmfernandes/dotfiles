@@ -55,5 +55,6 @@ vim.lsp.enable({
     "luals",
     "pyright",
     "ruff",
+    "rust_analyzer",
     "yamlls"
 })

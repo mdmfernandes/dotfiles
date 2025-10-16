@@ -24,7 +24,7 @@ local function format_document(client, bufnr, filter)
                 vim.lsp.buf.format({
                     bufnr = bufnr,
                     filter = filter,
-                    timeout_ms = 500,
+                    timeout_ms = 1000,
                 })
                 print_formatter(client)
             end,

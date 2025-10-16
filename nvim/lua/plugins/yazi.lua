@@ -13,7 +13,7 @@ return {
             {
                 "<Leader>.",
                 "<Cmd>Yazi cwd<CR>",
-                desc = "Open yazi in nvim working directory",
+                desc = "Open yazi in working directory",
             },
             {
                 "<C-.>",
