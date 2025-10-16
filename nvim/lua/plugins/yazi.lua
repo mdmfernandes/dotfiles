@@ -6,14 +6,14 @@ return {
         event = "VeryLazy",
         keys = {
             {
-                "<Leader>-",
+                "<Leader>,",
                 "<Cmd>Yazi<CR>",
                 desc = "Open yazi at the current file location",
             },
             {
                 "<Leader>.",
                 "<Cmd>Yazi cwd<CR>",
-                desc = "Open yazi in nvim working directory",
+                desc = "Open yazi in working directory",
             },
             {
                 "<C-.>",

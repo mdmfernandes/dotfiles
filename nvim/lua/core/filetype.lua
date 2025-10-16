@@ -31,6 +31,7 @@ vim.filetype.add({
                     end
                 end
             end
-        }
+        },
+        ["%.bashrc%..*"] = "sh"
     }
 })

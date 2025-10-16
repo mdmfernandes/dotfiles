@@ -22,16 +22,16 @@ map("n", "<C-Right>", "<Cmd>vertical resize -3<CR>")
 map("n", "<C-\\>", "<Cmd>e #<CR>")
 
 -- Move lines around
-map("n", "çm", "<Cmd>execute 'move -1-'. v:count1<CR>")
-map("v", "<S-k>", ":m '<-2<CR>gv=gv")
-map("n", "ºm", "<Cmd>execute 'move +'. v:count1<CR>")
-map("v", "<S-j>", ":m '>+1<CR>gv=gv")
+-- map("n", "[m", "<Cmd>execute 'move -1-'. v:count1<CR>")
+-- map("v", "<S-k>", ":m '<-2<CR>gv=gv")
+-- map("n", "]m", "<Cmd>execute 'move +'. v:count1<CR>")
+-- map("v", "<S-j>", ":m '>+1<CR>gv=gv")
 
 -- Add empty lines
-map("n", "ç<Space>", "<Cmd>put! =repeat(nr2char(10), v:count1)<CR>")
-map("n", "º<Space>", "<Cmd>put =repeat(nr2char(10), v:count1)<CR>")
+map("n", "[<Space>", "<Cmd>put! =repeat(nr2char(10), v:count1)<CR>")
+map("n", "]<Space>", "<Cmd>put =repeat(nr2char(10), v:count1)<CR>")
 
--- Smart delete - add deleted empty lines to the  blackhole ("_") register
+-- Smart delete - add deleted empty lines to the black hole ("_") register
 map("n", "dd", function()
     return vim.api.nvim_get_current_line():match("^%s*$") and '"_dd' or "dd"
 end, { expr = true, desc = "delete current line" })
@@ -57,21 +57,13 @@ map("n", "N", "Nzz")
 map("o", "A", "<Cmd>normal! mzggVG<CR>`z")
 map("x", "A", "<Cmd>normal! ggVG<CR>")
 
--- Navigation
--- Navigate between spell errors
-map("n", "çs", "[s")
-map("n", "ºs", "]s")
--- Navigate between changes
-map("n", "çc", "[c")
-map("n", "ºc", "]c")
-
 -- Diagnostics (center diagnostic in the screen)
-map("n", "çd", function()
-    vim.diagnostic.goto_prev()
+map("n", "[d", function()
+    vim.diagnostic.jump({ count = -1, float = true })
     vim.cmd("normal! zz")
 end, { desc = "Go to previous diagnostic" })
-map("n", "ºd", function()
-    vim.diagnostic.goto_next()
+map("n", "]d", function()
+    vim.diagnostic.jump({ count = 1, float = true })
     vim.cmd("normal! zz")
 end, { desc = "Go to next diagnostic" })
 
@@ -89,3 +81,6 @@ map("n", "<Leader>x", function()
     vim.cmd("!chmod u+x %")
     vim.notify(string.format("Changing file '%s' to executable (u+x)!", vim.fn.expand("%:p")), vim.log.levels.INFO)
 end, { desc = "Change current file to executable (u+x)" })
+
+-- Status of LSPs / formatters / linters
+map("n", "<Leader>\\", require("core.status").setup, { desc = "Print active LSP sources, formatters, and linters" })

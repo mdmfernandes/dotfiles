@@ -393,6 +393,10 @@ if exists go; then
     PATH=${PATH}:${GOPATH}/bin
 fi
 
+# Add $HOME/.local/bin to PATH, if it exists
+if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
 
 #### Export $PATH #############################################################
 export -U PATH

@@ -1,9 +1,9 @@
 -- Sort lines uniquely
-local F = {}
+local P = {}
 
-function F.format(lines)
+function P.parse(lines)
     table.sort(lines)
     return vim.fn.uniq(lines)
 end
 
-return F
+return P

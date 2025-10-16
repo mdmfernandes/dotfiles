@@ -2,10 +2,10 @@
 return {
     "saghen/blink.cmp",
     -- optional: provides snippets for the snippet source
-    dependencies = "rafamadriz/friendly-snippets",
+    dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot" },
 
     -- use a release tag to download pre-built binaries
-    version = "*",
+    version = "1.*",
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -69,13 +69,19 @@ return {
 
         },
         sources = {
-            default = { "lsp", "path", "snippets", "buffer" },
+            default = { "lsp", "copilot", "path", "snippets", "buffer" },
             providers = {
                 buffer = {
                     name = "Buffer",
                     module = "blink.cmp.sources.buffer",
                     -- max_items = 5,
-                    min_keyword_length = 3,
+                    -- min_keyword_length = 3,
+                },
+                copilot = {
+                    name = "copilot",
+                    module = "blink-copilot",
+                    score_offset = 100,
+                    async = true,
                 },
                 cmdline = {
                     name = "cmdline",
