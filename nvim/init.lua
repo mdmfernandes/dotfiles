@@ -51,6 +51,9 @@ require("lazy").setup("plugins", {
             },
         },
     },
+    rocks = {
+        enabled = false
+    },
 })
 
 -- netrw configuration (useful when netrwPlugin is enabled)
