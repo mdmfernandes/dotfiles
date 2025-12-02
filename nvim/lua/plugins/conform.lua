@@ -26,7 +26,7 @@ return {
 
         },
         format_on_save = {
-            timeout_ms = 500,
+            timeout_ms = 1000,
             -- If no formatter is available for the filetype, use the LSP formatter as fallback
             lsp_fallback = true,
         },

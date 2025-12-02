@@ -84,10 +84,9 @@ alias path='printf ${PATH//:/\\n}'
 
 # Vim
 if exists nvim; then
-    alias vim='nvim'
+    alias nvi='nvim'
     alias vimdiff='nvim -d'
 fi
-alias vi='vim'
 alias edit='vim'
 # `sudo -e` is the same as `sudoedit` but also works in MacOS
 alias svi='sudo -e' # Requires 'EDITOR=nvim'

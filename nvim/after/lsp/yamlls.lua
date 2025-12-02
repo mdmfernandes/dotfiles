@@ -17,6 +17,8 @@ return {
                 "docker-compose*.{yml,yaml}",
                 ["https://raw.githubusercontent.com/pycontribs/zuul-lint/master/zuul_lint/zuul-schema.json"] =
                 { "*zuul.d/*.yaml", "*/.zuul.yaml" },
+                ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] =
+                { ".gitlab-ci.yml" },
             },
         },
         -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
