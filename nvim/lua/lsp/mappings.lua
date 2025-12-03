@@ -37,7 +37,7 @@ local function mappings(client, bufnr)
 
     -- Show LSP symbols, if supported.
     local documentSymbol = require("vim.lsp.protocol").Methods.textDocument_documentSymbol
-    if client.supports_method(documentSymbol) then
+    if client:supports_method(documentSymbol) then
         -- Document symbols. If not supported by the LSP client it uses
         -- Treesitter to show the symbols (defined in telescope.lua).
         buf_map("n", "<Leader>ls", tb.lsp_document_symbols, "Show LSP symbols (document)")
@@ -46,7 +46,7 @@ local function mappings(client, bufnr)
 
     -- Toggle LSP inlay hints, if supported.
     local inlayHint = require("vim.lsp.protocol").Methods.textDocument_inlayHint
-    if client.supports_method(inlayHint) then
+    if client:supports_method(inlayHint) then
         buf_map("n", "<Leader>th", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end, "Toggle LSP inlay hints")
