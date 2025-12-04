@@ -7,6 +7,8 @@ return {
     root_markers = { ".git" },
     settings = {
         yaml = {
+            -- Enable built-in formatter
+            format = { enable = true },
             validate = true,
             schemaStore = {
                 enable = false,

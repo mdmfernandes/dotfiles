@@ -19,10 +19,10 @@ return {
             css = { "prettierd", "prettier" },
             html = { "prettierd", "prettier" },
             javascript = { "prettierd", "prettier" },
-            json = { "prettierd", "prettier" },
+            -- json = { "prettierd", "prettier" }, -- jsonls (LSP) uses its own formatter
             markdown = { "prettierd", "prettier" },
             -- sh = { "shfmt" }, -- bashls (LSP) uses shfmt for formatting
-            yaml = { "prettierd", "prettier" },
+            -- yaml = { "prettierd", "prettier" }, -- yamlls (LSP) uses its own formatter
 
         },
         format_on_save = {
