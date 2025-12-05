@@ -14,15 +14,20 @@ return {
             nerd_font_variant = "mono"
         },
         completion = {
+            accept = {
+                auto_brackets = {
+                    enabled = true,
+                },
+            },
             -- Show documentation when selecting a completion item
             documentation = {
                 auto_show = true,
                 auto_show_delay_ms = 200,
                 window = { border = "rounded" }
             },
-            -- ghost_text = {
-            --     enabled = true,
-            -- },
+            ghost_text = {
+                enabled = true,
+            },
             list = {
                 selection = {
                     preselect = function(ctx)
@@ -48,11 +53,12 @@ return {
                             end,
                         },
                     },
+                    treesitter = { "lsp" },
                 },
             },
         },
         keymap = {
-            preset = "enter",
+            preset = "none",
 
             ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
             ["<C-e>"] = { "hide", "fallback" },
@@ -66,7 +72,6 @@ return {
 
             ["<C-k>"] = { "scroll_documentation_up", "fallback" },
             ["<C-j>"] = { "scroll_documentation_down", "fallback" },
-
         },
         sources = {
             default = { "lsp", "copilot", "path", "snippets", "buffer" },
@@ -87,7 +92,7 @@ return {
                     name = "cmdline",
                     module = "blink.cmp.sources.cmdline",
                     max_items = 10,
-                    min_keyword_length = 3,
+                    -- min_keyword_length = 1,
                 },
             },
         },
