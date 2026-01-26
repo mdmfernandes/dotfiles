@@ -222,10 +222,6 @@ PROMPT_EOL_MARK='%S$%s'
 
 
 #### ZSH Plugins ##############################################################
-# zoxide
-if exists zoxide; then
-    eval "$(zoxide init zsh)"
-fi
 
 # Syntax Highlighting
 if [[ -r "${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
@@ -320,6 +316,12 @@ fi
 
 
 #### Applications #############################################################
+
+# Add $HOME/.local/bin to PATH, if it exists. Some apps are installed here
+if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 # Less
 export LESS='-R -i'     # -i is for insensitive search
 
@@ -387,15 +389,15 @@ if exists gpgconf; then
     gpgconf --launch gpg-agent
 fi
 
+# zoxide
+if exists zoxide; then
+    eval "$(zoxide init zsh)"
+fi
+
 # Go
 if exists go; then
     export GOPATH=${HOME}/go
     PATH=${PATH}:${GOPATH}/bin
-fi
-
-# Add $HOME/.local/bin to PATH, if it exists
-if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    PATH="$HOME/.local/bin:$PATH"
 fi
 
 #### Export $PATH #############################################################
