@@ -146,7 +146,7 @@ return {
                 files = { "src/parser.c" },
                 -- optional entries:
                 branch = "main",
-                generate_requires_npm = false,          -- if stand-alone parser without npm dependencies
+                generate_requires_npm = false, -- if stand-alone parser without npm dependencies
                 requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
             },
         }

@@ -7,7 +7,7 @@ return {
     dependencies = {
         { "nvim-tree/nvim-web-devicons", lazy = true },
         "ThePrimeagen/harpoon",
-        "catppuccin/nvim"
+        "catppuccin/nvim",
     },
     config = function()
         require("bufferline").setup({
@@ -32,7 +32,7 @@ return {
                 separator_style = "slant",
                 show_buffer_close_icons = false,
                 show_close_icon = false,
-            }
+            },
         })
     end,
     keys = {
@@ -41,42 +41,42 @@ return {
             function()
                 require("bufferline").cycle(-1)
             end,
-            desc = "Go to previous buffer"
+            desc = "Go to previous buffer",
         },
         {
             "<S-l>",
             function()
                 require("bufferline").cycle(1)
             end,
-            desc = "Go to next buffer"
+            desc = "Go to next buffer",
         },
         {
             "<S-Left>",
             function()
                 require("bufferline").move(-1)
             end,
-            desc = "Move current buffer to the left"
+            desc = "Move current buffer to the left",
         },
         {
             "<S-Right>",
             function()
                 require("bufferline").move(1)
             end,
-            desc = "Move current buffer to the right"
+            desc = "Move current buffer to the right",
         },
         {
             "<Leader>bp",
             function()
                 require("bufferline").pick()
             end,
-            desc = "Pick a buffer"
+            desc = "Pick a buffer",
         },
         {
             "<Leader>bq",
             function()
                 require("bufferline").close_with_pick()
             end,
-            desc = "Close a buffer with pick"
+            desc = "Close a buffer with pick",
         },
 
         -- Better to use harpoon to move only to buffers of "interest"
@@ -85,63 +85,63 @@ return {
             function()
                 require("bufferline").go_to(1)
             end,
-            desc = "Go to buffer in position 1"
+            desc = "Go to buffer in position 1",
         },
         {
             "<Leader>b2",
             function()
                 require("bufferline").go_to(2)
             end,
-            desc = "Go to buffer in position 2"
+            desc = "Go to buffer in position 2",
         },
         {
             "<Leader>b3",
             function()
                 require("bufferline").go_to(3)
             end,
-            desc = "Go to buffer in position 3"
+            desc = "Go to buffer in position 3",
         },
         {
             "<Leader>b4",
             function()
                 require("bufferline").go_to(4)
             end,
-            desc = "Go to buffer in position 4"
+            desc = "Go to buffer in position 4",
         },
         {
             "<Leader>b5",
             function()
                 require("bufferline").go_to(5)
             end,
-            desc = "Go to buffer in position 5"
+            desc = "Go to buffer in position 5",
         },
         {
             "<Leader>b6",
             function()
                 require("bufferline").go_to(6)
             end,
-            desc = "Go to buffer in position 6"
+            desc = "Go to buffer in position 6",
         },
         {
             "<Leader>b7",
             function()
                 require("bufferline").go_to(7)
             end,
-            desc = "Go to buffer in position 7"
+            desc = "Go to buffer in position 7",
         },
         {
             "<Leader>b8",
             function()
                 require("bufferline").go_to(8)
             end,
-            desc = "Go to buffer in position 8"
+            desc = "Go to buffer in position 8",
         },
         {
             "<Leader>b9",
             function()
                 require("bufferline").go_to(9)
             end,
-            desc = "Go to buffer in position 9"
+            desc = "Go to buffer in position 9",
         },
-    }
+    },
 }

@@ -41,18 +41,18 @@ require("lazy").setup("plugins", {
                 -- https://github.com/vim/vim/blob/master/runtime/plugin/README.txt
                 -- "gzip",       -- edit gzip files
                 -- "tarPlugin",  -- browse tar files
-                "zipPlugin",     -- edit zip files
+                "zipPlugin", -- edit zip files
                 "vimballPlugin", -- create and unpack vba files
-                "matchit",       --
-                "netrwPlugin",   -- navigate in directories
-                "tohtml",        -- convert syntax highlighted file to html
-                "tutor",         --
-                "rrhelper",      -- used for --remote-wait editing
+                "matchit", --
+                "netrwPlugin", -- navigate in directories
+                "tohtml", -- convert syntax highlighted file to html
+                "tutor", --
+                "rrhelper", -- used for --remote-wait editing
             },
         },
     },
     rocks = {
-        enabled = false
+        enabled = false,
     },
 })
 

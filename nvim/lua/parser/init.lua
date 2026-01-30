@@ -56,7 +56,8 @@ function F.setup(args)
     if #invalid > 0 then
         vim.notify(
             "Invalid parser(s): " .. table.concat(invalid, ", ") .. "\nAvailable: " .. parsers_str(),
-            vim.log.levels.ERROR)
+            vim.log.levels.ERROR
+        )
         return
     end
 

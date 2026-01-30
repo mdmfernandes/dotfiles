@@ -43,14 +43,54 @@ return {
             },
         },
         keys = {
-            { "<Leader>cc", "<Cmd>CopilotChatToggle<CR>",   desc = "Copilot Chat - Toggle",         mode = { "n", "v" } },
-            { "<Leader>cd", "<Cmd>CopilotChatDocs<CR>",     desc = "Copilot Chat - Generate docs",  mode = { "n", "v" } },
-            { "<Leader>ce", "<Cmd>CopilotChatExplain<CR>",  desc = "Copilot Chat - Explain",        mode = { "n", "v" } },
-            { "<Leader>cf", "<Cmd>CopilotChatFix<CR>",      desc = "Copilot Chat - Fix",            mode = { "n", "v" } },
-            { "<Leader>cg", "<Cmd>CopilotChatCommit<CR>",   desc = "Copilot Chat - Commit",         mode = { "n", "v" } },
-            { "<Leader>co", "<Cmd>CopilotChatOptimize<CR>", desc = "Copilot Chat - Optimize",       mode = { "n", "v" } },
-            { "<Leader>cr", "<Cmd>CopilotChatReview<CR>",   desc = "Copilot Chat - Review",         mode = { "n", "v" } },
-            { "<Leader>ct", "<Cmd>CopilotChatTests<CR>",    desc = "Copilot Chat - Generate tests", mode = { "n", "v" } },
+            {
+                "<Leader>cc",
+                "<Cmd>CopilotChatToggle<CR>",
+                desc = "Copilot Chat - Toggle",
+                mode = { "n", "v" },
+            },
+            {
+                "<Leader>cd",
+                "<Cmd>CopilotChatDocs<CR>",
+                desc = "Copilot Chat - Generate docs",
+                mode = { "n", "v" },
+            },
+            {
+                "<Leader>ce",
+                "<Cmd>CopilotChatExplain<CR>",
+                desc = "Copilot Chat - Explain",
+                mode = { "n", "v" },
+            },
+            {
+                "<Leader>cf",
+                "<Cmd>CopilotChatFix<CR>",
+                desc = "Copilot Chat - Fix",
+                mode = { "n", "v" },
+            },
+            {
+                "<Leader>cg",
+                "<Cmd>CopilotChatCommit<CR>",
+                desc = "Copilot Chat - Commit",
+                mode = { "n", "v" },
+            },
+            {
+                "<Leader>co",
+                "<Cmd>CopilotChatOptimize<CR>",
+                desc = "Copilot Chat - Optimize",
+                mode = { "n", "v" },
+            },
+            {
+                "<Leader>cr",
+                "<Cmd>CopilotChatReview<CR>",
+                desc = "Copilot Chat - Review",
+                mode = { "n", "v" },
+            },
+            {
+                "<Leader>ct",
+                "<Cmd>CopilotChatTests<CR>",
+                desc = "Copilot Chat - Generate tests",
+                mode = { "n", "v" },
+            },
         },
         config = function(_, opt)
             local chat = require("CopilotChat")

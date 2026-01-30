@@ -16,7 +16,8 @@ local function document_highlight(client, bufnr)
                 while node ~= nil do
                     local node_type = node:type()
                     -- Don't highlight strings
-                    if node_type == "string"
+                    if
+                        node_type == "string"
                         or node_type == "string_fragment"
                         or node_type == "template_string"
                         or node_type == "document"

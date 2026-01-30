@@ -12,7 +12,7 @@ I.diagnostics = {
 I.lsp = {
     source_installed = "✓",
     source_pending = "➜",
-    source_uninstalled = "✗"
+    source_uninstalled = "✗",
 }
 
 return I

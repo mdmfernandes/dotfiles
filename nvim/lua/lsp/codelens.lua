@@ -10,7 +10,7 @@ local function code_lens(client, bufnr)
             group = group,
             callback = function()
                 vim.lsp.codelens.refresh({ bufnr = bufnr })
-            end
+            end,
         })
 
         vim.api.nvim_create_autocmd("LspDetach", {

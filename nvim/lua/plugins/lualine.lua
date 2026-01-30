@@ -12,7 +12,8 @@ return {
             sections = {
                 lualine_c = {
                     {
-                        "filename", path = 1,
+                        "filename",
+                        path = 1,
                     },
                     {
                         function()
@@ -20,15 +21,15 @@ return {
                         end,
                         cond = function()
                             return require("nvim-navic").is_available()
-                        end
+                        end,
                     },
                 },
                 lualine_z = {
                     "selectioncount",
                     "searchcount",
-                    "location"
-                }
+                    "location",
+                },
             },
         })
-    end
+    end,
 }

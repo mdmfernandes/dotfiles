@@ -28,8 +28,8 @@ return {
             Struct = " ",
             Event = " ",
             Operator = " ",
-            TypeParameter = " "
+            TypeParameter = " ",
         },
         depth_limit = 3,
-    }
+    },
 }

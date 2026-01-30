@@ -5,7 +5,7 @@ local group = vim.api.nvim_create_augroup("CoreGroup", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = group,
     callback = function()
-        vim.highlight.on_yank({ higroup = "Visual", timeout = 350 })
+        vim.hl.on_yank({ higroup = "Visual", timeout = 350 })
     end,
 })
 
@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
         -- o - insert comment leader after 'o' or 'O' in Normal mode
         -- r - insert comment leader after hitting <Enter> in Insert mode
         vim.opt_local.formatoptions:remove({ "o", "r" })
-    end
+    end,
 })
 
 -- Set commentstring for SELinux files, for commenting the files

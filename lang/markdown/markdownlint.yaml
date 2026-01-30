@@ -16,17 +16,6 @@ MD024: false
 # MD029/ol-prefix - Ordered list item prefix
 MD029: false # Don't check
 
-# MD030/list-marker-space - Spaces after list markers
-MD030:
-  # Spaces for single-line unordered list items
-  ul_single: 3
-  # Spaces for single-line ordered list items
-  ol_single: 4
-  # Spaces for multi-line unordered list items
-  ul_multi: 3
-  # Spaces for multi-line ordered list items
-  ol_multi: 4
-
 # MD033/no-inline-html - Inline HTML
 MD033: false
 

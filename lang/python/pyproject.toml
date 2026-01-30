@@ -12,7 +12,6 @@ ignore = [
     # "ANN", # flake8-annotations
 
     #### specific rules
-    "ANN101", # missing type annotation for self in method
     "D203", # one blank line before class (incompatible with D211)
     "D213", # multi line summary second line (incompatible with D212)
     "INP001", # implicit namespace package

@@ -22,7 +22,9 @@ function P.parse(lines)
     end
 
     -- Sort lines by count (descending)
-    table.sort(result_lines, function(a, b) return a.number > b.number end)
+    table.sort(result_lines, function(a, b)
+        return a.number > b.number
+    end)
 
     local sorted_lines = {}
     for _, line in ipairs(result_lines) do
