@@ -16,7 +16,7 @@ vim.filetype.add({
     },
     filename = {
         ["docker-compose.yml"] = "yaml.docker-compose",
-        ["docker-compose.yaml"] = "yaml.docker-compose"
+        ["docker-compose.yaml"] = "yaml.docker-compose",
     },
     pattern = {
         -- Improve detection of *.inc files
@@ -30,8 +30,8 @@ vim.filetype.add({
                         return "bitbake"
                     end
                 end
-            end
+            end,
         },
-        ["%.bashrc%..*"] = "sh"
-    }
+        ["%.bashrc%..*"] = "sh",
+    },
 })

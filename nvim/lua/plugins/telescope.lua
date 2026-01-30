@@ -68,7 +68,7 @@ return {
                     hidden = true,
                 },
                 ["ui-select"] = {
-                    require("telescope.themes").get_dropdown {}
+                    require("telescope.themes").get_dropdown({}),
                 },
                 undo = {
                     layout_config = {
@@ -106,7 +106,7 @@ return {
         map("n", "<Leader>.", function()
             telescope.extensions.file_browser.file_browser({
                 path = "%:p:h",
-                hidden = true,             -- show hidden files
+                hidden = true, -- show hidden files
                 respect_gitignore = false, -- show all files
             })
         end, { desc = "Telescope open file browser in current directory" })
@@ -120,10 +120,16 @@ return {
         map("n", "<Leader>rr", tb.registers, { desc = "List vim rgisters" })
         -- Git
         map("n", "<Leader>gc", tb.git_commits, { desc = "List git commits with diff preview" })
-        map("n", "<Leader>gs", tb.git_status, { desc = "List current changes per file with diff preview and add action" })
+        map(
+            "n",
+            "<Leader>gs",
+            tb.git_status,
+            { desc = "List current changes per file with diff preview and add action" }
+        )
         -- Diagnostics
-        map("n", "<Leader>fd", function() tb.diagnostics({ bufnr = 0 }) end,
-            { desc = "Show diagnostics from current buffer" })
+        map("n", "<Leader>fd", function()
+            tb.diagnostics({ bufnr = 0 })
+        end, { desc = "Show diagnostics from current buffer" })
         map("n", "<Leader>fD", tb.diagnostics, { desc = "Show diagnostics from workspace" })
         -- Marks
         map("n", "<Leader>fm", tb.marks)
@@ -134,5 +140,5 @@ return {
         map("n", "<Leader>fk", tb.keymaps, { desc = "List key mappings" })
         map("n", "<Leader>fn", telescope.extensions.notify.notify, { desc = "List vim notifications" })
         map("n", "<Leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "List to do comments" })
-    end
+    end,
 }

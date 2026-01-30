@@ -13,5 +13,5 @@ return {
         map("n", "<Leader>gd", diffview.open, { desc = "Git open diff view" })
         map("n", "<Leader>gh", diffview.file_history, { desc = "Git open current file history" })
         map("n", "<Leader>gq", diffview.close, { desc = "Git close diff view" })
-    end
+    end,
 }

@@ -7,5 +7,5 @@ return {
             -- Use treesitter to check for pairs
             check_ts = true,
         })
-    end
+    end,
 }

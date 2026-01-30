@@ -4,7 +4,7 @@ return {
         "j-hui/fidget.nvim",
         event = "LspAttach",
         tag = "v1.4.0",
-        opts = {}
+        opts = {},
     },
 
     -- LSP servers package manager
@@ -15,7 +15,7 @@ return {
                 icons = {
                     package_installed = require("icons").lsp.source_installed,
                     package_pending = require("icons").lsp.source_pending,
-                    package_uninstalled = require("icons").lsp.source_uninstalled
+                    package_uninstalled = require("icons").lsp.source_uninstalled,
                 },
             },
         },

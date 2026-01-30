@@ -6,5 +6,5 @@ return {
     opts = {
         highlight_on_key = true,
         -- dim = true, -- dim all other characters
-    }
+    },
 }

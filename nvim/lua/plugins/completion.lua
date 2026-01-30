@@ -11,7 +11,7 @@ return {
     ---@type blink.cmp.Config
     opts = {
         appearance = {
-            nerd_font_variant = "mono"
+            nerd_font_variant = "mono",
         },
         completion = {
             accept = {
@@ -23,7 +23,7 @@ return {
             documentation = {
                 auto_show = true,
                 auto_show_delay_ms = 200,
-                window = { border = "rounded" }
+                window = { border = "rounded" },
             },
             ghost_text = {
                 enabled = true,
@@ -31,7 +31,7 @@ return {
             list = {
                 selection = {
                     preselect = function(ctx)
-                        return (ctx.mode ~= "cmdline") and not require("blink.cmp").snippet_active { direction = 1 }
+                        return (ctx.mode ~= "cmdline") and not require("blink.cmp").snippet_active({ direction = 1 })
                     end,
                     auto_insert = function(ctx)
                         return ctx.mode ~= "cmdline"
@@ -43,7 +43,7 @@ return {
                 draw = {
                     columns = {
                         { "kind_icon" },
-                        { "label",    "label_description", gap = 1 },
+                        { "label", "label_description", gap = 1 },
                         { "provider" },
                     },
                     components = {
@@ -97,7 +97,7 @@ return {
             },
         },
         -- Experimental signature help support
-        signature = { enabled = true }
+        signature = { enabled = true },
     },
-    opts_extend = { "sources.default" }
+    opts_extend = { "sources.default" },
 }

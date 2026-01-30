@@ -7,16 +7,17 @@ local function get_status()
     local lsp_sources = require("lsp.sources").active_sources()
 
     if lsp_sources ~= "" then
-        vim.notify(string.format("Active LSP sources: %s", require("lsp.sources").active_sources()),
-            vim.log.levels.INFO)
+        vim.notify(
+            string.format("Active LSP sources: %s", require("lsp.sources").active_sources()),
+            vim.log.levels.INFO
+        )
     else
         vim.notify("No active LSP sources", vim.log.levels.WARN)
     end
 
     -- Formatters
     local print_active_formaters = function(formatters)
-        vim.notify(string.format("Active formatters: %s", table.concat(formatters, ", ")),
-            vim.log.levels.INFO)
+        vim.notify(string.format("Active formatters: %s", table.concat(formatters, ", ")), vim.log.levels.INFO)
     end
     -- Get conform formatters (priority)
     local formatters = require("conform").list_formatters_for_buffer()
@@ -25,8 +26,7 @@ local function get_status()
     else
         -- If there are not conform formatters, check for LSP formatters
         local formatters_lsp = require("conform.lsp_format").get_format_clients({
-            bufnr = vim.api
-                .nvim_get_current_buf()
+            bufnr = vim.api.nvim_get_current_buf(),
         })
         if not vim.tbl_isempty(formatters_lsp) then
             print_active_formaters(vim.tbl_map(function(c)

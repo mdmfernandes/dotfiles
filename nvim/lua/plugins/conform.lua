@@ -23,12 +23,11 @@ return {
             markdown = { "prettierd", "prettier" },
             -- sh = { "shfmt" }, -- bashls (LSP) uses shfmt for formatting
             -- yaml = { "prettierd", "prettier" }, -- yamlls (LSP) uses its own formatter
-
         },
         format_on_save = {
             timeout_ms = 1000,
             -- If no formatter is available for the filetype, use the LSP formatter as fallback
             lsp_fallback = true,
         },
-    }
+    },
 }

@@ -4,9 +4,9 @@ local o = vim.opt
 -------------
 -- General --
 -------------
-o.mouse = ""       -- disable mouse
+o.mouse = "" -- disable mouse
 o.updatetime = 100 -- Refresh time
-o.history = 50     -- Command line history
+o.history = 50 -- Command line history
 -- o.clipboard = "unnamedplus"
 -- Better buffer splitting
 o.splitright = true
@@ -25,7 +25,7 @@ o.scrolloff = 10 -- Show at least 10 lines above/below the cursor
 o.cursorline = true
 o.signcolumn = "yes"
 o.showmatch = true -- When a bracket is inserted, briefly jump to the matching one
-o.cmdheight = 0    -- Don't show the cmdline
+o.cmdheight = 0 -- Don't show the cmdline
 
 -- Empty characters
 -- o.list = true

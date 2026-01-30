@@ -28,5 +28,5 @@ return {
                 open_file_in_horizontal_split = "<c-h>",
             },
         },
-    }
+    },
 }

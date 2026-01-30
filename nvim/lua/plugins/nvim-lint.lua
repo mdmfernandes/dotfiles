@@ -10,7 +10,7 @@ return {
             ansible = { "ansible_lint" },
             bitbake = { "oelint-adv" },
             dockerfile = { "hadolint" },
-            markdown = { "markdownlint" },
+            markdown = { "markdownlint-cli2" },
             python = { "mypy" },
             -- sh = { "shellcheck" }, -- bashls (LSP) uses shellcheck for linting
             yaml = { "yamllint" },
@@ -24,15 +24,18 @@ return {
 
         -- markdownlint
         lint.linters.markdownlint.args = {
-            "--config", config_dir .. "markdownlint.yaml",
-            "--"
+            "--config",
+            config_dir .. "markdownlint.yaml",
+            "--",
         }
 
         -- yamllint
         lint.linters.yamllint.args = {
-            "--config-file", config_dir .. "yamllint.yaml",
-            "--format", "parsable",
-            "-"
+            "--config-file",
+            config_dir .. "yamllint.yaml",
+            "--format",
+            "parsable",
+            "-",
         }
 
         -- oelint-adv

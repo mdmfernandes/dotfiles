@@ -33,7 +33,7 @@ return {
         "typescript",
         "typescriptreact",
         "typst",
-        "zsh"
+        "zsh",
     },
     root_markers = { ".git" },
     settings = {

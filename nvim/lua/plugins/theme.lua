@@ -17,10 +17,10 @@ return {
                     harpoon = true,
                     mason = true,
                     notify = true,
-                }
+                },
             })
             vim.cmd.colorscheme("catppuccin")
-        end
+        end,
     },
     -- OneDark: https://github.com/navarasu/onedark.nvim
     {
@@ -40,11 +40,13 @@ return {
                 "<Leader>tt",
                 function()
                     require("onedark").toggle()
-                    vim.notify(string.format("Switched OneDark theme to '%s'", vim.g.onedark_config.style),
-                        vim.log.levels.INFO)
+                    vim.notify(
+                        string.format("Switched OneDark theme to '%s'", vim.g.onedark_config.style),
+                        vim.log.levels.INFO
+                    )
                 end,
-                desc = "Toggle theme style"
-            }
+                desc = "Toggle theme style",
+            },
         },
     },
 }

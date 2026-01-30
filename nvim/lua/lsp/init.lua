@@ -41,7 +41,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
             client.server_capabilities.hoverProvider = false
         end
     end,
-
 })
 
 -- Enable LSP servers
@@ -56,5 +55,5 @@ vim.lsp.enable({
     "pyright",
     "ruff",
     "rust_analyzer",
-    "yamlls"
+    "yamlls",
 })

@@ -18,21 +18,21 @@ return {
             function()
                 require("neogen").generate({})
             end,
-            desc = "Annotate current function"
+            desc = "Annotate current function",
         },
         {
             "<Leader>ac",
             function()
                 require("neogen").generate({ type = "class" })
             end,
-            desc = "Annotate current class"
+            desc = "Annotate current class",
         },
         {
             "<Leader>ad",
             function()
                 require("neogen").generate({ type = "file" })
             end,
-            desc = "Annotate current file"
+            desc = "Annotate current file",
         },
     },
 }

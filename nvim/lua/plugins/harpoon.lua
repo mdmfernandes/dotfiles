@@ -5,8 +5,8 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "jasonpanosso/harpoon-tabline.nvim" },
     opts = {
         settings = {
-            save_on_toggle = true
-        }
+            save_on_toggle = true,
+        },
     },
     config = function(_, opt)
         local harpoon = require("harpoon")
@@ -19,8 +19,7 @@ return {
 
         map("n", "<Leader>H", function()
             harpoon:list():add()
-            vim.notify(string.format("File marked as '%s'", harpoon:list():length()),
-                vim.log.levels.INFO)
+            vim.notify(string.format("File marked as '%s'", harpoon:list():length()), vim.log.levels.INFO)
         end, { desc = "Harpoon mark current file" })
         map("n", "<Leader>h", function()
             harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -34,12 +33,9 @@ return {
 
         -- Navigate windows
         for i = 1, 9 do
-            map("n",
-                string.format("<Leader>%s", i),
-                function()
-                    harpoon:list():select(i)
-                end, { desc = string.format("Harpoon navigate to marker %d", i) }
-            )
+            map("n", string.format("<Leader>%s", i), function()
+                harpoon:list():select(i)
+            end, { desc = string.format("Harpoon navigate to marker %d", i) })
         end
 
         -- Custom colors
@@ -49,5 +45,4 @@ return {
         vim.api.nvim_set_hl(0, "HarpoonNumberInactive", { foreground = "#7aa2f7", background = "NONE" })
         vim.api.nvim_set_hl(0, "TabLineFill", { foreground = "white", background = "NONE" })
     end,
-
 }
