@@ -93,6 +93,7 @@
     # =========================[ Line #2 ]=========================
     newline
     yocto_sdk                 # Yocto SDK version
+    petalinux_sdk             # PetaLinux SDK version
     # ip                      # ip address and bandwidth usage for a specified network interface
     # public_ip               # public IP address
     # proxy                   # system-wide http/https/ftp proxy
@@ -1523,6 +1524,13 @@
   function prompt_yocto_sdk() {
     if [[ ! -z "${OECORE_SDK_VERSION}" ]]; then
         p10k segment -f 032 -i '🛠 ' -t "${OECORE_SDK_VERSION}"
+    fi
+  }
+
+  # Show PetaLinux SDK version
+  function prompt_petalinux_sdk() {
+    if [[ ! -z "${PETALINUX_VER}" ]]; then
+        p10k segment -f 032 -i '🛠 ' -t "${PETALINUX_VER}"
     fi
   }
 

@@ -68,7 +68,7 @@ function F.setup(args)
 
     -- Run the parsers in the order they were provided
     for i = 1, #args do
-        lines = require("parser.parsers." .. args[i]).format(lines)
+        lines = require("parser.parsers." .. args[i]).parse(lines)
     end
 
     -- Set the modified lines back into the buffer

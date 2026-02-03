@@ -10,7 +10,7 @@ return {
             ansible = { "ansible_lint" },
             bitbake = { "oelint-adv" },
             dockerfile = { "hadolint" },
-            markdown = { "markdownlint-cli2" },
+            markdown = { "markdownlint" },
             python = { "mypy" },
             -- sh = { "shellcheck" }, -- bashls (LSP) uses shellcheck for linting
             yaml = { "yamllint" },
@@ -20,22 +20,19 @@ return {
         ---------------------
         -- Linters options --
         ---------------------
-        local config_dir = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config") .. "/"
+        local conf_lang_dir = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config") .. "/lang/"
 
-        -- markdownlint
-        lint.linters.markdownlint.args = {
-            "--config",
-            config_dir .. "markdownlint.yaml",
-            "--",
+        -- markdownlint - the name of the config needs to be .markdownlint.yaml or .markdownlint.json
+        lint.linters["markdownlint-cli2"].args = {
+            "--config", conf_lang_dir .. ".markdownlint.yaml",
+            "--"
         }
 
         -- yamllint
         lint.linters.yamllint.args = {
-            "--config-file",
-            config_dir .. "yamllint.yaml",
-            "--format",
-            "parsable",
-            "-",
+            "--config-file", conf_lang_dir .. "yamllint.yaml",
+            "--format", "parsable",
+            "-"
         }
 
         -- oelint-adv
