@@ -95,9 +95,9 @@ return {
         local map = require("utils").map
         local tb = require("telescope.builtin")
 
-        map("n", "<C-p>", tb.find_files)
+        map("n", "<C-p>", tb.find_files, { desc = "Telescope find all files" })
+        map("n", "<C-s>", tb.git_files, { desc = "Telescope find git files" })
         map("n", "<Leader>/", tb.current_buffer_fuzzy_find)
-        map("n", "<Leader>fs", tb.git_files)
         map("n", "<Leader>fg", tb.live_grep)
         -- Grep for string under cursor
         map("n", "<Leader>fc", tb.grep_string)
@@ -106,7 +106,7 @@ return {
         map("n", "<Leader>.", function()
             telescope.extensions.file_browser.file_browser({
                 path = "%:p:h",
-                hidden = true, -- show hidden files
+                hidden = true,             -- show hidden files
                 respect_gitignore = false, -- show all files
             })
         end, { desc = "Telescope open file browser in current directory" })

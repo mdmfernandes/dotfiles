@@ -16,7 +16,6 @@ local function mappings(client, bufnr)
     -- Not needed anymore since it's enabled by default
     -- buf_map("n", "K", vim.lsp.buf.hover)
 
-    buf_map("n", "<C-S>", vim.lsp.buf.signature_help, "Display signature information about the symbol under the cursor")
     buf_map("n", "gd", vim.lsp.buf.definition, "Jump to the definition of the symbol under the cursor")
     buf_map("n", "gD", vim.lsp.buf.declaration, "Jump to the declaration of the symbol under the cursor")
     buf_map("n", "gt", tb.lsp_type_definitions, "Jump to the definition of the type of the symbol under the cursor")
