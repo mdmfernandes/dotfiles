@@ -10,7 +10,7 @@ return {
             ansible = { "ansible_lint" },
             bitbake = { "oelint-adv" },
             dockerfile = { "hadolint" },
-            markdown = { "markdownlint" },
+            markdown = { "markdownlint-cli2" },
             python = { "mypy" },
             -- sh = { "shellcheck" }, -- bashls (LSP) uses shellcheck for linting
             yaml = { "yamllint" },

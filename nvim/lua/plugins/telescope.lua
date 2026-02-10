@@ -103,13 +103,14 @@ return {
         map("n", "<Leader>fc", tb.grep_string)
         -- File browser
         map("n", "<Leader>fb", telescope.extensions.file_browser.file_browser)
-        map("n", "<Leader>.", function()
-            telescope.extensions.file_browser.file_browser({
-                path = "%:p:h",
-                hidden = true,             -- show hidden files
-                respect_gitignore = false, -- show all files
-            })
-        end, { desc = "Telescope open file browser in current directory" })
+        -- Using YaZi as file browser
+        -- map("n", "<Leader>.", function()
+        --     telescope.extensions.file_browser.file_browser({
+        --         path = "%:p:h",
+        --         hidden = true,             -- show hidden files
+        --         respect_gitignore = false, -- show all files
+        --     })
+        -- end, { desc = "Telescope open file browser in current directory" })
         -- Find symbols
         map("n", "<Leader>ls", tb.treesitter, { desc = "Telescope find document symbols" })
         -- List previously opened files
