@@ -1,5 +1,4 @@
 -- Diagnostics
-local d = require("defaults")
 
 -- Symbols in the sign column (gutter)
 local signs = require("icons").diagnostics
@@ -17,8 +16,8 @@ local sign_icons = {
 vim.diagnostic.config({
     virtual_text = true,
     signs = { text = sign_icons }, -- show symbols in the gutter
-    underline = true, -- use underline text for diagnostics (default)
-    update_in_insert = false, -- update diagnostics during insert mode
-    severity_sort = true, -- sort diagnostics by severity (show severe first)
-    float = d.border_opts,
+    underline = true,              -- use underline text for diagnostics (default)
+    update_in_insert = false,      -- update diagnostics during insert mode
+    severity_sort = true,          -- sort diagnostics by severity (show severe first)
+    float = { border = "rounded", focusable = true, scope = "line" },
 })

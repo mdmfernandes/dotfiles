@@ -9,14 +9,14 @@ local function code_lens(client, bufnr)
         vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
             group = group,
             callback = function()
-                vim.lsp.codelens.refresh({ bufnr = bufnr })
+                vim.lsp.codelens.enable(true, { bufnr = bufnr })
             end,
         })
 
         vim.api.nvim_create_autocmd("LspDetach", {
             group = group,
             callback = function()
-                vim.lsp.codelens.clear(client.id, bufnr)
+                vim.lsp.codelens.enable(false, { bufnr = bufnr })
             end,
         })
     end

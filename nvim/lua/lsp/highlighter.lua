@@ -1,8 +1,6 @@
 -- LSP code highlighter: highlight code on hover
 local H = {}
 
-local ts_utils = require("nvim-treesitter.ts_utils")
-
 local highlight_au = vim.api.nvim_create_augroup("LspDocumentHighlight", {})
 local documentHighlight = require("vim.lsp.protocol").Methods.textDocument_documentHighlight
 
@@ -12,7 +10,7 @@ local function document_highlight(client, bufnr)
             group = highlight_au,
             buffer = bufnr,
             callback = function()
-                local node = ts_utils.get_node_at_cursor()
+                local node = vim.treesitter.get_node()
                 while node ~= nil do
                     local node_type = node:type()
                     -- Don't highlight strings

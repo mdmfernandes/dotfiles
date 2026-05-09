@@ -1,13 +1,11 @@
 -- LSP mappings
 local M = {}
 
-local map = require("utils").map
-
 -- LSP server mappings
 local function mappings(client, bufnr)
     -- Helper for buffer funtions
     local function buf_map(mode, target, source, desc)
-        map(mode, target, source, { buffer = bufnr, desc = desc })
+        vim.keymap.set(mode, target, source, { buffer = bufnr, desc = desc })
     end
 
     local tb = require("telescope.builtin")
@@ -18,14 +16,10 @@ local function mappings(client, bufnr)
 
     buf_map("n", "gd", vim.lsp.buf.definition, "Jump to the definition of the symbol under the cursor")
     buf_map("n", "gD", vim.lsp.buf.declaration, "Jump to the declaration of the symbol under the cursor")
-    buf_map("n", "gt", tb.lsp_type_definitions, "Jump to the definition of the type of the symbol under the cursor")
-    -- buf_map("n", "<Leader>rn", vim.lsp.buf.rename, "Rename all references to the symbol under the cursor")
     -- Replace default list by telescope
     buf_map("n", "gri", tb.lsp_implementations, "Find all the implementations for the symbol under the cursor")
     -- Replace default list by telescope
     buf_map("n", "grr", tb.lsp_references, "List all the references to the symbol under the cursor")
-    -- buf_map("n", "<Leader>ca", vim.lsp.buf.code_action, "List code actions available at the current cursor position")
-    buf_map("n", "<Leader>cl", vim.lsp.codelens.run, "Run code lens in the current line")
 
     -- Language specific mappings
     if client.name == "clangd" then
