@@ -2,7 +2,6 @@
 .DS_Store
 
 # NeoVIM
-nvim/plugin
 nvim/spell/pt.utf-8.*
 .luarc.json
 

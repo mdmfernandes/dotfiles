@@ -1,1 +1,14 @@
 nvim
+libp11
+HSM
+Greybox
+PKCS
+SoftHSM2
+PKCS11
+CTX
+greybox
+backend
+init
+SoftHSM
+dir
+keypair
