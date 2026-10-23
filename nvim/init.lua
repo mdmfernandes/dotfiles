@@ -16,3 +16,7 @@ require("core.autocmd")
 
 -- Load LSP
 require("lsp")
+
+-- Disable built-in plugins
+-- ftplugin mappings may conflict with treesitter textobjects mappings
+vim.g.no_plugin_maps = true
