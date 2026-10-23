@@ -110,13 +110,6 @@ fi
 # fzf
 alias -g Z='| fzf'
 
-# apt
-alias ai='sudo apt install'
-alias auu='sudo apt update && sudo apt upgrade -y'
-
-# Become root
-alias root='sudo -i'
-
 # Disks
 alias df='df -h'
 alias dud='du -d 1 -h' # Size of files at depth 1 in current location
@@ -187,7 +180,6 @@ alias guf='git pull --ff-only'
 alias gur='git pull --rebase'
 
 # Docker
-alias d='docker'
 alias di='docker images'
 alias dia='docker images -a'
 alias dp='docker ps'
@@ -225,8 +217,6 @@ alias tl='tmux list-sessions'
 alias tk='tmux kill-session -t'
 
 # Other commands
-alias h='history'
-alias j='jobs -l'
 alias :q='exit'
 alias copy='xclip -in -selection clipboard'
 alias zshrc="${=EDITOR} $ZDOTDIR/.zshrc"
