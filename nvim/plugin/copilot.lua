@@ -11,5 +11,9 @@ if copilot_enabled() then
         { src = "https://github.com/zbirenbaum/copilot.lua", name = "copilot" },
     })
 
-    require("copilot").setup()
+    require("copilot").setup({
+        filetypes = {
+            gitcommit = true,
+        },
+    })
 end
