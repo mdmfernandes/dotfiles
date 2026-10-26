@@ -33,13 +33,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client.server_capabilities.documentSymbolProvider then
             require("nvim-navic").attach(client, bufnr)
         end
-
-        -- Add server specific attachments below
-        --- ruff
-        if client.name == "ruff" then
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-        end
     end,
 })
 

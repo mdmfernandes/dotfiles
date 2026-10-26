@@ -5,6 +5,9 @@ return {
     cmd = { "yaml-language-server", "--stdio" },
     filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
     root_markers = { ".git" },
+    capabilities = {
+        documentFormattingProvider = true,
+    },
     settings = {
         yaml = {
             -- Enable built-in formatter
@@ -15,7 +18,8 @@ return {
                 url = "",
             },
             schemas = {
-                ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] = "docker-compose*.{yml,yaml}",
+                ["https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json"] =
+                "docker-compose*.{yml,yaml}",
                 ["https://raw.githubusercontent.com/pycontribs/zuul-lint/master/zuul_lint/zuul-schema.json"] = {
                     "*zuul.d/*.yaml",
                     "*/.zuul.yaml",

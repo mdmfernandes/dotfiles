@@ -17,24 +17,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end,
 })
 
--- Tree-sitter SELinux parser
--- vim.api.nvim_create_autocmd("User", {
---     pattern = "TSUpdate",
---     callback = function()
---         require("nvim-treesitter.parsers").selinux = {
---             install_info = {
---                 url = "https://github.com/mdmfernandes/tree-sitter-selinux", -- local path or git repo
---                 files = { "src/parser.c" },
---                 branch = "main",
---                 -- revision = "HEAD",
---                 generate_requires_npm = false,          -- if stand-alone parser without npm dependencies
---                 requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
---                 queries = "queries",                    -- also install queries from given directory
---             },
---         }
---     end
--- })
-
 vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter",            name = "treesitter" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
@@ -100,6 +82,28 @@ local treesitter = require("nvim-treesitter")
 treesitter.setup()
 treesitter.install(parsers)
 
+
+-- Treesitter SELinux parser
+vim.api.nvim_create_autocmd("User", {
+    pattern = "TSUpdate",
+    callback = function()
+        require("nvim-treesitter.parsers").selinux = {
+            install_info = {
+                url = "https://github.com/mdmfernandes/tree-sitter-selinux", -- local path or git repo
+                files = { "src/parser.c" },
+                branch = "main",
+                -- revision = "HEAD",
+                generate_requires_npm = false,          -- if stand-alone parser without npm dependencies
+                requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+                queries = "queries",                    -- also install queries from given directory
+            },
+            tier = 3,                                   -- unmaintained
+        }
+    end
+})
+
+
+-- treesitter-textobjects
 require("nvim-treesitter-textobjects").setup({
     select = {
         lookahead = true,

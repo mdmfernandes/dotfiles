@@ -1,6 +1,6 @@
 -- blink.cmp: https://github.com/Saghen/blink.cmp
 vim.pack.add({
-    { src = "https://github.com/saghen/blink.cmp",            version = "v1", name = "blink.cmp" },
+    { src = "https://github.com/saghen/blink.cmp",            version = vim.version.range("^1"), name = "blink.cmp" },
     -- optional: provides snippets for the snippet source
     { src = "https://github.com/rafamadriz/friendly-snippets" },
     { src = "https://github.com/fang2hou/blink-copilot" }
@@ -96,4 +96,5 @@ require("blink.cmp").setup({
     },
     -- Experimental signature help support
     signature = { enabled = true },
+    fuzzy = { implementation = "prefer_rust_with_warning" }
 })

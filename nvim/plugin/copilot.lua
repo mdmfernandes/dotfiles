@@ -14,6 +14,7 @@ if copilot_enabled() then
     require("copilot").setup({
         filetypes = {
             gitcommit = true,
+            yaml = true,
         },
     })
 end

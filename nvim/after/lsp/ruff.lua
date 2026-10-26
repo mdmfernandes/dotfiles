@@ -4,6 +4,9 @@
 return {
     cmd = { "ruff", "server" },
     filetypes = { "python" },
+    capabilities = {
+        hoverProvider = false, -- Disable hover in favor of Pyright
+    },
     init_options = {
         -- See: https://docs.astral.sh/ruff/editors/settings/
         settings = {
