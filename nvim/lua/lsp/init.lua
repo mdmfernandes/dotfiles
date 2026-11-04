@@ -33,6 +33,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client.server_capabilities.documentSymbolProvider then
             require("nvim-navic").attach(client, bufnr)
         end
+
+        -- User commands
+        require("lsp.commands").setup(client, bufnr)
     end,
 })
 
