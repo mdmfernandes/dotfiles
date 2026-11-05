@@ -28,14 +28,16 @@ local function set_features(bufnr, features)
         return
     end
 
-    -- Copy settings so changing this project's client does not mutate shared config.
-    local settings = vim.deepcopy(client.config.settings or {})
+    -- Deep copy the live settings (client.settings is what the server pulls via workspace/configuration).
+    -- Nested tables may be shared with the global vim.lsp.config, so mutating in place would leak
+    -- these features into other projects' clients.
+    local settings = vim.deepcopy(client.settings or {})
     settings["rust-analyzer"] = settings["rust-analyzer"] or {}
     settings["rust-analyzer"].cargo = settings["rust-analyzer"].cargo or {}
     settings["rust-analyzer"].cargo.features = features
-    client.config.settings = settings
+    client.settings = settings
 
-    -- Notify only this project client; do not change the global rust-analyzer config.
+    -- Notify only this project client. rust-analyzer then re-pulls the config from client.settings.
     if not client:notify("workspace/didChangeConfiguration", { settings = settings }) then
         vim.notify("Could not send updated settings to rust-analyzer", vim.log.levels.ERROR)
         return
@@ -52,7 +54,7 @@ local function list_features(bufnr)
         return
     end
 
-    local settings = client.config.settings or {}
+    local settings = client.settings or {}
     local rust_settings = settings["rust-analyzer"]
     local cargo = type(rust_settings) == "table" and rust_settings.cargo or nil
     local features = type(cargo) == "table" and cargo.features or nil
