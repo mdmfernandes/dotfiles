@@ -29,4 +29,7 @@ end, 500, Status.RIGHT)
 require("full-border"):setup()
 
 -- Git: https://github.com/yazi-rs/plugins/tree/main/git.yazi
-require("git"):setup()
+require("git"):setup({
+    -- Order status signs showing in the linemode
+    order = 1500
+})

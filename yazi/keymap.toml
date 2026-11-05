@@ -31,3 +31,9 @@ desc = "Enter the child directory, or open the file"
 on   = [ "c", "m" ]
 run  = "plugin chmod"
 desc = "Chmod on selected files"
+
+# jump-to-char: https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
+[[mgr.prepend_keymap]]
+on   = "f"
+run  = "plugin jump-to-char"
+desc = "Jump to char"
