@@ -24,11 +24,9 @@ fi
 # Set language environment
 export LANG=en_US.UTF-8
 
-
 #### Helpers ##################################################################
 # Check if a command exists
-exists()
-{
+exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
@@ -39,46 +37,45 @@ ZDOTDIR="${${(%):-%x}:h}"
 ZSH_USERDATA="${HOME}/.local/share/zsh"
 
 #### Options ##############################################################
-setopt autocd               # if only directory path is entered, cd there.
-setopt autopushd            # make cd push the old directory onto the directory stack
-setopt appendhistory        # immediately append history instead of overwriting
-setopt cdsilent             # don't print the working directory after a `cd`
-setopt extendedglob         # extended globbing. Allows using regular expressions with *
-setopt histignorealldups    # if a new command is a duplicate, remove the older one
-setopt histignorespace      # ignore commands that start with space
-setopt histverify           # show command with history expansion to user before running it
-setopt incappendhistory     # save commands are added to the history immediately, otherwise only when shell exits
-setopt interactivecomments  # allow comments even in interactive shells
-setopt magicequalsubst      # enable filename expansion for arguments of the form 'foo=bar'
-setopt nobeep               # no beep
-setopt nocaseglob           # case insensitive globbing
-setopt nocheckjobs          # don't warn about running processes when exiting
-setopt noclobber            # prevent from overwriting an existing file
-setopt nonomatch            # hide error message if there is no match for the pattern
-setopt numericglobsort      # sort filenames numerically when it makes sense
-setopt promptsubst          # perform parameter expansion, command substitution and arithmetic expansion in prompts
-setopt pushdignoredups      # don't push multiple copies of the same directory onto the stack
-setopt pushdminus           # exchanges the meaning of `+` and `-` when used with a number to specify a directory in the stack
-setopt pushdsilent          # don't print the directory stack after `pushd` or `popd`
+setopt autocd              # if only directory path is entered, cd there.
+setopt autopushd           # make cd push the old directory onto the directory stack
+setopt appendhistory       # immediately append history instead of overwriting
+setopt cdsilent            # don't print the working directory after a `cd`
+setopt extendedglob        # extended globbing. Allows using regular expressions with *
+setopt histignorealldups   # if a new command is a duplicate, remove the older one
+setopt histignorespace     # ignore commands that start with space
+setopt histverify          # show command with history expansion to user before running it
+setopt incappendhistory    # save commands are added to the history immediately, otherwise only when shell exits
+setopt interactivecomments # allow comments even in interactive shells
+setopt magicequalsubst     # enable filename expansion for arguments of the form 'foo=bar'
+setopt nobeep              # no beep
+setopt nocaseglob          # case insensitive globbing
+setopt nocheckjobs         # don't warn about running processes when exiting
+setopt noclobber           # prevent from overwriting an existing file
+setopt nonomatch           # hide error message if there is no match for the pattern
+setopt numericglobsort     # sort filenames numerically when it makes sense
+setopt promptsubst         # perform parameter expansion, command substitution and arithmetic expansion in prompts
+setopt pushdignoredups     # don't push multiple copies of the same directory onto the stack
+setopt pushdminus          # exchanges the meaning of `+` and `-` when used with a number to specify a directory in the stack
+setopt pushdsilent         # don't print the directory stack after `pushd` or `popd`
 
-unsetopt flowcontrol        # disable output flow control in the shell's editor
-
+unsetopt flowcontrol # disable output flow control in the shell's editor
 
 #### Completion ###############################################################
-setopt auto_menu                                                # automatically use menu completion
-setopt complete_in_word                                         # keep the cursor at the completion, if ambiguous
-setopt always_to_end                                            # move cursor to end if word has one match
+setopt auto_menu        # automatically use menu completion
+setopt complete_in_word # keep the cursor at the completion, if ambiguous
+setopt always_to_end    # move cursor to end if word has one match
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # case insensitive tab completion
-zstyle ':completion:*' menu select                              # select completions with arrow keys
-zstyle ':completion:*' rehash true                              # automatically find new executables in path
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
+zstyle ':completion:*' menu select                        # select completions with arrow keys
+zstyle ':completion:*' rehash true                        # automatically find new executables in path
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' special-dirs true                        # complete . and .. special directories
-zstyle ':completion:*:-command-:*' tag-order '!parameters'      # don't show parameters (e.g. environment variables)
-zstyle ':completion:*:functions' ignored-patterns '_*'          # don't complete functions
+zstyle ':completion:*' special-dirs true                                        # complete . and .. special directories
+zstyle ':completion:*:-command-:*' tag-order '!parameters'                      # don't show parameters (e.g. environment variables)
+zstyle ':completion:*:functions' ignored-patterns '_*'                          # don't complete functions
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd' # format of `kill` completions
 
 # Speed up completions
@@ -88,16 +85,16 @@ zstyle ':completion:*' cache-path ${ZDOTDIR}/.zsh_cache
 
 # Don't complete uninteresting users
 zstyle ':completion:*:*:*:users' ignored-patterns \
-        adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
-        clamav colord cups daemon dbus dhcpcd distcache dnsmasq dovecot fax ftp games gdm \
-        gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
-        ldap lp mail mailman mailnull man messagebus  mldonkey mysql nagios \
-        named netdump news nfsnobody 'nm-*' nobody nscd ntp nut nx obsrun openvpn \
-        operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
-        rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync 'systemd-*' tftp \
-        usbmux uucp vcsa wwwrun xfs '_*'
+    adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
+    clamav colord cups daemon dbus dhcpcd distcache dnsmasq dovecot fax ftp games gdm \
+    gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
+    ldap lp mail mailman mailnull man messagebus mldonkey mysql nagios \
+    named netdump news nfsnobody 'nm-*' nobody nscd ntp nut nx obsrun openvpn \
+    operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
+    rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync 'systemd-*' tftp \
+    usbmux uucp vcsa wwwrun xfs '_*'
 
-WORDCHARS=${WORDCHARS//\/[&.;]} # don't consider certain characters part of the word
+WORDCHARS=${WORDCHARS//\/[&.;]/} # don't consider certain characters part of the word
 
 # zsh-completions
 if [[ -r "${ZSH_USERDATA}/plugins/zsh-completions/zsh-completions.plugin.zsh" ]]; then
@@ -116,47 +113,45 @@ fpath=(${ZSH_USERDATA}/completions/**/* $fpath)
 # in the .zshenv file, by placing the command `skip_global_compinit=1` at the EOF.
 autoload -Uz compinit && compinit
 
-
 #### Vi mode ##################################################################
 # Preferred editor (this will also change the ZSH mode)
 export EDITOR='nvim'
 export VISUAL='nvim'
 
 # Although the editor set the zsh mode, we can force the vi mode
-bindkey -v              # vi mode
-export KEYTIMEOUT=2     # decrease change mode time to 0.2s
+bindkey -v          # vi mode
+export KEYTIMEOUT=2 # decrease change mode time to 0.2s
 
 # Use ' to edit a command line in the editor, if zsh is in insert mode
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd "'" edit-command-line
 
-
 #### Keybindings ##############################################################
-bindkey '^[[7~' beginning-of-line                   # Home key
-bindkey '^[[H' beginning-of-line                    # Home key
-bindkey '^a' beginning-of-line                      # Ctrl+a
+bindkey '^[[7~' beginning-of-line # Home key
+bindkey '^[[H' beginning-of-line  # Home key
+bindkey '^a' beginning-of-line    # Ctrl+a
 if [[ "${terminfo[khome]}" != "" ]]; then
-  bindkey "${terminfo[khome]}" beginning-of-line    # [Home] - Go to beginning of line
+    bindkey "${terminfo[khome]}" beginning-of-line # [Home] - Go to beginning of line
 fi
-bindkey '^[[8~' end-of-line                         # End key
-bindkey '^[[F' end-of-line                          # End key
-bindkey '^e' end-of-line                            # Ctrl+e
+bindkey '^[[8~' end-of-line # End key
+bindkey '^[[F' end-of-line  # End key
+bindkey '^e' end-of-line    # Ctrl+e
 if [[ "${terminfo[kend]}" != "" ]]; then
-  bindkey "${terminfo[kend]}" end-of-line           # [End] - Go to end of line
+    bindkey "${terminfo[kend]}" end-of-line # [End] - Go to end of line
 fi
-bindkey '^[[2~' overwrite-mode                      # Insert key
-bindkey '^[[3~' delete-char                         # Delete key
-bindkey '^[[C'  forward-char                        # Right key
-bindkey '^[[D'  backward-char                       # Left key
+bindkey '^[[2~' overwrite-mode # Insert key
+bindkey '^[[3~' delete-char    # Delete key
+bindkey '^[[C' forward-char    # Right key
+bindkey '^[[D' backward-char   # Left key
 
 # Search history
-bindkey '^[[5~' history-beginning-search-backward   # Page up key
-bindkey '^[[6~' history-beginning-search-forward    # Page down key
-bindkey '^r' history-incremental-search-backward    # Ctrl+r
-bindkey '^s' history-incremental-search-forward     # Ctrl+s
-bindkey '^P' up-history                             # Ctrl+p
-bindkey '^N' down-history                           # Ctrl+n
+bindkey '^[[5~' history-beginning-search-backward # Page up key
+bindkey '^[[6~' history-beginning-search-forward  # Page down key
+bindkey '^r' history-incremental-search-backward  # Ctrl+r
+bindkey '^s' history-incremental-search-forward   # Ctrl+s
+bindkey '^P' up-history                           # Ctrl+p
+bindkey '^N' down-history                         # Ctrl+n
 
 # Navigate words with ctrl+arrow keys
 bindkey '^[Oc' forward-word
@@ -165,20 +160,19 @@ bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
 # Delete chars and words
-bindkey '^?' backward-delete-char                   # Backspace
-bindkey '^h' backward-delete-char                   # Ctrl+h
-bindkey '^H' backward-kill-word                     # Ctrl+backspace
-bindkey '^w' backward-kill-word                     # Ctrl+w
-bindkey '^[[Z' undo                                 # Shift+tab undo last action
+bindkey '^?' backward-delete-char # Backspace
+bindkey '^h' backward-delete-char # Ctrl+h
+bindkey '^H' backward-kill-word   # Ctrl+backspace
+bindkey '^w' backward-kill-word   # Ctrl+w
+bindkey '^[[Z' undo               # Shift+tab undo last action
 
 # Push the current buffer onto the buffer stack and clear the buffer
-bindkey '^q' push-line-or-edit                      # Ctrl+q
-
+bindkey '^q' push-line-or-edit # Ctrl+q
 
 #### Colors ###################################################################
 if [[ -x /usr/bin/dircolors ]]; then
     test -r ~/.dircolors && eval "$(/usr/bin/dircolors -b ~/.dircolors)" || eval "$(/usr/bin/dircolors -b)"
-elif [[ "${OSTYPE}" = "darwin"* ]]; then   # If in MacOS
+elif [[ "${OSTYPE}" = "darwin"* ]]; then # If in MacOS
     export CLICOLOR=1
     # Use https://geoff.greer.fm/lscolors/ to convert between BSD (LSCOLORS),
     # used in MacOS, and Linux colors (LS_COLORS)
@@ -202,7 +196,6 @@ export LESS_TERMCAP_us=$'\E[01;36m'
 autoload -Uz colors
 colors
 
-
 #### Others ###################################################################
 # Directories stack size (number of directories shown in 'dirs -v')
 DIRSTACKSIZE=6
@@ -215,12 +208,10 @@ SAVEHIST=20000
 # Change EOL sign (default: '%')
 PROMPT_EOL_MARK='%S$%s'
 
-
 #### Theme ####################################################################
 # Powerlevel10k
 . ${ZSH_USERDATA}/themes/powerlevel10k/powerlevel10k.zsh-theme
 . ${ZDOTDIR}/p10k.zsh
-
 
 #### ZSH Plugins ##############################################################
 
@@ -236,7 +227,7 @@ if [[ -r "${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlightin
     # ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=green,underline
     # ZSH_HIGHLIGHT_STYLES[global-alias]=fg=cyan
     # ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,underline
-    ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold     # default: none
+    ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold # default: none
     # ZSH_HIGHLIGHT_STYLES[autodirectory]=fg=green,underline
     # ZSH_HIGHLIGHT_STYLES[path]=underline
     # ZSH_HIGHLIGHT_STYLES[path_pathseparator]=
@@ -247,8 +238,8 @@ if [[ -r "${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlightin
     # ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=magenta
     # ZSH_HIGHLIGHT_STYLES[process-substitution]=none
     # ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=magenta
-    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=cyan,bold     # default: none
-    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=cyan,bold     # default: none
+    ZSH_HIGHLIGHT_STYLES[single - hyphen - option]=fg=cyan,bold # default: none
+    ZSH_HIGHLIGHT_STYLES[double - hyphen - option]=fg=cyan,bold # default: none
     # ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
     # ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=magenta
     # ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow
@@ -259,20 +250,20 @@ if [[ -r "${ZSH_USERDATA}/plugins/zsh-syntax-highlighting/zsh-syntax-highlightin
     # ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=cyan
     # ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=cyan
     # ZSH_HIGHLIGHT_STYLES[assign]=none
-    ZSH_HIGHLIGHT_STYLES[redirection]=fg=yellow,bold            # default: none
+    ZSH_HIGHLIGHT_STYLES[redirection]=fg=yellow,bold # default: none
     # ZSH_HIGHLIGHT_STYLES[comment]=fg=black,bold
     # ZSH_HIGHLIGHT_STYLES[named-fd]=none
     # ZSH_HIGHLIGHT_STYLES[numeric-fd]=none
     # ZSH_HIGHLIGHT_STYLES[arg0]=fg=green
 
     # Highlight brackets
-    ZSH_HIGHLIGHT_STYLES[bracket-error]=fg=red
-    ZSH_HIGHLIGHT_STYLES[bracket-level-1]=fg=blue
-    ZSH_HIGHLIGHT_STYLES[bracket-level-2]=fg=yellow
-    ZSH_HIGHLIGHT_STYLES[bracket-level-3]=fg=green
-    ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=cyan
-    ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=yellow,bold
-    ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
+    ZSH_HIGHLIGHT_STYLES[bracket - error]=fg=red
+    ZSH_HIGHLIGHT_STYLES[bracket - level - 1]=fg=blue
+    ZSH_HIGHLIGHT_STYLES[bracket - level - 2]=fg=yellow
+    ZSH_HIGHLIGHT_STYLES[bracket - level - 3]=fg=green
+    ZSH_HIGHLIGHT_STYLES[bracket - level - 4]=fg=cyan
+    ZSH_HIGHLIGHT_STYLES[bracket - level - 5]=fg=yellow,bold
+    ZSH_HIGHLIGHT_STYLES[cursor - matchingbracket]=standout
 
     # Highlight patterns
     ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=black,bold,bg=yellow')
@@ -315,7 +306,6 @@ fi
 [[ -r "${ZDOTDIR}/functions.zsh" ]] && source "${ZDOTDIR}/functions.zsh"
 [[ -r "${ZDOTDIR}/custom.zsh" ]] && source "${ZDOTDIR}/custom.zsh"
 
-
 #### Applications #############################################################
 
 # Add $HOME/.local/bin to PATH, if it exists. Some apps are installed here
@@ -324,7 +314,7 @@ if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 fi
 
 # Less
-export LESS='-R -i'     # -i is for insensitive search
+export LESS='-R -i' # -i is for insensitive search
 
 # Man pages - show location in document as percentage
 export MANPAGER='less -s -M +Gg'
@@ -358,12 +348,12 @@ if exists fzf; then
         # Use fd for listing path candidates.
         # - The first argument to the function ($1) is the base path to start traversal
         _fzf_compgen_path() {
-        fd --hidden --follow --exclude ".git" . "$1"
+            fd --hidden --follow --exclude ".git" . "$1"
         }
 
         # Use fd to generate the list for directory completion
         _fzf_compgen_dir() {
-        fd --type d --hidden --follow --exclude ".git" . "$1"
+            fd --type d --hidden --follow --exclude ".git" . "$1"
         }
     # If not, try to use ripgrep
     elif exists rg; then

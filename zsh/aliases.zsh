@@ -3,14 +3,13 @@
 # ====================
 
 # Helper: check if a command exists
-exists()
-{
+exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
 # ls
-if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
-    alias ls='ls --color=auto' # Colorize the output if a terminal is available
+if [[ "$OSTYPE" != "darwin"* ]]; then # If not in MacOS
+    alias ls='ls --color=auto'        # Colorize the output if a terminal is available
 fi
 alias la='ls -lAh'
 alias ll='ls -lh'
@@ -50,13 +49,13 @@ alias help='man'
 
 # ripgrep
 if exists rg; then
-    alias rga='rg --text'   # Treat binary files as text
-    alias rgu='rg -uuu'     # Unrestricted grep (similar to `grep -r`)
+    alias rga='rg --text' # Treat binary files as text
+    alias rgu='rg -uuu'   # Unrestricted grep (similar to `grep -r`)
 fi
 
 # fd
 if exists fd; then
-    alias fdu='fd -uuu'     # Unrestricted find
+    alias fdu='fd -uuu' # Unrestricted find
 fi
 
 # Make directory with parents
@@ -112,15 +111,15 @@ alias -g Z='| fzf'
 
 # Disks
 alias df='df -h'
-alias dud='du -d 1 -h' # Size of files at depth 1 in current location
-alias duf='du -sh' # Size of files in current location
+alias dud='du -d 1 -h'        # Size of files at depth 1 in current location
+alias duf='du -sh'            # Size of files in current location
 alias dusz='du -sh | sort -h' # disk usage ordered by size
 alias du='du -h'
 alias lsblkf='lsblk --fs' # Show info about filesystems in `lsblk`
 
 # IP
-if [[ "$OSTYPE" != "darwin"* ]]; then   # If not in MacOS
-    alias ip='ip -color=auto' # Colorize the output if a terminal is available
+if [[ "$OSTYPE" != "darwin"* ]]; then # If not in MacOS
+    alias ip='ip -color=auto'         # Colorize the output if a terminal is available
 fi
 
 # Git
@@ -178,16 +177,19 @@ alias gtgn='git tag -n'
 alias gtgr='git ls-remote --tags'
 alias guf='git pull --ff-only'
 alias gur='git pull --rebase'
+alias gwa='git worktree add'
+alias gwl='git worktree list'
+alias gwr='git worktree remove'
 
 # Docker
 alias di='docker images'
 alias dia='docker images -a'
 alias dp='docker ps'
 alias dpa='docker ps -a'
-alias drc='docker rm'   # Remove one or more containers
-alias dri='docker rmi'  # Remove one or more images
-alias dpc='docker container prune'  # Delete stopped containers
-alias dpi='docker image prune'      # Delete dangling images
+alias drc='docker rm'              # Remove one or more containers
+alias dri='docker rmi'             # Remove one or more images
+alias dpc='docker container prune' # Delete stopped containers
+alias dpi='docker image prune'     # Delete dangling images
 # Docker-Compose
 alias dco='docker-compose'
 alias dcp='docker-compose ps'
@@ -199,18 +201,18 @@ alias dci='docker-compose images'
 ta() {
     # If it has no arguments
     if [ -z "$1" ]; then
-            tmux attach-session
+        tmux attach-session
     else
-            tmux attach-session -t $1
+        tmux attach-session -t $1
     fi
 }
 # Create a session (default or named)
 ts() {
     # If it has no arguments
     if [ -z "$1" ]; then
-            tmux new-session
+        tmux new-session
     else
-            tmux new-session -A -s $1
+        tmux new-session -A -s $1
     fi
 }
 alias tl='tmux list-sessions'
